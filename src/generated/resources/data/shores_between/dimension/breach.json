@@ -1,0 +1,11 @@
+{
+  "type": "shores_between:breach_dim_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "shores_between:breach"
+    },
+    "settings": "minecraft:amplified"
+  }
+}

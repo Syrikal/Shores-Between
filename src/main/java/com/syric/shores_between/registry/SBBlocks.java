@@ -1,11 +1,13 @@
 package com.syric.shores_between.registry;
 
+import com.syric.shores_between.block.BreachPortalBlock;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,6 +39,7 @@ public class SBBlocks {
 
     // Creates a new Block with the id "examplemod:example_block", combining the namespace and path, with matching item
     public static final RegistryObject<Block> EXAMPLE_BLOCK = register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)), CreativeModeTabs.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> PORTAL_BLOCK = register("portal_block", () -> new BreachPortalBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), SBCreativeTabs.EXAMPLE_TAB.getKey());
 
 
 }
