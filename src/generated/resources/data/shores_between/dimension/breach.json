@@ -6,6 +6,6 @@
       "type": "minecraft:fixed",
       "biome": "shores_between:breach"
     },
-    "settings": "minecraft:amplified"
+    "settings": "shores_between:breach"
   }
 }
