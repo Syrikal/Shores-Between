@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": {
+      "type": "minecraft:noise",
+      "noise": "shores_between:vitality",
+      "xz_scale": 1.0,
+      "y_scale": 0.0
+    },
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": -1.0,
+        "value": -1.0
+      },
+      {
+        "derivative": 0.5,
+        "location": -0.6,
+        "value": -0.7
+      },
+      {
+        "derivative": 0.5,
+        "location": 0.6,
+        "value": 0.7
+      },
+      {
+        "derivative": 0.0,
+        "location": 1.0,
+        "value": 1.0
+      }
+    ]
+  }
+}

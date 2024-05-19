@@ -2,12 +2,17 @@ package com.syric.shores_between.datagen;
 
 import com.syric.shores_between.registry.SBBiomes;
 import com.syric.shores_between.registry.SBDimensions;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -16,11 +21,26 @@ import static com.syric.shores_between.ShoresBetween.MODID;
 public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.BIOME, SBBiomes::bootstrap)
-            .add(Registries.DIMENSION_TYPE, SBDimensions::bootstrapType)
-            .add(Registries.LEVEL_STEM, SBDimensions::bootstrapStem);
+            .add(Registries.BIOME, SBBiomes::bootstrapBiomes)
+            .add(Registries.DIMENSION_TYPE, SBDimensions::bootstrapDimensionType)
+            .add(Registries.LEVEL_STEM, SBDimensions::bootstrapLevelStem)
+            .add(Registries.NOISE, SBWorldGenProvider::bootstrapAllNoise)
+            .add(Registries.DENSITY_FUNCTION, SBWorldGenProvider::bootstrapAllDensity)
+            .add(Registries.NOISE_SETTINGS, SBDimensions::bootstrapNoiseSettings)
+            ;
 
     public SBWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(MODID));
     }
+
+    private static void bootstrapAllNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
+        SBDimensions.bootstrapBiomeNoise(context);
+        RockFields.bootstrapRockFieldsNoise(context);
+    }
+
+    private static void bootstrapAllDensity(BootstapContext<DensityFunction> context) {
+        List<DensityFunction> biomeDensityFunctions = SBDimensions.bootstrapBiomeDensity(context);
+        RockFields.bootstrapRockFieldsDensity(context, biomeDensityFunctions);
+    }
+
 }

@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:add",
+  "argument1": "shores_between:rock_fields_texture",
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": "shores_between:rock_fields_presence",
+    "argument2": {
+      "type": "minecraft:spline",
+      "spline": {
+        "coordinate": "minecraft:y",
+        "points": [
+          {
+            "derivative": -0.01,
+            "location": 30.0,
+            "value": 0.9
+          },
+          {
+            "derivative": -0.02,
+            "location": 40.0,
+            "value": 0.8
+          },
+          {
+            "derivative": -0.04,
+            "location": 50.0,
+            "value": 0.6
+          },
+          {
+            "derivative": -0.7,
+            "location": 60.0,
+            "value": 0.2
+          },
+          {
+            "derivative": -0.75,
+            "location": 63.0,
+            "value": 0.0
+          },
+          {
+            "derivative": -0.1,
+            "location": 65.0,
+            "value": -0.15
+          },
+          {
+            "derivative": -0.25,
+            "location": 69.0,
+            "value": -0.5
+          },
+          {
+            "derivative": -0.5,
+            "location": 71.0,
+            "value": -1.0
+          },
+          {
+            "derivative": -1.0,
+            "location": 73.0,
+            "value": -2.0
+          }
+        ]
+      }
+    }
+  }
+}
