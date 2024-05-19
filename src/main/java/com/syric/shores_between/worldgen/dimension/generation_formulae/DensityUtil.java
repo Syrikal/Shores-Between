@@ -39,4 +39,16 @@ public class DensityUtil {
         );
     }
 
+    //LessSmoothMax combines two values and adds a little bit more when they're similar, which fills in the seam a bit.
+    public static DensityFunction lessSmoothMax(DensityFunction a, DensityFunction b) {
+        //Takes the max of three things
+        return applyAll(DensityFunctions::max,
+                //0.58(a+b)
+                DensityFunctions.mul(DensityFunctions.constant(0.58), DensityFunctions.add(a, b)),
+                //a and b
+                a,
+                b
+        );
+    }
+
 }

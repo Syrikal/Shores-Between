@@ -3,6 +3,7 @@ package com.syric.shores_between.datagen;
 import com.syric.shores_between.registry.SBBiomes;
 import com.syric.shores_between.registry.SBDimensions;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -36,11 +37,13 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
     private static void bootstrapAllNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
         SBDimensions.bootstrapBiomeNoise(context);
         RockFields.bootstrapRockFieldsNoise(context);
+        Strands.bootstrapStrandNoise(context);
     }
 
     private static void bootstrapAllDensity(BootstapContext<DensityFunction> context) {
         List<DensityFunction> biomeDensityFunctions = SBDimensions.bootstrapBiomeDensity(context);
         RockFields.bootstrapRockFieldsDensity(context, biomeDensityFunctions);
+        Strands.bootstrapStrandDensity(context);
     }
 
 }

@@ -145,8 +145,8 @@ public class SBDimensions {
 
     //Generates the noise functions used to place biomes.
     public static void bootstrapBiomeNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
-        context.register(ROCKINESS_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(2, 1, 0, 2, 1, 1, 1)));
-        context.register(VITALITY_NOISE, new NormalNoise.NoiseParameters(-10, DoubleList.of(2, 1, 1, 0, 1, 1, 1)));
+        context.register(ROCKINESS_NOISE, new NormalNoise.NoiseParameters(-8, DoubleList.of(2, 1, 0, 2, 1, 1, 1)));
+        context.register(VITALITY_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(2, 1, 1, 0, 1, 1, 1)));
         context.register(BREACH_CONTINENTAL_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(1.4, 1, 0.8, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)));
     }
 
