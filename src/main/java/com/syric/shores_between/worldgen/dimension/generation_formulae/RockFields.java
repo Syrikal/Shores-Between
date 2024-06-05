@@ -1,6 +1,5 @@
 package com.syric.shores_between.worldgen.dimension.generation_formulae;
 
-import com.syric.shores_between.registry.SBDimensions;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import java.util.List;
 
 import static com.syric.shores_between.ShoresBetween.MODID;
+import static com.syric.shores_between.registry.SBDimensions.CONTINENTALNESS;
 
 public class RockFields {
 
@@ -253,7 +253,7 @@ public class RockFields {
                 .clamp(0, 1);
 
         // ValidAreas is 1 when Breach Continentalness is between -0.1 and 0.9 and falls off pretty sharply outside there.
-        DensityFunction validAreas = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(DensityFunctions.noise(noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE), 1, 0))))
+        DensityFunction validAreas = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(CONTINENTALNESS)))
                         .addPoint(-0.3F, 0, 0)
                         .addPoint(-0.1F, 1, 0)
                         .addPoint(0.9F, 1, 0)

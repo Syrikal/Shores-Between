@@ -58,12 +58,7 @@
       "argument2": {
         "type": "minecraft:spline",
         "spline": {
-          "coordinate": {
-            "type": "minecraft:noise",
-            "noise": "shores_between:breach_continentalness",
-            "xz_scale": 1.0,
-            "y_scale": 0.0
-          },
+          "coordinate": "shores_between:breach_continentalness",
           "points": [
             {
               "derivative": 0.0,

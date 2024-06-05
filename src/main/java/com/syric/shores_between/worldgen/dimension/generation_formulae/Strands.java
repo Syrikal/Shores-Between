@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.NoiseRouterData;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import static com.syric.shores_between.ShoresBetween.MODID;
+import static com.syric.shores_between.registry.SBDimensions.CONTINENTALNESS;
 
 public class Strands {
 
@@ -40,6 +41,8 @@ public class Strands {
 
     private static DensityFunction StrandsDensity(BootstapContext<DensityFunction> context) {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
+        HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
+
 
         /*
         * Base Strand Density is a 2D density function that calculates beach height.
@@ -49,8 +52,8 @@ public class Strands {
 
         //Strands Major is a spline of the breach_continentalness noise.
         //It has beaches at 0 and 0.37.
-        Holder<DensityFunction> strands_major = Holder.direct(DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                DensityFunctions.noise(noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE), 1, 0))))
+        Holder<DensityFunction> strands_major = Holder.direct(DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(
+                functions.getOrThrow(CONTINENTALNESS)))
                 .addPoint(-0.5F, -0.8F, 0.5F)
                 .addPoint(-0.2F,-0.4F,2)
                 .addPoint(-0.03F,0,0.7F)
@@ -67,7 +70,7 @@ public class Strands {
         //The rangeChoice is so that it only exists in positive continental areas.
         Holder<DensityFunction> strands_minor = Holder.direct(
                 DensityFunctions.rangeChoice(
-                        DensityFunctions.noise(noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE), 1, 0),
+                        new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)),
                         0, //Min value
                         5, //Max value
 
@@ -92,7 +95,7 @@ public class Strands {
         //Sandbars is like Strands Minor. They're smaller and typically submerged.
         Holder<DensityFunction> sandbars = Holder.direct(
                 DensityFunctions.rangeChoice(
-                        DensityFunctions.noise(noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE), 1, 0),
+                        new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)),
                         0, //Min value
                         5, //Max value
 
@@ -121,8 +124,8 @@ public class Strands {
                         DensityFunctions.constant(0.015), //Coefficient (it's very thin)
                         DensityFunctions.noise(noises.getOrThrow(STRANDS_ROUGHNESS_NOISE), 1, 0), //Roughness
                         //Spline to put it only in continental areas
-                        DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                        DensityFunctions.noise(noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE), 1, 0))))
+                        DensityFunctions.spline(CubicSpline.builder(
+                                new DensityFunctions.Spline.Coordinate(functions.getOrThrow(CONTINENTALNESS)))
                                 .addPoint(-0.3F,0,0)
                                 .addPoint(0,1,0)
                                 .build())
@@ -136,8 +139,8 @@ public class Strands {
                         DensityFunctions.constant(0.1), //Coefficient
                         DensityFunctions.noise(noises.getOrThrow(OCEAN_ROUGHNESS_NOISE), 1, 0), //Roughness
                         //Spline to put it only in continental areas
-                        DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                        DensityFunctions.noise(noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE), 1, 0))))
+                        DensityFunctions.spline(CubicSpline.builder(
+                                new DensityFunctions.Spline.Coordinate(functions.getOrThrow(CONTINENTALNESS)))
                                 .addPoint(-0.7F, 1, 0)
                                 .addPoint(-0.3F, 0.35F, -1)
                                 .addPoint(-0.05F,0,0)

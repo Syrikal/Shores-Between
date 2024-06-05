@@ -1,5 +1,8 @@
 package com.syric.shores_between.registry;
 
+import com.syric.shores_between.worldgen.dimension.generation_formulae.DensityUtil;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -20,6 +23,7 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
@@ -41,10 +45,11 @@ public class SBDimensions {
 
     public static final ResourceKey<NormalNoise.NoiseParameters> ROCKINESS_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "rockiness"));
     public static final ResourceKey<NormalNoise.NoiseParameters> VITALITY_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "vitality"));
-    public static final ResourceKey<NormalNoise.NoiseParameters> BREACH_CONTINENTAL_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "breach_continentalness"));
+    public static final ResourceKey<NormalNoise.NoiseParameters> BREACH_CONTINENTAL_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "breach_continentalness_noise"));
 
     public static final ResourceKey<DensityFunction> SPLINED_ROCKINESS = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "splined_rockiness"));
     public static final ResourceKey<DensityFunction> SPLINED_VITALITY = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "splined_vitality"));
+    public static final ResourceKey<DensityFunction> CONTINENTALNESS = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "breach_continentalness"));
 
 
     //Generates the Breach dimension type.
@@ -98,13 +103,13 @@ public class SBDimensions {
         DensityFunction shift_z = NoiseRouterData.getFunction(functions, NoiseRouterData.SHIFT_Z);
 
         context.register(BREACH_NOISE, new NoiseGeneratorSettings(
-                NoiseSettings.create(
+                NoiseSettings.create( //Noise Settings
                         -64, //min_y
                         384, //height
                         1, //size_horizontal
                         1), //size_vertical
 
-                Blocks.GRAVEL.defaultBlockState(), //default block
+                Blocks.SMOOTH_BASALT.defaultBlockState(), //default block
 
                 Blocks.WATER.defaultBlockState(), //default fluid
 
@@ -114,23 +119,98 @@ public class SBDimensions {
                         DensityFunctions.zero(), //fluid level floodedness noise
                         DensityFunctions.zero(), //fluid level spread noise
                         DensityFunctions.zero(), //lava noise
-//                        functions.getOrThrow(SPLINED_ROCKINESS).get(),
-                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.TEMPERATURE)),
-//                        functions.getOrThrow(SPLINED_VITALITY).get(),
-                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.VEGETATION)),
-                        NoiseRouterData.getFunction(functions, NoiseRouterData.CONTINENTS), //Continents
+                        new DensityFunctions.HolderHolder(functions.getOrThrow(SPLINED_ROCKINESS)), //Temperature (Rockiness)
+//                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.TEMPERATURE)),
+                        new DensityFunctions.HolderHolder(functions.getOrThrow(SPLINED_VITALITY)), //Vegetation (Vitality)
+//                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.VEGETATION)),
+                        new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)), //Continents
+//                        NoiseRouterData.getFunction(functions, NoiseRouterData.CONTINENTS),
+
                         NoiseRouterData.getFunction(functions, NoiseRouterData.EROSION), //Erosion
                         NoiseRouterData.getFunction(functions, NoiseRouterData.DEPTH), //Depth
                         NoiseRouterData.getFunction(functions, NoiseRouterData.RIDGES), //Ridges
+//                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)), //initial density without jaggedness
                         DensityFunctions.zero(), //initial density without jaggedness
-                        DensityFunctions.zero(), //Final density
+                        DensityUtil.applyAll(DensityFunctions::max,
+                                new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL)),
+                                new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL))
+                        ), //Final density
                         DensityFunctions.zero(), //vein toggle
                         DensityFunctions.zero(), //vein ridged
                         DensityFunctions.zero() //vein gap
                 ),
 
                 SurfaceRules.sequence(
-                        SurfaceRules.state(Blocks.REDSTONE_BLOCK.defaultBlockState())
+                        //Bedrock floor
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.verticalGradient("minecraft:bedrock_floor", VerticalAnchor.BOTTOM, VerticalAnchor.aboveBottom(5)),
+                                SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())
+                        ),
+
+                        //Deepslate
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.verticalGradient("shores_between:deepslate_layer", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8)),
+                                SurfaceRules.state(Blocks.DEEPSLATE.defaultBlockState())
+                        ),
+
+                        //Stone
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.verticalGradient("shores_between:tougher_layer", VerticalAnchor.absolute(20), VerticalAnchor.absolute(30)),
+                                SurfaceRules.ifTrue(
+                                        SurfaceRules.not(
+                                                SurfaceRules.stoneDepthCheck(-4, true, 0, CaveSurface.FLOOR)
+                                        ),
+                                        SurfaceRules.state(Blocks.STONE.defaultBlockState())
+                                )
+                        ),
+
+                        //Shoreline gravel
+                                //Tapers from 55 to 63 and back down to 65
+                                //Then a surface depth check
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.verticalGradient("shores_between:shoreline_gravel_top", VerticalAnchor.absolute(63), VerticalAnchor.absolute(65)),
+                                SurfaceRules.ifTrue(
+                                        SurfaceRules.not(SurfaceRules.verticalGradient("shores_between:shoreline_gravel_bottom", VerticalAnchor.absolute(55), VerticalAnchor.absolute(63))),
+                                        SurfaceRules.ifTrue(
+                                                SurfaceRules.stoneDepthCheck(1, false, 0, CaveSurface.FLOOR),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.noiseCondition(Noises.ICE, 0.24, 1.8),
+                                                        SurfaceRules.state(Blocks.GRAVEL.defaultBlockState())
+                                                )
+                                        )
+                                )
+                        ),
+
+                        //Strand gravel
+//                        SurfaceRules.ifTrue(
+//                                SurfaceRules.abovePreliminarySurface(),
+//                                SurfaceRules.state(Blocks.GRAVEL.defaultBlockState())
+//                        ),
+
+                        //Tangled shingle
+                        //Do as ore instead?
+
+                        //Grass
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.stoneDepthCheck(1, false, 0, CaveSurface.FLOOR),
+                                SurfaceRules.ifTrue(
+                                        SurfaceRules.isBiome(SBBiomes.MISTWOOD_BIOME),
+                                        SurfaceRules.ifTrue(
+                                                SurfaceRules.verticalGradient("shores_between:dunegrass", VerticalAnchor.absolute(64),VerticalAnchor.absolute(66)),
+                                                SurfaceRules.state(Blocks.GRASS_BLOCK.defaultBlockState())
+                                        )
+                                )
+                        )
+
+                        //Rock fields obsidian
+//                        SurfaceRules.ifTrue(
+//                                SurfaceRules.isBiome(SBBiomes.MISTWOOD_BIOME),
+//                                SurfaceRules.ifTrue(
+//                                        SurfaceRules.verticalGradient()
+//                                )
+//                        )
+
+                        // Deep ocean ore - run as ore instead?
                 ),
 
                 List.of(), //spawn target (whatever that is)
@@ -168,217 +248,11 @@ public class SBDimensions {
                 .addPoint(1, 1, 0)
                 .build()));
 
+        Holder<DensityFunction> breach_continentalness = context.register(CONTINENTALNESS, DensityFunctions.noise(noises.getOrThrow(BREACH_CONTINENTAL_NOISE), 1, 0));
+
 //        context.register(SPLINED_ROCKINESS, splined_rockiness);
 //        context.register(SPLINED_VITALITY, splined_vitality);
 
-        return List.of(new DensityFunctions.HolderHolder(splined_rockiness), new DensityFunctions.HolderHolder(splined_vitality));
+        return List.of(new DensityFunctions.HolderHolder(splined_rockiness), new DensityFunctions.HolderHolder(splined_vitality), new DensityFunctions.HolderHolder(breach_continentalness));
     }
-
-//    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
-//        HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
-//        HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
-//        DensityFunction densityfunction = NoiseRouterData.getFunction(functions, NoiseRouterData.SHIFT_X);
-//        DensityFunction densityfunction1 = NoiseRouterData.getFunction(functions, NoiseRouterData.SHIFT_Z);
-//        context.register(BREACH_NOISE, new NoiseGeneratorSettings(
-//                NoiseSettings.create(-64, 384, 1, 1),
-//
-//                Blocks.GRAVEL.defaultBlockState(),
-//
-//                Blocks.WATER.defaultBlockState(),
-//
-//
-//
-//                new NoiseRouter(
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.shiftedNoise2d(densityfunction, densityfunction1, 0.25, noises.getOrThrow(Noises.TEMPERATURE)),
-//                        DensityFunctions.shiftedNoise2d(densityfunction, densityfunction1, 0.25, noises.getOrThrow(Noises.VEGETATION)),
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.CONTINENTS),
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.EROSION),
-//                        DensityFunctions.rangeChoice(
-//                                NoiseRouterData.getFunction(functions, NoiseRouterData.Y), 0.0, 32.0,
-//                                DensityFunctions.constant(2.0),
-//                                DensityFunctions.constant(-2.0)),
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.RIDGES),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.mul(
-//                                DensityFunctions.constant(0.64),
-//                                DensityFunctions.interpolated(
-//                                        DensityFunctions.blendDensity(
-//                                                DensityFunctions.add(
-//                                                        DensityFunctions.constant(2.5),
-//                                                        DensityFunctions.mul(
-//                                                                DensityFunctions.yClampedGradient(-8, 24, 0.0, 1.0),
-//                                                                DensityFunctions.add(
-//                                                                        DensityFunctions.constant(-2.5),
-//                                                                        DensityFunctions.add(
-//                                                                                DensityFunctions.constant(0.5),
-//                                                                                DensityFunctions.mul(
-//                                                                                        DensityFunctions.yClampedGradient(110, 128, 1.0, 0.0),
-//                                                                                        DensityFunctions.add(
-//                                                                                                DensityFunctions.constant(-0.5),
-//                                                                                                BlendedNoise.createUnseeded(0.1, 0.3, 80.0, 60.0, 1.0)))))))))
-//                        ).squeeze(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero()),
-//
-//
-//
-//                SurfaceRules.sequence(
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.verticalGradient("minecraft:bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)),
-//                                SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.not(
-//                                        SurfaceRules.verticalGradient("minecraft:bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top())),
-//                                SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.yBlockCheck(VerticalAnchor.belowTop(5), 0),
-//                                SurfaceRules.state(UGBlocks.DEPTHROCK.get().defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.stoneDepthCheck(0, true, CaveSurface.FLOOR),
-//                                SurfaceRules.ifTrue(
-//                                        SurfaceRules.not(
-//                                                SurfaceRules.yBlockCheck(VerticalAnchor.absolute(33), 0)),
-//                                        SurfaceRules.state(UGBlocks.SEDIMENT.get().defaultBlockState()))),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.isBiome(UGBiomes.BLOOD_MUSHROOM_BOG),
-//                                SurfaceRules.ifTrue(
-//                                        SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
-//                                        SurfaceRules.sequence(
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.noiseCondition(noises.getOrThrow(Noises.NETHER_STATE_SELECTOR).key(), 0.0, 1.8),
-//                                                        SurfaceRules.state(UGBlocks.COARSE_DEEPSOIL.get().defaultBlockState())),
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
-//                                                        SurfaceRules.state(UGBlocks.DEEPTURF_BLOCK.get().defaultBlockState()))))),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.isBiome(UGBiomes.SMOG_SPIRES),
-//                                SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
-//                                        SurfaceRules.sequence(
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.noiseCondition(noises.getOrThrow(Noises.NETHER_STATE_SELECTOR).key(), 0.0, 1.8),
-//                                                        SurfaceRules.state(UGBlocks.COARSE_DEEPSOIL.get().defaultBlockState())),
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
-//                                                        SurfaceRules.state(UGBlocks.ASHEN_DEEPTURF_BLOCK.get().defaultBlockState()))))),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.isBiome(UGBiomes.BARREN_ABYSS, UGBiomes.DEAD_SEA),
-//                                SurfaceRules.ifTrue(
-//                                        SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
-//                                        SurfaceRules.sequence(
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.noiseCondition(noises.getOrThrow(Noises.NETHER_STATE_SELECTOR).key(), 0.0, 1.8),
-//                                                SurfaceRules.state(UGBlocks.COARSE_DEEPSOIL.get().defaultBlockState())),
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
-//                                                        SurfaceRules.state(UGBlocks.DEPTHROCK.get().defaultBlockState())),
-//                                                SurfaceRules.state(UGBlocks.DEPTHROCK.get().defaultBlockState())))),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.isBiome(UGBiomes.FROSTFIELDS, UGBiomes.ICY_SEA, UGBiomes.FROSTY_SMOGSTEM_FOREST),
-//                                SurfaceRules.ifTrue(
-//                                        SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
-//                                        SurfaceRules.sequence(
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.noiseCondition(noises.getOrThrow(Noises.POWDER_SNOW).key(), 0.45, 0.58),
-//                                                        SurfaceRules.state(Blocks.POWDER_SNOW.defaultBlockState())),
-//                                                SurfaceRules.ifTrue(
-//                                                        SurfaceRules.stoneDepthCheck(0, false, CaveSurface.FLOOR),
-//                                                        SurfaceRules.state(UGBlocks.FROZEN_DEEPTURF_BLOCK.get().defaultBlockState()))))),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
-//                                SurfaceRules.state(UGBlocks.DEEPTURF_BLOCK.get().defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
-//                                SurfaceRules.state(UGBlocks.DEEPSOIL.get().defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(
-//                                SurfaceRules.isBiome(UGBiomes.FROSTFIELDS, UGBiomes.ICY_SEA, UGBiomes.FROSTY_SMOGSTEM_FOREST),
-//                                SurfaceRules.state(UGBlocks.SHIVERSTONE.get().defaultBlockState()))
-//                ),
-//
-//
-//
-//                List.of(),
-//                32,
-//                false,
-//                false,
-//                false,
-//                false));
-//    }
-
-//    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
-//        HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
-//        HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
-//        DensityFunction densityfunction = NoiseRouterData.getFunction(functions, NoiseRouterData.SHIFT_X);
-//        DensityFunction densityfunction1 = NoiseRouterData.getFunction(functions, NoiseRouterData.SHIFT_Z);
-//        context.register(BREACH_NOISE, new NoiseGeneratorSettings(
-//                NoiseSettings.create(0, 128, 2, 2),
-//
-//                UGBlocks.DEPTHROCK.get().defaultBlockState(),
-//
-//                Blocks.WATER.defaultBlockState(),
-//
-//
-//                new NoiseRouter(
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.shiftedNoise2d(densityfunction, densityfunction1, 0.25, noises.getOrThrow(Noises.TEMPERATURE)),
-//                        DensityFunctions.shiftedNoise2d(densityfunction, densityfunction1, 0.25, noises.getOrThrow(Noises.VEGETATION)),
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.CONTINENTS),
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.EROSION),
-//                        DensityFunctions.rangeChoice(NoiseRouterData.getFunction(functions, NoiseRouterData.Y), 0.0, 32.0, DensityFunctions.constant(2.0), DensityFunctions.constant(-2.0)),
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.RIDGES),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.mul(DensityFunctions.constant(0.64), DensityFunctions.interpolated(DensityFunctions.blendDensity(DensityFunctions.add(DensityFunctions.constant(2.5), DensityFunctions.mul(DensityFunctions.yClampedGradient(-8, 24, 0.0, 1.0), DensityFunctions.add(DensityFunctions.constant(-2.5), DensityFunctions.add(DensityFunctions.constant(0.5), DensityFunctions.mul(DensityFunctions.yClampedGradient(110, 128, 1.0, 0.0), DensityFunctions.add(DensityFunctions.constant(-0.5), BlendedNoise.createUnseeded(0.1, 0.3, 80.0, 60.0, 1.0)))))))))).squeeze(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero(),
-//                        DensityFunctions.zero()),
-//
-//
-//                SurfaceRules.sequence(
-//                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("minecraft:bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("minecraft:bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top())), SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.belowTop(5), 0), SurfaceRules.state(UGBlocks.DEPTHROCK.get().defaultBlockState())), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, CaveSurface.FLOOR), SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(33), 0)), SurfaceRules.state(UGBlocks.SEDIMENT.get().defaultBlockState()))),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.isBiome(UGBiomes.BLOOD_MUSHROOM_BOG), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(noises.getOrThrow(Noises.NETHER_STATE_SELECTOR).key(), 0.0, 1.8), SurfaceRules.state(UGBlocks.COARSE_DEEPSOIL.get().defaultBlockState())), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR), SurfaceRules.state(UGBlocks.DEEPTURF_BLOCK.get().defaultBlockState()))))),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.isBiome(UGBiomes.SMOG_SPIRES), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(noises.getOrThrow(Noises.NETHER_STATE_SELECTOR).key(), 0.0, 1.8), SurfaceRules.state(UGBlocks.COARSE_DEEPSOIL.get().defaultBlockState())), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR), SurfaceRules.state(UGBlocks.ASHEN_DEEPTURF_BLOCK.get().defaultBlockState()))))),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.isBiome(UGBiomes.BARREN_ABYSS, UGBiomes.DEAD_SEA), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(noises.getOrThrow(Noises.NETHER_STATE_SELECTOR).key(), 0.0, 1.8), SurfaceRules.state(UGBlocks.COARSE_DEEPSOIL.get().defaultBlockState())), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR), SurfaceRules.state(UGBlocks.DEPTHROCK.get().defaultBlockState())), SurfaceRules.state(UGBlocks.DEPTHROCK.get().defaultBlockState())))),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.isBiome(UGBiomes.FROSTFIELDS, UGBiomes.ICY_SEA, UGBiomes.FROSTY_SMOGSTEM_FOREST), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(noises.getOrThrow(Noises.POWDER_SNOW).key(), 0.45, 0.58), SurfaceRules.state(Blocks.POWDER_SNOW.defaultBlockState())), SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, CaveSurface.FLOOR), SurfaceRules.state(UGBlocks.FROZEN_DEEPTURF_BLOCK.get().defaultBlockState()))))),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR), SurfaceRules.state(UGBlocks.DEEPTURF_BLOCK.get().defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR), SurfaceRules.state(UGBlocks.DEEPSOIL.get().defaultBlockState())),
-//
-//                        SurfaceRules.ifTrue(SurfaceRules.isBiome(UGBiomes.FROSTFIELDS, UGBiomes.ICY_SEA, UGBiomes.FROSTY_SMOGSTEM_FOREST), SurfaceRules.state(UGBlocks.SHIVERSTONE.get().defaultBlockState()))
-//                ),
-//
-//
-//                List.of(),
-//                32,
-//                false,
-//                false,
-//                false,
-//                false));
-//    }
-
 }

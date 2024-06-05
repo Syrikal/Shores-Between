@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class DensityUtil {
 
-    interface TwoDensityOperation {
+    public interface TwoDensityOperation {
         DensityFunction method(DensityFunction a, DensityFunction b);
     }
 
