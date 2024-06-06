@@ -1,7 +1,7 @@
 package com.syric.shores_between.registry;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -18,13 +18,13 @@ public class SBBiomes {
     public static final ResourceKey<Biome> FORSAKEN_OCEAN_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "forsaken_ocean"));
 
 
-    public static void bootstrapBiomes(BootstapContext<Biome> context) {
+    public static void bootstrapBiomes(BootstrapContext<Biome> context) {
         context.register(DESOLATE_STRAND_BIOME, DesolateStrandBiome(context));
         context.register(MISTWOOD_BIOME, MistwoodBiome(context));
         context.register(FORSAKEN_OCEAN_BIOME, ForsakenOceanBiome(context));
     }
 
-    public static Biome DesolateStrandBiome(BootstapContext<Biome> context) {
+    public static Biome DesolateStrandBiome(BootstrapContext<Biome> context) {
 
         BiomeSpecialEffects specialEffects = new BiomeSpecialEffects.Builder()
                 .fogColor(0xffffff)
@@ -52,7 +52,7 @@ public class SBBiomes {
                 .build();
     }
 
-    public static Biome MistwoodBiome(BootstapContext<Biome> context) {
+    public static Biome MistwoodBiome(BootstrapContext<Biome> context) {
 
         BiomeSpecialEffects specialEffects = new BiomeSpecialEffects.Builder()
                 .fogColor(0xffffff)
@@ -80,7 +80,7 @@ public class SBBiomes {
                 .build();
     }
 
-    public static Biome ForsakenOceanBiome(BootstapContext<Biome> context) {
+    public static Biome ForsakenOceanBiome(BootstrapContext<Biome> context) {
 
         BiomeSpecialEffects specialEffects = new BiomeSpecialEffects.Builder()
                 .fogColor(0xffffff)

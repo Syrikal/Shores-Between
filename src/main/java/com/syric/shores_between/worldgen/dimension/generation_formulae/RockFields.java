@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CubicSpline;
@@ -29,7 +29,7 @@ public class RockFields {
     public static final ResourceKey<DensityFunction> ROCK_FIELDS_PRESENCE = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "rock_fields_presence"));
     public static final ResourceKey<DensityFunction> ROCK_FIELDS_FINAL = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "rock_fields_final"));
 
-    public static void bootstrapRockFieldsNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
+    public static void bootstrapRockFieldsNoise(BootstrapContext<NormalNoise.NoiseParameters> context) {
         //Rock Field Patches Noise is used to decide where to put small rock fields outside the actual Rock Fields biome.
         context.register(ROCK_FIELD_PATCHES_NOISE, new NormalNoise.NoiseParameters(-7, DoubleList.of(1, 2, 2, 1)));
         //Rock Gullies is used to place smooth gullies in rock fields.
@@ -38,7 +38,7 @@ public class RockFields {
         context.register(ROCK_GULLIES_FUZZIER_NOISE, new NormalNoise.NoiseParameters(-5, 3, 0, 0.5, 1.2, 1));
     }
 
-    public static void bootstrapRockFieldsDensity(BootstapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
+    public static void bootstrapRockFieldsDensity(BootstrapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
         Holder<DensityFunction> major_gullies_alpha = Holder.direct(DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(DensityFunctions.constant(1000), DensityFunctions.zero(), -0.67, noises.getOrThrow(ROCK_GULLIES_FUZZIER_NOISE))));
@@ -51,7 +51,7 @@ public class RockFields {
         Holder<DensityFunction> rock_fields_final = context.register(ROCK_FIELDS_FINAL, RockFieldsFinal(context, rock_fields_texture, rock_fields_presence));
     }
 
-    private static DensityFunction RockFieldsTexture(BootstapContext<DensityFunction> context, Holder<DensityFunction> major_gullies_alpha, Holder<DensityFunction> major_gullies_beta) {
+    private static DensityFunction RockFieldsTexture(BootstrapContext<DensityFunction> context, Holder<DensityFunction> major_gullies_alpha, Holder<DensityFunction> major_gullies_beta) {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
         //Add together the base terrain and the gullies
@@ -206,7 +206,7 @@ public class RockFields {
         return texture;
     }
 
-    private static DensityFunction RockFieldsPresence(BootstapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
+    private static DensityFunction RockFieldsPresence(BootstrapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
         DensityFunction rockiness = biomeDensityFunctions.get(0);
@@ -270,7 +270,7 @@ public class RockFields {
         return splinedPresence;
     }
 
-    private static DensityFunction RockFieldsFinal(BootstapContext<DensityFunction> context, Holder<DensityFunction> rock_fields_texture, Holder<DensityFunction> rock_fields_presence) {
+    private static DensityFunction RockFieldsFinal(BootstrapContext<DensityFunction> context, Holder<DensityFunction> rock_fields_texture, Holder<DensityFunction> rock_fields_presence) {
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
 
         /*Rock Fields Final is a 3D density function that decides which blocks to place as part of rock field generation.

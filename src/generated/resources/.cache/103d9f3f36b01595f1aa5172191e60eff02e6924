@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-02T12:04:17.9085601	Registries
+// 1.20.6	2024-06-06T12:54:21.1646007	Registries
 929b38dc9879d4b177be9798844858a6cde98185 data/shores_between/dimension/breach.json
 c9f81c93dacb566b92af21072b4e1edc28725c98 data/shores_between/dimension_type/breach_dim_type.json
 9ea0043afe07a8edddbf59478e7b31aeedf4871d data/shores_between/worldgen/biome/desolate_strand.json
@@ -20,4 +20,4 @@ b62804c1b9ac4a8c2a7fc58f542cbbb3ae91e1ad data/shores_between/worldgen/noise/brea
 44770ac68bf0b1784bbfaeb7c4fef3f822a5907a data/shores_between/worldgen/noise/rock_gullies_fuzzier.json
 0d36dad1664890cabacbe784f3f76cd863f23c8d data/shores_between/worldgen/noise/strands_roughness.json
 8dda3aa1ff12683e7990552d27e9054e0bfbce9a data/shores_between/worldgen/noise/vitality.json
-9bd94d0a6638b3727ff5901337dc8d014e250463 data/shores_between/worldgen/noise_settings/breach_noise_settings.json
+7e44f40ca36fb5e9d7933a82591d181b4e644b4b data/shores_between/worldgen/noise_settings/breach_noise_settings.json

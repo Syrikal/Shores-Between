@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CubicSpline;
@@ -25,21 +25,21 @@ public class Strands {
     public static final ResourceKey<DensityFunction> BASE_STRAND_DENSITY = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "base_strand_density"));
     public static final ResourceKey<DensityFunction> STRANDS_FINAL = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(MODID, "strands_final"));
 
-    public static void bootstrapStrandDensity(BootstapContext<DensityFunction> context) {
+    public static void bootstrapStrandDensity(BootstrapContext<DensityFunction> context) {
 
         Holder<DensityFunction> strands_density = context.register(BASE_STRAND_DENSITY, StrandsDensity(context));
         Holder<DensityFunction> strands_final = context.register(STRANDS_FINAL, StrandsFinal(context, strands_density));
 
     }
 
-    public static void bootstrapStrandNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
+    public static void bootstrapStrandNoise(BootstrapContext<NormalNoise.NoiseParameters> context) {
         //Strands Roughness Noise is applied to alter the height of strand terrain.
         context.register(STRANDS_ROUGHNESS_NOISE, new NormalNoise.NoiseParameters(-7, DoubleList.of(2, 2, 1, 2, 1)));
         //Ocean Roughness Noise is applied to alter the height of oceanic terrain.
         context.register(OCEAN_ROUGHNESS_NOISE, new NormalNoise.NoiseParameters(-6, DoubleList.of(2,2, 2, 2, 1, 1, 1, 1, 1)));
    }
 
-    private static DensityFunction StrandsDensity(BootstapContext<DensityFunction> context) {
+    private static DensityFunction StrandsDensity(BootstrapContext<DensityFunction> context) {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
 
@@ -161,7 +161,7 @@ public class Strands {
         return strands_density;
     }
 
-    private static DensityFunction StrandsFinal(BootstapContext<DensityFunction> context, Holder<DensityFunction> strandsDensity) {
+    private static DensityFunction StrandsFinal(BootstrapContext<DensityFunction> context, Holder<DensityFunction> strandsDensity) {
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
 
         /* Strands Final is a 3D density function that decides which blocks to place as part of strand generation.

@@ -8,10 +8,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 
 import java.util.List;
 import java.util.Set;
@@ -34,13 +34,13 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
         super(output, registries, BUILDER, Set.of(MODID));
     }
 
-    private static void bootstrapAllNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
+    private static void bootstrapAllNoise(BootstrapContext<NormalNoise.NoiseParameters> context) {
         SBDimensions.bootstrapBiomeNoise(context);
         RockFields.bootstrapRockFieldsNoise(context);
         Strands.bootstrapStrandNoise(context);
     }
 
-    private static void bootstrapAllDensity(BootstapContext<DensityFunction> context) {
+    private static void bootstrapAllDensity(BootstrapContext<DensityFunction> context) {
         List<DensityFunction> biomeDensityFunctions = SBDimensions.bootstrapBiomeDensity(context);
         RockFields.bootstrapRockFieldsDensity(context, biomeDensityFunctions);
         Strands.bootstrapStrandDensity(context);

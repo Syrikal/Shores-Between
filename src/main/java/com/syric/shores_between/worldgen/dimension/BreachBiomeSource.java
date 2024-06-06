@@ -1,6 +1,6 @@
 package com.syric.shores_between.worldgen.dimension;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class BreachBiomeSource extends BiomeSource {
     @Override
-    protected Codec<? extends BiomeSource> codec() {
+    protected MapCodec<? extends BiomeSource> codec() {
         return null;
     }
 

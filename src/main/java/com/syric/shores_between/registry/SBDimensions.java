@@ -7,7 +7,7 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -53,7 +53,7 @@ public class SBDimensions {
 
 
     //Generates the Breach dimension type.
-    public static void bootstrapDimensionType(BootstapContext<DimensionType> context) {
+    public static void bootstrapDimensionType(BootstrapContext<DimensionType> context) {
         context.register(BREACH_DIM_TYPE,
                 new DimensionType(
                         OptionalLong.of(0L), //fixed time
@@ -81,7 +81,7 @@ public class SBDimensions {
     }
 
     //Generates the Breach dimension
-    public static void bootstrapLevelStem(BootstapContext<LevelStem> context) {
+    public static void bootstrapLevelStem(BootstrapContext<LevelStem> context) {
         HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
         HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
@@ -96,7 +96,7 @@ public class SBDimensions {
     }
 
     //Generates the Breach noise settings, responsible for most terrain.
-    public static void bootstrapNoiseSettings(BootstapContext<NoiseGeneratorSettings> context) {
+    public static void bootstrapNoiseSettings(BootstrapContext<NoiseGeneratorSettings> context) {
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
         DensityFunction shift_x = NoiseRouterData.getFunction(functions, NoiseRouterData.SHIFT_X);
@@ -224,14 +224,14 @@ public class SBDimensions {
     }
 
     //Generates the noise functions used to place biomes.
-    public static void bootstrapBiomeNoise(BootstapContext<NormalNoise.NoiseParameters> context) {
+    public static void bootstrapBiomeNoise(BootstrapContext<NormalNoise.NoiseParameters> context) {
         context.register(ROCKINESS_NOISE, new NormalNoise.NoiseParameters(-8, DoubleList.of(2, 1, 0, 2, 1, 1, 1)));
         context.register(VITALITY_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(2, 1, 1, 0, 1, 1, 1)));
         context.register(BREACH_CONTINENTAL_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(1.4, 1, 0.8, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)));
     }
 
     //Generates the altered density functions used to modify the biome noise.
-    public static List<DensityFunction> bootstrapBiomeDensity(BootstapContext<DensityFunction> context) {
+    public static List<DensityFunction> bootstrapBiomeDensity(BootstrapContext<DensityFunction> context) {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
         Holder<DensityFunction> splined_rockiness = context.register(SPLINED_ROCKINESS, DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(DensityFunctions.noise(noises.getOrThrow(ROCKINESS_NOISE), 1, 0))))
