@@ -21,6 +21,11 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         generator.addProvider(event.includeServer(), new SBWorldGenProvider(packOutput, lookupProvider));
+//        generator.addProvider(event.includeServer(), new SBRecipeProvider(packOutput, lookupProvider));
+//        SBBlockTagProvider blockTags = generator.addProvider(event.includeServer(), new SBBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
+//        generator.addProvider(event.includeServer(), new SBItemTagProvider(packOutput, lookupProvider, blockTags.contentsGetter()));
+//        generator.addProvider(event.includeClient(), new SBBlockStateProvider(packOutput, existingFileHelper));
+//        generator.addProvider(event.includeClient(), new SBItemModelProvider(packOutput, existingFileHelper));
     }
 }
 

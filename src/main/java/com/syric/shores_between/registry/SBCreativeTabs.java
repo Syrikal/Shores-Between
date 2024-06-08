@@ -22,9 +22,8 @@ public class SBCreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.shoresBetween"))
-                    .icon(() -> SBItems.EXAMPLE_ITEM.get().getDefaultInstance())
+                    .icon(() -> SBBlocks.PORTAL_BLOCK.get().asItem().getDefaultInstance())
                     .displayItems((((pParameters, pOutput) -> {
-                        pOutput.accept(SBItems.EXAMPLE_ITEM);
                         pOutput.accept(SBBlocks.PORTAL_BLOCK.asItem());
                     })))
                     .build());
