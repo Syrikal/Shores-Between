@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "shores_between:rusty_scrap_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "shores_between:rusty_scrap"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "shores_between:block/seaweed_slab"
+    },
+    "type=double": {
+      "model": "shores_between:block/seaweed_block"
+    },
+    "type=top": {
+      "model": "shores_between:block/seaweed_slab_top"
+    }
+  }
+}

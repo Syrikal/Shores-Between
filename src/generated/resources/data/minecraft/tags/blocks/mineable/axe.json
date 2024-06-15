@@ -1,0 +1,11 @@
+{
+  "values": [
+    "shores_between:driftwood_chest",
+    "shores_between:mistwood_chest",
+    "shores_between:seagull_nest",
+    "shores_between:mistwood_barrel",
+    "shores_between:driftwood_barrel",
+    "shores_between:driftwood_ladder",
+    "shores_between:mistwood_ladder"
+  ]
+}

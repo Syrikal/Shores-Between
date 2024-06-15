@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "shores_between:block/mistwood_ladder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "shores_between:block/mistwood_ladder"
+    },
+    "facing=south": {
+      "model": "shores_between:block/mistwood_ladder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "shores_between:block/mistwood_ladder",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "shores_between:bottle_of_ichor"
+    },
+    {
+      "item": "shores_between:raw_titan_marrow"
+    },
+    {
+      "item": "shores_between:raw_titan_marrow"
+    },
+    {
+      "item": "shores_between:raw_titan_marrow"
+    },
+    {
+      "item": "shores_between:raw_titan_marrow"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:titan_marrow"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lobster": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:lobster"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shores_between:cooked_lobster_from_smoking_lobster"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lobster"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shores_between:cooked_lobster_from_smoking_lobster"
+    ]
+  }
+}

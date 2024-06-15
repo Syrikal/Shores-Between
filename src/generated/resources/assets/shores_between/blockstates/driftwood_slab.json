@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "shores_between:block/driftwood_slab"
+    },
+    "type=double": {
+      "model": "shores_between:block/driftwood_planks"
+    },
+    "type=top": {
+      "model": "shores_between:block/driftwood_slab_top"
+    }
+  }
+}

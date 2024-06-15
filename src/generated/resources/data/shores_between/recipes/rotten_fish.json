@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "shores_between:dead_fish_slab"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "shores_between:rotten_fish"
+  }
+}

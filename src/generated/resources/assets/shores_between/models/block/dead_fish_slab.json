@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "shores_between:block/dead_fish_block",
+    "side": "shores_between:block/dead_fish_block",
+    "top": "shores_between:block/dead_fish_block"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_engraved_dark_shale": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:engraved_dark_shale"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shores_between:dark_obelisk"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_engraved_dark_shale"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shores_between:dark_obelisk"
+    ]
+  }
+}

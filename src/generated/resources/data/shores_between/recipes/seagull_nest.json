@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "tag": "c:feathers"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SFS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:seagull_nest"
+  }
+}

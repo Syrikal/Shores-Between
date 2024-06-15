@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chest",
+  "key": {
+    "#": {
+      "item": "shores_between:driftwood_planks"
+    },
+    "_": {
+      "item": "shores_between:driftwood_slab"
+    }
+  },
+  "pattern": [
+    "#_#",
+    "# #",
+    "#_#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:driftwood_barrel"
+  }
+}

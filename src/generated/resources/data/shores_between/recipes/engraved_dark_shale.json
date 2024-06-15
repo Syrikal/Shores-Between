@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "shores_between:chiseled_dark_shale"
+    },
+    "S": {
+      "item": "shores_between:bottle_of_ichor"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CSC",
+    "CCC"
+  ],
+  "result": {
+    "count": 8,
+    "id": "shores_between:engraved_dark_shale"
+  }
+}

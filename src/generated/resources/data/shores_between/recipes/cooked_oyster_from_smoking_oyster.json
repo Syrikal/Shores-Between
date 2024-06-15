@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "shores_between:oyster"
+  },
+  "result": {
+    "count": 1,
+    "id": "shores_between:cooked_oyster"
+  }
+}

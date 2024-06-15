@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "shores_between:ambergris"
+    },
+    "I": {
+      "item": "shores_between:bottle_of_ichor"
+    },
+    "R": {
+      "item": "shores_between:rust"
+    },
+    "S": {
+      "item": "shores_between:salt"
+    },
+    "W": {
+      "item": "shores_between:whalebone"
+    }
+  },
+  "pattern": [
+    "SIS",
+    "RWR",
+    "WAW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:whalebone_totem"
+  }
+}

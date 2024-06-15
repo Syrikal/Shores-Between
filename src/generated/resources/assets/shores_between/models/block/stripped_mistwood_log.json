@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "shores_between:block/stripped_mistwood_log_top",
+    "side": "shores_between:block/stripped_mistwood_log"
+  }
+}

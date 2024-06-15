@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "shores_between:shale_bricks"
+    },
+    {
+      "item": "shores_between:mistwood_moss_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:mossy_shale_bricks"
+  }
+}

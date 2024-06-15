@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_seaweed_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:seaweed_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shores_between:seaweed_carpet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_seaweed_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shores_between:seaweed_carpet"
+    ]
+  }
+}

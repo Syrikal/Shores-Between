@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "shores_between:block/polished_shale",
+    "side": "shores_between:block/polished_shale",
+    "top": "shores_between:block/polished_shale"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "shores_between:block/dead_fish_slab"
+    },
+    "type=double": {
+      "model": "shores_between:block/dead_fish_block"
+    },
+    "type=top": {
+      "model": "shores_between:block/dead_fish_slab_top"
+    }
+  }
+}

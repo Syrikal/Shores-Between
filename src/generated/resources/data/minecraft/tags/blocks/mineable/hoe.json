@@ -1,0 +1,14 @@
+{
+  "values": [
+    "shores_between:rotting_flesh_block",
+    "shores_between:infested_flesh_block",
+    "shores_between:bloated_flesh",
+    "shores_between:mummified_flesh",
+    "shores_between:jellied_ichor",
+    "shores_between:seaweed_slab",
+    "shores_between:seaweed_carpet",
+    "shores_between:mistwood_moss_block",
+    "shores_between:mistwood_moss_carpet",
+    "shores_between:dead_fish_slab"
+  ]
+}

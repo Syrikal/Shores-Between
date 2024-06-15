@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "shores_between:rusty_scrap"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RTR",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:corroded_lantern"
+  }
+}

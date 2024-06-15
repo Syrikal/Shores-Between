@@ -1,0 +1,12 @@
+{
+  "values": [
+    "shores_between:shale_wall",
+    "shores_between:polished_shale_wall",
+    "shores_between:shale_brick_wall",
+    "shores_between:mossy_shale_brick_wall",
+    "shores_between:dark_shale_wall",
+    "shores_between:polished_shale_wall",
+    "shores_between:dark_shale_brick_wall",
+    "shores_between:dark_shale_tile_wall"
+  ]
+}

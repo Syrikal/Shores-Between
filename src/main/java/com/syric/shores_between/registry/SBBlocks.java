@@ -1,6 +1,6 @@
 package com.syric.shores_between.registry;
 
-import com.syric.shores_between.block.BreachPortalBlock;
+import com.syric.shores_between.block.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -20,7 +20,11 @@ public class SBBlocks {
         BLOCKS.register(bus);
     }
 
-    public static final DeferredBlock<Block> PORTAL_BLOCK = registerWithItem("portal_block", () -> new BreachPortalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+    public static final DeferredBlock<Block> PORTAL_BLOCK = registerWithItem("portal_block",
+            () -> new BreachPortalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noLootTable()));
+
+    public static final DeferredBlock<Block> DEFAULT_BLOCK = registerWithItem("default_block",
+            () -> new Block(BlockBehaviour.Properties.of()));
 
     //Beach blocks
     public static final DeferredBlock<Block> SHINGLE = registerWithItem("shingle",
@@ -47,13 +51,13 @@ public class SBBlocks {
     //Wood and tree blocks
     //Driftwood set
     public static final DeferredBlock<Block> DRIFTWOOD_LOG = registerWithItem("driftwood_log",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_WOOD = registerWithItem("driftwood_wood",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_LOG.get())));
     public static final DeferredBlock<Block> STRIPPED_DRIFTWOOD_LOG = registerWithItem("stripped_driftwood_log",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_LOG.get())));
     public static final DeferredBlock<Block> STRIPPED_DRIFTWOOD_WOOD = registerWithItem("stripped_driftwood_wood",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_LOG.get())));
     public static final DeferredBlock<Block> DRIFTWOOD_PLANKS = registerWithItem("driftwood_planks",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_SLAB = registerWithItem("driftwood_slab",
@@ -62,9 +66,9 @@ public class SBBlocks {
             () -> new StairBlock(SBBlocks.DRIFTWOOD_PLANKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.ofFullCopy(DRIFTWOOD_PLANKS.get())));
     public static final DeferredBlock<Block> DRIFTWOOD_DOOR = registerWithItem("driftwood_door",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new DoorBlock(SBWoodTypes.DRIFTWOOD_WOOD_SET, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_TRAPDOOR = registerWithItem("driftwood_trapdoor",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new TrapDoorBlock(SBWoodTypes.DRIFTWOOD_WOOD_SET, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_FENCE = registerWithItem("driftwood_fence",
             () -> new FenceBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_FENCE_GATE = registerWithItem("driftwood_fence_gate",
@@ -74,24 +78,24 @@ public class SBBlocks {
     public static final DeferredBlock<Block> DRIFTWOOD_PRESSURE_PLATE = registerWithItem("driftwood_pressure_plate",
             () -> new PressurePlateBlock(SBWoodTypes.DRIFTWOOD_WOOD_SET, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_SIGN = registerNoItem("driftwood_sign",
-            () -> new StandingSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_WALL_SIGN = registerNoItem("driftwood_wall_sign",
-            () -> new WallSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBWallSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_HANGING_SIGN = registerNoItem("driftwood_hanging_sign",
-            () -> new CeilingHangingSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBHangingSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_WALL_HANGING_SIGN = registerNoItem("driftwood_wall_hanging_sign",
-            () -> new WallHangingSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBWallHangingSignBlock(SBWoodTypes.DRIFTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_LADDER = registerWithItem("driftwood_ladder",
-            () -> new LadderBlock(BlockBehaviour.Properties.of()));
+            () -> new LadderBlock(BlockBehaviour.Properties.of().noOcclusion()));
     //Petrified set
     public static final DeferredBlock<Block> PETRIFIED_LOG = registerWithItem("petrified_log",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> PETRIFIED_WOOD = registerWithItem("petrified_wood",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())));
     public static final DeferredBlock<Block> STRIPPED_PETRIFIED_LOG = registerWithItem("stripped_petrified_log",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())));
     public static final DeferredBlock<Block> STRIPPED_PETRIFIED_WOOD = registerWithItem("stripped_petrified_wood",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())));
     public static final DeferredBlock<Block> PETRIFIED_PLANKS = registerWithItem("petrified_planks",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> PETRIFIED_SLAB = registerWithItem("petrified_slab",
@@ -101,13 +105,13 @@ public class SBBlocks {
                     BlockBehaviour.Properties.ofFullCopy(PETRIFIED_PLANKS.get())));
     //Mistwood set
     public static final DeferredBlock<Block> MISTWOOD_LOG = registerWithItem("mistwood_log",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_WOOD = registerWithItem("mistwood_wood",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(MISTWOOD_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(MISTWOOD_LOG.get())));
     public static final DeferredBlock<Block> STRIPPED_MISTWOOD_LOG = registerWithItem("stripped_mistwood_log",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(MISTWOOD_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(MISTWOOD_LOG.get())));
     public static final DeferredBlock<Block> STRIPPED_MISTWOOD_WOOD = registerWithItem("stripped_mistwood_wood",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(MISTWOOD_LOG.get())));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(MISTWOOD_LOG.get())));
     public static final DeferredBlock<Block> MISTWOOD_PLANKS = registerWithItem("mistwood_planks",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_SLAB = registerWithItem("mistwood_slab",
@@ -116,9 +120,9 @@ public class SBBlocks {
             () -> new StairBlock(SBBlocks.MISTWOOD_PLANKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.ofFullCopy(MISTWOOD_PLANKS.get())));
     public static final DeferredBlock<Block> MISTWOOD_DOOR = registerWithItem("mistwood_door",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new DoorBlock(SBWoodTypes.MISTWOOD_WOOD_SET, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_TRAPDOOR = registerWithItem("mistwood_trapdoor",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new TrapDoorBlock(SBWoodTypes.MISTWOOD_WOOD_SET, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_FENCE = registerWithItem("mistwood_fence",
             () -> new FenceBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_FENCE_GATE = registerWithItem("mistwood_fence_gate",
@@ -128,19 +132,19 @@ public class SBBlocks {
     public static final DeferredBlock<Block> MISTWOOD_PRESSURE_PLATE = registerWithItem("mistwood_pressure_plate",
             () -> new PressurePlateBlock(SBWoodTypes.MISTWOOD_WOOD_SET, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_SIGN = registerNoItem("mistwood_sign",
-            () -> new StandingSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_WALL_SIGN = registerNoItem("mistwood_wall_sign",
-            () -> new WallSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBWallSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_HANGING_SIGN = registerNoItem("mistwood_hanging_sign",
-            () -> new CeilingHangingSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBHangingSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_WALL_HANGING_SIGN = registerNoItem("mistwood_wall_hanging_sign",
-            () -> new WallHangingSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
+            () -> new SBWallHangingSignBlock(SBWoodTypes.MISTWOOD, BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_LADDER = registerWithItem("mistwood_ladder",
-            () -> new LadderBlock(BlockBehaviour.Properties.of()));
+            () -> new LadderBlock(BlockBehaviour.Properties.of().noOcclusion()));
     public static final DeferredBlock<Block> MISTWOOD_LEAVES = registerWithItem("mistwood_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_SAPLING = registerWithItem("mistwood_sapling",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new Block(BlockBehaviour.Properties.of().noOcclusion()));
 
 
     //Corpse blocks
@@ -159,9 +163,11 @@ public class SBBlocks {
     public static final DeferredBlock<Block> JELLIED_ICHOR = registerWithItem("jellied_ichor",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> TITAN_BONE = registerWithItem("titan_bone",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new Block(BlockBehaviour.Properties.of().noLootTable()));
     public static final DeferredBlock<Block> CORRODED_TITAN_BONE = registerWithItem("corroded_titan_bone",
             () -> new Block(BlockBehaviour.Properties.of()));
+    public static final DeferredBlock<Block> ABERRANT_SHELL = registerWithItem("aberrant_shell",
+            () -> new Block(BlockBehaviour.Properties.of().noLootTable()));
 
 
     //Building blocks
@@ -264,13 +270,15 @@ public class SBBlocks {
 
     //Flora blocks
     public static final DeferredBlock<Block> DUNEGRASS = registerWithItem("dunegrass",
+            () -> new Block(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final DeferredBlock<Block> SEAWEED_BLOCK = registerWithItem("seaweed_block",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> SEAWEED_SLAB = registerWithItem("seaweed_slab",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new SlabBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> SEAWEED_CARPET = registerWithItem("seaweed_carpet",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new CarpetBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_MOSS_CARPET = registerWithItem("mistwood_moss_carpet",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new CarpetBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> MISTWOOD_MOSS_BLOCK = registerWithItem("mistwood_moss_block",
             () -> new Block(BlockBehaviour.Properties.of()));
 
@@ -290,7 +298,7 @@ public class SBBlocks {
     public static final DeferredBlock<Block> CRAB_POT = registerWithItem("crab_pot",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> WHALEBONE_TOTEM = registerWithItem("whalebone_totem",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new Block(BlockBehaviour.Properties.of().noOcclusion()));
     public static final DeferredBlock<Block> DRIFTWOOD_CHEST = registerWithItem("driftwood_chest",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> DRIFTWOOD_BARREL = registerWithItem("driftwood_barrel",
@@ -303,6 +311,8 @@ public class SBBlocks {
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> CORRODED_LANTERN = registerWithItem("corroded_lantern",
             () -> new Block(BlockBehaviour.Properties.of()));
+    public static final DeferredBlock<Block> ICHOR_CAULDRON = registerNoItem("ichor_cauldron",
+            () -> new Block(BlockBehaviour.Properties.of()));
 
 
     //Miscellaneous
@@ -312,8 +322,10 @@ public class SBBlocks {
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> BARNACLES = registerWithItem("barnacles",
             () -> new Block(BlockBehaviour.Properties.of()));
+    public static final DeferredBlock<Block> DEAD_FISH_BLOCK = registerWithItem("dead_fish_block",
+            () -> new Block(BlockBehaviour.Properties.of().noLootTable()));
     public static final DeferredBlock<Block> DEAD_FISH_SLAB = registerWithItem("dead_fish_slab",
-            () -> new Block(BlockBehaviour.Properties.of()));
+            () -> new SlabBlock(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> BURIED_IRON_SCRAP = registerWithItem("buried_iron_scrap",
             () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredBlock<Block> BURIED_RUSTY_SCRAP = registerWithItem("buried_rusty_scrap",

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "shores_between:block/mistwood_slab"
+    },
+    "type=double": {
+      "model": "shores_between:block/mistwood_planks"
+    },
+    "type=top": {
+      "model": "shores_between:block/mistwood_slab_top"
+    }
+  }
+}

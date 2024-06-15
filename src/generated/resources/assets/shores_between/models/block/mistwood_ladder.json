@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/ladder",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "shores_between:block/mistwood_planks",
+    "texture": "shores_between:block/mistwood_ladder"
+  }
+}

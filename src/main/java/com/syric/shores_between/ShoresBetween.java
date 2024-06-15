@@ -1,15 +1,18 @@
 package com.syric.shores_between;
 
 import com.mojang.logging.LogUtils;
-import com.syric.shores_between.registry.SBBlocks;
-import com.syric.shores_between.registry.SBCreativeTabs;
-import com.syric.shores_between.registry.SBItems;
+import com.syric.shores_between.registry.*;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 
@@ -34,6 +37,7 @@ public class ShoresBetween
         SBItems.register(modEventBus);
         SBBlocks.register(modEventBus);
         SBCreativeTabs.register(modEventBus);
+        SBBlockEntities.register(modEventBus);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -59,14 +63,14 @@ public class ShoresBetween
 //        LOGGER.info("HELLO from server starting");
 //    }
 
-//    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-//    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-//    public static class ClientModEvents {
-//        @SubscribeEvent
-//        public static void onClientSetup(FMLClientSetupEvent event) {
-//            // Some client setup code
-//            LOGGER.info("HELLO FROM CLIENT SETUP");
-//            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-//        }
-//    }
+    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            // Some client setup code
+            Sheets.addWoodType(SBWoodTypes.DRIFTWOOD);
+            Sheets.addWoodType(SBWoodTypes.MISTWOOD);
+        }
+    }
 }

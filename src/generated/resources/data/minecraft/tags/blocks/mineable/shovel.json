@@ -1,0 +1,11 @@
+{
+  "values": [
+    "shores_between:shingle",
+    "shores_between:tangled_shingle",
+    "shores_between:pebbles",
+    "shores_between:grassy_shingle",
+    "shores_between:suspicious_shingle",
+    "shores_between:buried_iron_scrap",
+    "shores_between:buried_rusty_scrap"
+  ]
+}

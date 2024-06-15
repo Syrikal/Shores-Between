@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "shores_between:dark_shale_slab"
+  },
+  "result": {
+    "count": 1,
+    "id": "shores_between:polished_dark_shale_slab"
+  }
+}

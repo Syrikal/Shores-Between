@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "shores_between:block/dark_shale_tile_slab"
+    },
+    "type=double": {
+      "model": "shores_between:block/dark_shale_tiles"
+    },
+    "type=top": {
+      "model": "shores_between:block/dark_shale_tile_slab_top"
+    }
+  }
+}

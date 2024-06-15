@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shale_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:shale_stairs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shores_between:shale_brick_stairs_from_shale_stairs_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shale_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shores_between:shale_brick_stairs_from_shale_stairs_stonecutting"
+    ]
+  }
+}

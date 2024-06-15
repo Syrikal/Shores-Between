@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "shores_between:item/raw_titan_marrow"
+  }
+}

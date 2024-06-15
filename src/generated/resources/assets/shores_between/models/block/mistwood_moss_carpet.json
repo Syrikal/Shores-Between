@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "shores_between:block/mistwood_moss_carpet"
+  }
+}

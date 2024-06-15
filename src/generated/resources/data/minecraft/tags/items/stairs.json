@@ -1,0 +1,13 @@
+{
+  "values": [
+    "shores_between:shale_stairs",
+    "shores_between:polished_shale_stairs",
+    "shores_between:shale_brick_stairs",
+    "shores_between:mossy_shale_brick_stairs",
+    "shores_between:dark_shale_stairs",
+    "shores_between:polished_shale_stairs",
+    "shores_between:dark_shale_brick_stairs",
+    "shores_between:dark_shale_tile_stairs",
+    "shores_between:petrified_stairs"
+  ]
+}

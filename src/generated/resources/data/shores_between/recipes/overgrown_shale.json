@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "shores_between:shale"
+    },
+    {
+      "item": "shores_between:mistwood_moss_carpet"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:overgrown_shale"
+  }
+}

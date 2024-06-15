@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "shores_between:shingle"
+    },
+    {
+      "item": "shores_between:rusty_scrap"
+    },
+    {
+      "item": "shores_between:rusty_scrap"
+    },
+    {
+      "item": "shores_between:rusty_scrap"
+    },
+    {
+      "item": "shores_between:rusty_scrap"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "shores_between:buried_rusty_scrap"
+  }
+}

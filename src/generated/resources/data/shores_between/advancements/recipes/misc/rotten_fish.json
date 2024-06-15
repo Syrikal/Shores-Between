@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dead_fish_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:dead_fish_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shores_between:rotten_fish"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dead_fish_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shores_between:rotten_fish"
+    ]
+  }
+}

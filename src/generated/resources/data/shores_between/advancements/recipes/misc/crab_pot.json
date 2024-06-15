@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:crab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crab_pot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:crab_pot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lobster": {
+      "conditions": {
+        "items": [
+          {
+            "items": "shores_between:lobster"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shores_between:crab_pot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crab",
+      "has_lobster",
+      "has_crab_pot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shores_between:crab_pot"
+    ]
+  }
+}
