@@ -1,5 +1,6 @@
 package com.syric.shores_between.registry;
 
+import com.syric.shores_between.item.SBChestItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
@@ -64,7 +65,15 @@ public class SBItems {
             () -> new SignItem( new Item.Properties(), SBBlocks.MISTWOOD_SIGN.get(), SBBlocks.MISTWOOD_WALL_SIGN.get()));
     public static final DeferredItem<Item> MISTWOOD_HANGING_SIGN = ITEMS.register("mistwood_hanging_sign",
             () -> new HangingSignItem( SBBlocks.MISTWOOD_HANGING_SIGN.get(), SBBlocks.MISTWOOD_WALL_HANGING_SIGN.get(), new Item.Properties()));
-    
+
+
+    //Chests
+    public static final DeferredItem<Item> DRIFTWOOD_CHEST = ITEMS.register("driftwood_chest",
+            () -> new SBChestItem(SBBlocks.DRIFTWOOD_CHEST.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MISTWOOD_CHEST = ITEMS.register("mistwood_chest",
+            () -> new SBChestItem(SBBlocks.MISTWOOD_CHEST.get(), new Item.Properties()));
+    public static final DeferredItem<Item> ANCIENT_CHEST = ITEMS.register("ancient_chest",
+            () -> new SBChestItem(SBBlocks.ANCIENT_CHEST.get(), new Item.Properties()));
 
 
 

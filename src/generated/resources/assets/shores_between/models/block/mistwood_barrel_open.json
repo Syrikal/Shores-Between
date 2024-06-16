@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "shores_between:block/mistwood_barrel_bottom",
     "side": "shores_between:block/mistwood_barrel_side",
-    "top": "shores_between:block/mistwood_barrel_top"
+    "top": "shores_between:block/mistwood_barrel_top_open"
   }
 }

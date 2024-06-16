@@ -159,16 +159,17 @@ public class SBItemModelProvider extends ItemModelProvider {
         simpleBlockItem(SBBlocks.DARK_OBELISK);
         simpleBlockItem(SBBlocks.CRAB_POT);
         blockWithOwnFlatTexture(SBBlocks.WHALEBONE_TOTEM);
-        simpleBlockItem(SBBlocks.DRIFTWOOD_CHEST);
         simpleBlockItem(SBBlocks.DRIFTWOOD_BARREL);
-        simpleBlockItem(SBBlocks.MISTWOOD_CHEST);
         simpleBlockItem(SBBlocks.MISTWOOD_BARREL);
-        simpleBlockItem(SBBlocks.ANCIENT_CHEST);
         blockWithFlatTexture(SBBlocks.CORRODED_LANTERN);
         simpleBlockItem(SBBlocks.BURIED_IRON_SCRAP);
         simpleBlockItem(SBBlocks.BURIED_RUSTY_SCRAP);
         simpleBlockItem(SBBlocks.IRON_SCRAP_BLOCK);
         simpleBlockItem(SBBlocks.RUSTY_SCRAP_BLOCK);
+
+        chestItem(SBItems.DRIFTWOOD_CHEST, SBBlocks.DRIFTWOOD_PLANKS);
+        chestItem(SBItems.MISTWOOD_CHEST, SBBlocks.MISTWOOD_PLANKS);
+        chestItem(SBItems.ANCIENT_CHEST, SBBlocks.POLISHED_DARK_SHALE);
     }
 
     private void simpleItem(DeferredItem<Item> item) {
@@ -212,6 +213,11 @@ public class SBItemModelProvider extends ItemModelProvider {
     private void simpleWallItem(DeferredBlock<Block> block, DeferredBlock<Block> fullBlock) {
         withExistingParent(block.getRegisteredName(), mcLoc("block/wall_inventory"))
                 .texture("wall", blockTexture(fullBlock));
+    }
+
+    private void chestItem(DeferredItem<Item> chest, DeferredBlock<Block> fullBlock) {
+        withExistingParent(chest.getRegisteredName(), mcLoc("item/chest"))
+                .texture("particle", blockTexture(fullBlock));
     }
 
     private ResourceLocation blockTexture(DeferredBlock<Block> block) {

@@ -1,3 +1,6 @@
 {
-  "parent": "shores_between:block/driftwood_chest"
+  "parent": "minecraft:item/chest",
+  "textures": {
+    "particle": "shores_between:block/driftwood_planks"
+  }
 }

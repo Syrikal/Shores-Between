@@ -1,6 +1,7 @@
 package com.syric.shores_between.event;
 
 import com.syric.shores_between.ShoresBetween;
+import com.syric.shores_between.entity.rendering.SBChestRenderer;
 import com.syric.shores_between.registry.SBBlockEntities;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -16,6 +17,6 @@ public class ModEventBusClientEvents {
     public static void registerBERs(EntityRenderersEvent.RegisterRenderers renderersEvent) {
         renderersEvent.registerBlockEntityRenderer(SBBlockEntities.SHORES_BETWEEN_SIGN.get(), SignRenderer::new);
         renderersEvent.registerBlockEntityRenderer(SBBlockEntities.SHORES_BETWEEN_HANGING_SIGN.get(), HangingSignRenderer::new);
+        renderersEvent.registerBlockEntityRenderer(SBBlockEntities.SHORES_BETWEEN_CHEST.get(), SBChestRenderer::new);
     }
-
 }

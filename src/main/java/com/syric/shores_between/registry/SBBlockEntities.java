@@ -1,6 +1,7 @@
 package com.syric.shores_between.registry;
 
 import com.mojang.datafixers.types.Type;
+import com.syric.shores_between.entity.SBChestBlockEntity;
 import com.syric.shores_between.entity.SBHangingSignBlockEntity;
 import com.syric.shores_between.entity.SBSignBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +26,9 @@ public class SBBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SBHangingSignBlockEntity>> SHORES_BETWEEN_HANGING_SIGN =
             BLOCK_ENTITIES.register("shores_between_hanging_sign", () ->
                     BlockEntityType.Builder.of(SBHangingSignBlockEntity::new, SBBlocks.DRIFTWOOD_HANGING_SIGN.get(), SBBlocks.DRIFTWOOD_WALL_HANGING_SIGN.get(), SBBlocks.MISTWOOD_HANGING_SIGN.get(), SBBlocks.MISTWOOD_WALL_HANGING_SIGN.get()).build((Type) null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SBChestBlockEntity>> SHORES_BETWEEN_CHEST =
+            BLOCK_ENTITIES.register("shores_between_chest", () ->
+                    BlockEntityType.Builder.of(SBChestBlockEntity::new, SBBlocks.DRIFTWOOD_CHEST.get(), SBBlocks.MISTWOOD_CHEST.get(), SBBlocks.ANCIENT_CHEST.get()).build((Type) null));
 
 
 }

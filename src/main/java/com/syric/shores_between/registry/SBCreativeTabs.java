@@ -142,11 +142,11 @@ public class SBCreativeTabs {
                         pOutput.accept(SBBlocks.DARK_OBELISK.asItem());
                         pOutput.accept(SBBlocks.CRAB_POT.asItem());
                         pOutput.accept(SBBlocks.WHALEBONE_TOTEM.asItem());
-                        pOutput.accept(SBBlocks.DRIFTWOOD_CHEST.asItem());
+                        pOutput.accept(SBItems.DRIFTWOOD_CHEST.asItem());
                         pOutput.accept(SBBlocks.DRIFTWOOD_BARREL.asItem());
-                        pOutput.accept(SBBlocks.MISTWOOD_CHEST.asItem());
+                        pOutput.accept(SBItems.MISTWOOD_CHEST.asItem());
                         pOutput.accept(SBBlocks.MISTWOOD_BARREL.asItem());
-                        pOutput.accept(SBBlocks.ANCIENT_CHEST.asItem());
+                        pOutput.accept(SBItems.ANCIENT_CHEST.asItem());
                         pOutput.accept(SBBlocks.CORRODED_LANTERN.asItem());
                         pOutput.accept(SBBlocks.BURIED_IRON_SCRAP.asItem());
                         pOutput.accept(SBBlocks.BURIED_RUSTY_SCRAP.asItem());

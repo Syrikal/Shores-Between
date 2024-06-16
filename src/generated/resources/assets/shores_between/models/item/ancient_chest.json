@@ -1,3 +1,6 @@
 {
-  "parent": "shores_between:block/ancient_chest"
+  "parent": "minecraft:item/chest",
+  "textures": {
+    "particle": "shores_between:block/polished_dark_shale"
+  }
 }

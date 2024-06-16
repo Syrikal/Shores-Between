@@ -6,7 +6,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -133,13 +135,13 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.ENGRAVED_DARK_SHALE);
         block(SBBlocks.DARK_OBELISK); //Needs custom model
         block(SBBlocks.CRAB_POT); //Needs custom model
-        crossBlock(SBBlocks.WHALEBONE_TOTEM); //Needs custom model
-        block(SBBlocks.DRIFTWOOD_CHEST); //Needs attention
-        block(SBBlocks.DRIFTWOOD_BARREL); //Needs attention
-        block(SBBlocks.MISTWOOD_CHEST); //Needs attention
-        block(SBBlocks.MISTWOOD_BARREL); //Needs attention
-        block(SBBlocks.ANCIENT_CHEST); //Needs attention
-        block(SBBlocks.CORRODED_LANTERN); //Needs custom model
+        totem(SBBlocks.WHALEBONE_TOTEM); //Needs custom model
+        chest(SBBlocks.DRIFTWOOD_CHEST); //Needs attention
+        barrel(SBBlocks.DRIFTWOOD_BARREL); //Needs attention
+        chest(SBBlocks.MISTWOOD_CHEST); //Needs attention
+        barrel(SBBlocks.MISTWOOD_BARREL); //Needs attention
+        chest(SBBlocks.ANCIENT_CHEST); //Needs attention
+        lantern(SBBlocks.CORRODED_LANTERN); //Needs custom model
         block(SBBlocks.BURIED_IRON_SCRAP); //Needs custom model
         block(SBBlocks.BURIED_RUSTY_SCRAP); //Needs custom model
         block(SBBlocks.IRON_SCRAP_BLOCK);
@@ -213,6 +215,11 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleBlock(wallSignBlock.get(), sign);
     }
 
+    private void chest(DeferredBlock<Block> chest) {
+        ModelFile chestModel = models().getBuilder(chest.getRegisteredName()).texture("particle", texture(chest));
+        simpleBlock(chest.get(), chestModel);
+    }
+
     private void ladder(DeferredBlock<Block> ladder, DeferredBlock<Block> fullBlock) {
         ModelFile ladderModel = models().withExistingParent(ladder.getId().getPath(), "ladder")
                 .texture("particle", texture(fullBlock))
@@ -229,12 +236,57 @@ public class SBBlockStateProvider extends BlockStateProvider {
                     .modelForState().modelFile(ladderModel).rotationY(270).addModel();
     }
 
+    private void lantern(DeferredBlock<Block> lantern) {
+        ModelFile lanternModel = models().withExistingParent(lantern.getId().getPath(), "lantern")
+                .texture("lantern", texture(lantern));
+        ModelFile hangingModel = models().withExistingParent(lantern.getId().getPath() + "_hanging", "lantern_hanging")
+                .texture("lantern", texture(lantern));
+        getVariantBuilder(lantern.get())
+                .partialState().with(LanternBlock.HANGING, Boolean.FALSE)
+                    .modelForState().modelFile(lanternModel).addModel()
+                .partialState().with(LanternBlock.HANGING, Boolean.TRUE)
+                    .modelForState().modelFile(hangingModel).addModel();
+    }
+
+    private void totem(DeferredBlock<Block> totem) {
+        ModelFile totemModel = models().withExistingParent(totem.getId().getPath(), "brewing_stand")
+                .texture("particle", texture(totem))
+                .texture("base", texture(totem, "base"))
+                .texture("stand", texture(totem));
+        simpleBlock(totem.get(), totemModel);
+    }
+
+    private void barrel(DeferredBlock<Block> barrel) {
+        ModelFile barrelClosedModel = models().withExistingParent(barrel.getId().getPath(), "barrel")
+                .texture("side", texture(barrel, "side"))
+                .texture("bottom", texture(barrel, "bottom"))
+                .texture("top", texture(barrel, "top"));
+        ModelFile barrelOpenModel = models().withExistingParent(barrel.getId().getPath() + "_open", "barrel")
+                .texture("side", texture(barrel, "side"))
+                .texture("bottom", texture(barrel, "bottom"))
+                .texture("top", texture(barrel, "top_open"));
+        getVariantBuilder(barrel.get())
+                .forAllStates(blockState -> {
+                    Direction dir = blockState.getValue(BlockStateProperties.FACING);
+                    Boolean open = blockState.getValue(BlockStateProperties.OPEN);
+                    return ConfiguredModel.builder()
+                            .modelFile(open ? barrelOpenModel : barrelClosedModel)
+                            .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
+                            .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot() + 180)) % 360)
+                            .build();
+                });
+    }
+
     private ResourceLocation texture(String name) {
         return new ResourceLocation(ShoresBetween.MODID, "block/" + name);
     }
 
     private ResourceLocation texture(DeferredBlock<Block> block) {
         return new ResourceLocation(ShoresBetween.MODID, "block/" + block.getId().getPath());
+    }
+
+    private ResourceLocation texture(DeferredBlock<Block> block, String addon) {
+        return new ResourceLocation(ShoresBetween.MODID, "block/" + block.getId().getPath() + "_" + addon);
     }
 
 }

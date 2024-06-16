@@ -1,7 +1,7 @@
-// 1.20.6	2024-06-15T11:42:54.9548432	Item Models: shores_between
+// 1.20.6	2024-06-16T13:26:55.7816788	Item Models: shores_between
 c7b057f4b7cb417e78ff4e00c32592db81bff231 assets/shores_between/models/item/aberrant_shell.json
 4f1b716fa899aff5f2c6e5f69953a1e595f29a1e assets/shores_between/models/item/ambergris.json
-55c8bd5faa9b8c330527018f73178ff0c4f0c7f3 assets/shores_between/models/item/ancient_chest.json
+a6919ddfc6fee829132bf7b963ee65277b5b8622 assets/shores_between/models/item/ancient_chest.json
 0815218f88df4c59c46112f54c6823cffa7b802b assets/shores_between/models/item/barnacle.json
 bd582c0921cf97a8055c17a499bcf859a839a6de assets/shores_between/models/item/barnacles.json
 0d5b20ea0fb4e8a71338dafe58b61c9a2dbc0caa assets/shores_between/models/item/bloated_flesh.json
@@ -37,7 +37,7 @@ fa92c0696089f1dd0bf96927d7fefbfaf7443540 assets/shores_between/models/item/dark_
 e846c8e8595508787cde65846a0cc42f27776ed0 assets/shores_between/models/item/dead_fish_slab.json
 2d0d6d1c006dfd339f9a7d05c141155589684f98 assets/shores_between/models/item/driftwood_barrel.json
 eb116c7f88301cfbb4e427c70599568ba3eb7b55 assets/shores_between/models/item/driftwood_button.json
-b89af1985e779ac4a326b713730d3210b0939c74 assets/shores_between/models/item/driftwood_chest.json
+404569ab5b06e6afcc656e9949e430927e719b33 assets/shores_between/models/item/driftwood_chest.json
 7715aa9fa3a928e262c3758186571083ba00d175 assets/shores_between/models/item/driftwood_door.json
 b7f2ee274defbb8b6224846133f17b91b8c29e65 assets/shores_between/models/item/driftwood_fence.json
 e669354dbd5fb391de9de9c9a104b1703533ea7d assets/shores_between/models/item/driftwood_fence_gate.json
@@ -65,7 +65,7 @@ b9b2baf37cb0cfa6da374ccb0a1c821241593cd9 assets/shores_between/models/item/levia
 3aaba0ea815ffc9ff521ebfa46b5beb9a098fa26 assets/shores_between/models/item/message_in_a_bottle.json
 254f1e9695f87681aef12a8715a9e6a231251531 assets/shores_between/models/item/mistwood_barrel.json
 6b68f7bae543c095d5dc65f83375f7d6ee2d34af assets/shores_between/models/item/mistwood_button.json
-f4bd5418d655536c8c0d19c99cd4adde90f92157 assets/shores_between/models/item/mistwood_chest.json
+9ba12a48ac9e6737700166c7df594f720956f8fe assets/shores_between/models/item/mistwood_chest.json
 8e72dd01b9649c7c833d7a6db1580c9257fb5328 assets/shores_between/models/item/mistwood_door.json
 96354a188b0a362ba9cf053639e4204abb287d09 assets/shores_between/models/item/mistwood_fence.json
 6dd36707152ebbb0ff411a0e8f389a4edf329839 assets/shores_between/models/item/mistwood_fence_gate.json

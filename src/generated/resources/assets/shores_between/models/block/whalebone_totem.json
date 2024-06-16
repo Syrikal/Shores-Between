@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/brewing_stand",
   "textures": {
-    "cross": "shores_between:block/whalebone_totem"
+    "base": "shores_between:block/whalebone_totem_base",
+    "particle": "shores_between:block/whalebone_totem",
+    "stand": "shores_between:block/whalebone_totem"
   }
 }

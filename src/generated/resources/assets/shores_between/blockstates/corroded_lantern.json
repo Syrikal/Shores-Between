@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "hanging=false": {
       "model": "shores_between:block/corroded_lantern"
+    },
+    "hanging=true": {
+      "model": "shores_between:block/corroded_lantern_hanging"
     }
   }
 }
