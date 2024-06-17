@@ -168,6 +168,7 @@ public class SBCreativeTabs {
                         pOutput.accept(SBItems.SEAGULL_EGG);
                         pOutput.accept(SBItems.OYSTER);
                         pOutput.accept(SBItems.COOKED_OYSTER);
+                        pOutput.accept(SBItems.BARNACLE);
                         pOutput.accept(SBItems.WRITHING_TENDRILS);
                         pOutput.accept(SBItems.ROTTEN_FISH);
                         pOutput.accept(SBItems.STRANGE_MEAT);
