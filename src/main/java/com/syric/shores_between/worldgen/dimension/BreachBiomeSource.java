@@ -177,22 +177,7 @@ public class BreachBiomeSource extends BiomeSource {
     }
 
     @Override
-    public void addDebugInfo(List<String> pInfo, BlockPos pPos, Climate.Sampler pSampler) {
-        int i = QuartPos.fromBlock(pPos.getX());
-        int j = QuartPos.fromBlock(pPos.getY());
-        int k = QuartPos.fromBlock(pPos.getZ());
-        Climate.TargetPoint climate$targetpoint = pSampler.sample(i, j, k);
-        float f = Climate.unquantizeCoord(climate$targetpoint.continentalness());
-        float f2 = Climate.unquantizeCoord(climate$targetpoint.temperature());
-        float f3 = Climate.unquantizeCoord(climate$targetpoint.humidity());
-        pInfo.add(
-                "Breach Continentalness: "
-                        + f
-                        + ", Rockiness: "
-                        + f2
-                        + ", Vitality: "
-                        + f3
-        );
+    public Holder<Biome> getNoiseBiome(int p_204238_, int p_204239_, int p_204240_, Climate.Sampler p_204241_) {
+        return null;
     }
-
 }
