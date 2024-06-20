@@ -4,7 +4,7 @@
     "type": "minecraft:noise",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "shores_between:desolate_strand"
+      "biome": "shores_between:drowned_forest"
     },
     "settings": "shores_between:breach_noise_settings"
   }

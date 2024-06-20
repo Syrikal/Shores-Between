@@ -28,6 +28,7 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.NOISE, SBWorldGenProvider::bootstrapAllNoise)
             .add(Registries.DENSITY_FUNCTION, SBWorldGenProvider::bootstrapAllDensity)
             .add(Registries.NOISE_SETTINGS, SBDimensions::bootstrapNoiseSettings)
+            .add(Registries.BIOME_SOURCE, SBDimensions::bootstrapBiomeSource)
             ;
 
     public SBWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

@@ -1,5 +1,7 @@
 package com.syric.shores_between.registry;
 
+import com.mojang.serialization.MapCodec;
+import com.syric.shores_between.worldgen.dimension.BreachBiomeSource;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.DensityUtil;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
@@ -10,14 +12,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.CubicSpline;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.FixedBiomeSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -41,7 +41,8 @@ public class SBDimensions {
             new ResourceLocation(MODID, "breach_dim_type"));
     public static final ResourceKey<NoiseGeneratorSettings> BREACH_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
             new ResourceLocation(MODID, "breach_noise_settings"));
-    public static final TagKey<Block> INFINIBURN_BREACH = BlockTags.create(new ResourceLocation("infiniburn_breach"));
+    public static final ResourceKey<MapCodec<? extends BiomeSource>> BREACH_BIOME_SOURCE = ResourceKey.create(Registries.BIOME_SOURCE,
+            new ResourceLocation(MODID, "breach_biome_source"));
 
     public static final ResourceKey<NormalNoise.NoiseParameters> ROCKINESS_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "rockiness"));
     public static final ResourceKey<NormalNoise.NoiseParameters> VITALITY_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "vitality"));
@@ -67,7 +68,7 @@ public class SBDimensions {
                         -64, //min Y
                         256, //height
                         256, //logical height
-                        INFINIBURN_BREACH, //Infiniburn blocks
+                        SBTags.Blocks.INFINIBURN_BREACH, //Infiniburn blocks
                         BuiltinDimensionTypes.NETHER_EFFECTS, //effects (mostly sky stuff)
                         0.1F, //Ambient light
                         new DimensionType.MonsterSettings( //Monster settings
@@ -86,8 +87,12 @@ public class SBDimensions {
         HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
 
+//        NoiseBasedChunkGenerator wrappedChunkGenerator = new NoiseBasedChunkGenerator(
+//                BreachBiomeSource.create(biomeRegistry),
+//                noiseGenSettings.getOrThrow(BREACH_NOISE));
+
         NoiseBasedChunkGenerator wrappedChunkGenerator = new NoiseBasedChunkGenerator(
-                new FixedBiomeSource(biomeRegistry.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME)),
+                new FixedBiomeSource(biomeRegistry.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME)),
                 noiseGenSettings.getOrThrow(BREACH_NOISE));
 
         LevelStem stem = new LevelStem(dimTypes.getOrThrow(SBDimensions.BREACH_DIM_TYPE), wrappedChunkGenerator);
@@ -254,5 +259,9 @@ public class SBDimensions {
 //        context.register(SPLINED_VITALITY, splined_vitality);
 
         return List.of(new DensityFunctions.HolderHolder(splined_rockiness), new DensityFunctions.HolderHolder(splined_vitality), new DensityFunctions.HolderHolder(breach_continentalness));
+    }
+
+    public static void bootstrapBiomeSource(BootstrapContext<MapCodec<? extends BiomeSource>> context) {
+        context.register(BREACH_BIOME_SOURCE, BreachBiomeSource.create(context.lookup(Registries.BIOME)).codec());
     }
 }
