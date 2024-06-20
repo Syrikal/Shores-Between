@@ -252,7 +252,4 @@ public class SBDimensions {
         return List.of(new DensityFunctions.HolderHolder(splined_rockiness), new DensityFunctions.HolderHolder(splined_vitality), new DensityFunctions.HolderHolder(breach_continentalness));
     }
 
-//    public static void bootstrapBiomeSource(BootstrapContext<MapCodec<? extends BiomeSource>> context) {
-//        context.register(SBBiomeSources.BREACH_BIOME_SOURCE, BreachBiomeSource.CODEC);
-//    }
 }
