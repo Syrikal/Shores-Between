@@ -38,6 +38,7 @@ public class ShoresBetween
         SBBlocks.register(modEventBus);
         SBCreativeTabs.register(modEventBus);
         SBBlockEntities.register(modEventBus);
+        SBBiomeSources.register(modEventBus);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -1,5 +1,6 @@
 package com.syric.shores_between.registry;
 
+import com.syric.shores_between.worldgen.dimension.BreachBiomeSource;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.DensityUtil;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
@@ -10,14 +11,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.CubicSpline;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.FixedBiomeSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -41,7 +38,6 @@ public class SBDimensions {
             new ResourceLocation(MODID, "breach_dim_type"));
     public static final ResourceKey<NoiseGeneratorSettings> BREACH_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
             new ResourceLocation(MODID, "breach_noise_settings"));
-    public static final TagKey<Block> INFINIBURN_BREACH = BlockTags.create(new ResourceLocation("infiniburn_breach"));
 
     public static final ResourceKey<NormalNoise.NoiseParameters> ROCKINESS_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "rockiness"));
     public static final ResourceKey<NormalNoise.NoiseParameters> VITALITY_NOISE = ResourceKey.create(Registries.NOISE, new ResourceLocation(MODID, "vitality"));
@@ -67,7 +63,7 @@ public class SBDimensions {
                         -64, //min Y
                         256, //height
                         256, //logical height
-                        INFINIBURN_BREACH, //Infiniburn blocks
+                        SBTags.Blocks.INFINIBURN_BREACH, //Infiniburn blocks
                         BuiltinDimensionTypes.NETHER_EFFECTS, //effects (mostly sky stuff)
                         0.1F, //Ambient light
                         new DimensionType.MonsterSettings( //Monster settings
@@ -87,7 +83,7 @@ public class SBDimensions {
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
 
         NoiseBasedChunkGenerator wrappedChunkGenerator = new NoiseBasedChunkGenerator(
-                new FixedBiomeSource(biomeRegistry.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME)),
+                BreachBiomeSource.create(biomeRegistry),
                 noiseGenSettings.getOrThrow(BREACH_NOISE));
 
         LevelStem stem = new LevelStem(dimTypes.getOrThrow(SBDimensions.BREACH_DIM_TYPE), wrappedChunkGenerator);
@@ -255,4 +251,8 @@ public class SBDimensions {
 
         return List.of(new DensityFunctions.HolderHolder(splined_rockiness), new DensityFunctions.HolderHolder(splined_vitality), new DensityFunctions.HolderHolder(breach_continentalness));
     }
+
+//    public static void bootstrapBiomeSource(BootstrapContext<MapCodec<? extends BiomeSource>> context) {
+//        context.register(SBBiomeSources.BREACH_BIOME_SOURCE, BreachBiomeSource.CODEC);
+//    }
 }

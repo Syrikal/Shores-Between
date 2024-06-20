@@ -14,6 +14,7 @@ public class SBTags {
         public static final TagKey<Block> DRIFTWOOD_LOGS = tag("driftwood_logs");
         public static final TagKey<Block> MISTWOOD_LOGS = tag("mistwood_logs");
         public static final TagKey<Block> PETRIFIED_LOGS = tag("petrified_logs");
+        public static final TagKey<Block> INFINIBURN_BREACH = BlockTags.create(new ResourceLocation("infiniburn_breach"));
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(ShoresBetween.MODID, name));
