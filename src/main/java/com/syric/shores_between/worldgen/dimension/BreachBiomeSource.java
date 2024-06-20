@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.DensityFunction;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.stream.Stream;
 
 @MethodsReturnNonnullByDefault
@@ -174,4 +175,24 @@ public class BreachBiomeSource extends BiomeSource {
             }
         }
     }
+
+    @Override
+    public void addDebugInfo(List<String> pInfo, BlockPos pPos, Climate.Sampler pSampler) {
+        int i = QuartPos.fromBlock(pPos.getX());
+        int j = QuartPos.fromBlock(pPos.getY());
+        int k = QuartPos.fromBlock(pPos.getZ());
+        Climate.TargetPoint climate$targetpoint = pSampler.sample(i, j, k);
+        float f = Climate.unquantizeCoord(climate$targetpoint.continentalness());
+        float f2 = Climate.unquantizeCoord(climate$targetpoint.temperature());
+        float f3 = Climate.unquantizeCoord(climate$targetpoint.humidity());
+        pInfo.add(
+                "Breach Continentalness: "
+                        + f
+                        + ", Rockiness: "
+                        + f2
+                        + ", Vitality: "
+                        + f3
+        );
+    }
+
 }
