@@ -23,7 +23,7 @@ public class ShoresBetween
     // Define mod id in a common place for everything to reference
     public static final String MODID = "shores_between";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
 
     public ShoresBetween(IEventBus modEventBus, ModContainer modContainer) {

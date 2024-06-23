@@ -16,7 +16,6 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
@@ -52,7 +51,7 @@ public class SBDimensions {
     public static void bootstrapDimensionType(BootstrapContext<DimensionType> context) {
         context.register(BREACH_DIM_TYPE,
                 new DimensionType(
-                        OptionalLong.of(0L), //fixed time
+                        OptionalLong.empty(), //fixed time
                         true, //has skylight
                         false, //has ceiling
                         false, //ultrawarm (evaporation)
@@ -64,8 +63,8 @@ public class SBDimensions {
                         256, //height
                         256, //logical height
                         SBTags.Blocks.INFINIBURN_BREACH, //Infiniburn blocks
-                        BuiltinDimensionTypes.NETHER_EFFECTS, //effects (mostly sky stuff)
-                        0.1F, //Ambient light
+                        SBDimensionEffects.BREACH_EFFECTS, //effects (mostly sky stuff)
+                        0.03F, //Ambient light
                         new DimensionType.MonsterSettings( //Monster settings
                                 false, //safe for piglins
                                 false, //has raids

@@ -11,7 +11,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 @EventBusSubscriber(modid = ShoresBetween.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ModEventBusClientEvents {
+public class ShoresBetweenClientEvents {
 
     @SubscribeEvent
     public static void registerBERs(EntityRenderersEvent.RegisterRenderers renderersEvent) {

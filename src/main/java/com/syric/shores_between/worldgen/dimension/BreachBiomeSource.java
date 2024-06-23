@@ -27,7 +27,7 @@ public class BreachBiomeSource extends BiomeSource {
                             RegistryOps.retrieveElement(SBBiomes.GRASSY_STRAND_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.DRIFTWOOD_BEACH_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.MISTWOOD_BIOME),
-                            RegistryOps.retrieveElement(SBBiomes.MISTWOOD_COAST_BIOME),
+                            RegistryOps.retrieveElement(SBBiomes.MISTWOOD_EDGE),
                             RegistryOps.retrieveElement(SBBiomes.FORSAKEN_OCEAN_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.SEAMOUNTS_BIOME)
                     )
@@ -43,7 +43,7 @@ public class BreachBiomeSource extends BiomeSource {
     private final Holder<Biome> grassy_strand;
     private final Holder<Biome> driftwood_beach;
     private final Holder<Biome> mistwood;
-    private final Holder<Biome> mistwood_coast;
+    private final Holder<Biome> mistwood_edge;
     private final Holder<Biome> forsaken_ocean;
     private final Holder<Biome> seamounts;
 
@@ -58,7 +58,7 @@ public class BreachBiomeSource extends BiomeSource {
                 pBiomeGetter.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_BIOME),
-                pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_COAST_BIOME),
+                pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_EDGE),
                 pBiomeGetter.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.SEAMOUNTS_BIOME)
         );
@@ -74,14 +74,14 @@ public class BreachBiomeSource extends BiomeSource {
         grassy_strand = grassyStrand;
         driftwood_beach = driftwoodBeach;
         this.mistwood = mistwood;
-        mistwood_coast = mistwoodCoast;
+        mistwood_edge = mistwoodCoast;
         forsaken_ocean = forsakenOcean;
         this.seamounts = seamounts;
     }
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(this.desolate_strand, this.drowned_forest, this.barren_strand, this.rocky_strand, this.rock_fields, this.crags, this.grassy_strand, this.driftwood_beach, this.mistwood, this.mistwood_coast, this.forsaken_ocean, this.seamounts);
+        return Stream.of(this.desolate_strand, this.drowned_forest, this.barren_strand, this.rocky_strand, this.rock_fields, this.crags, this.grassy_strand, this.driftwood_beach, this.mistwood, this.mistwood_edge, this.forsaken_ocean, this.seamounts);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class BreachBiomeSource extends BiomeSource {
         if (continentalness >= 1) {
             return this.mistwood;
         } else if (continentalness >= 0.98) {
-            return this.mistwood_coast;
+            return this.mistwood_edge;
         } else if (-0.5 < continentalness && continentalness < -0.1) {
             return this.forsaken_ocean;
         } else if (-0.5 >= continentalness) {
