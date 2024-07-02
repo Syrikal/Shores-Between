@@ -186,4 +186,20 @@ public class SBCreativeTabs {
                         pOutput.accept(SBItems.STRAND_ARMOR_TRIM_SMITHING_TEMPLATE);
                     })))
                     .build());
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BREACH_TESTING_ITEMS = CREATIVE_MODE_TABS.register("breach_testing_items",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.breach_items"))
+                    .icon(SBBlocks.MISTWOOD_SAPLING::toStack)
+                    .displayItems((((pParameters, pOutput) -> {
+                        pOutput.accept(SBBlocks.MISTWOOD_SAPLING);
+                        pOutput.accept(SBBlocks.MISTWOOD_EDGE_SAPLING);
+                        pOutput.accept(SBBlocks.MISTWOOD_TALL_SAPLING);
+                        pOutput.accept(SBBlocks.MISTWOOD_THIN_SAPLING);
+                        pOutput.accept(SBBlocks.MISTWOOD_BUSH_SAPLING);
+                        pOutput.accept(SBBlocks.WINDBLOWN_SAPLING);
+                        pOutput.accept(SBBlocks.DEAD_SAPLING);
+                        pOutput.accept(SBBlocks.PETRIFIED_SAPLING);
+                    })))
+                    .build());
 }

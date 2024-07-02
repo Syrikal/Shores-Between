@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:add",
+  "argument1": "shores_between:mistwood_islands",
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": "shores_between:mistwood_terrain",
+    "argument2": "shores_between:mistwood_channel_roughness"
+  }
+}

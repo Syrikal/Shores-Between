@@ -7,7 +7,7 @@
   "has_raids": false,
   "has_skylight": true,
   "height": 256,
-  "infiniburn": "#minecraft:infiniburn_breach",
+  "infiniburn": "#shores_between:infiniburn_breach",
   "logical_height": 256,
   "min_y": -64,
   "monster_spawn_block_light_limit": 0,

@@ -1,6 +1,7 @@
 package com.syric.shores_between.registry;
 
 import com.syric.shores_between.block.*;
+import com.syric.shores_between.worldgen.tree.SBTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -224,7 +225,24 @@ public class SBBlocks {
     public static final DeferredBlock<Block> MISTWOOD_LEAVES = registerWithItem("mistwood_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)));
     public static final DeferredBlock<Block> MISTWOOD_SAPLING = registerWithItem("mistwood_sapling",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+
+
+    //Saplings
+    public static final DeferredBlock<Block> MISTWOOD_EDGE_SAPLING = registerWithItem("mistwood_edge_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_EDGE_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+    public static final DeferredBlock<Block> MISTWOOD_TALL_SAPLING = registerWithItem("mistwood_tall_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_TALL_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+    public static final DeferredBlock<Block> MISTWOOD_THIN_SAPLING = registerWithItem("mistwood_thin_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_THIN_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+    public static final DeferredBlock<Block> MISTWOOD_BUSH_SAPLING = registerWithItem("mistwood_bush_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_BUSH, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+    public static final DeferredBlock<Block> PETRIFIED_SAPLING = registerWithItem("petrified_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.PETRIFIED_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+    public static final DeferredBlock<Block> DEAD_SAPLING = registerWithItem("dead_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.DEAD_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+    public static final DeferredBlock<Block> WINDBLOWN_SAPLING = registerWithItem("windblown_sapling",
+            () -> new SaplingBlock(SBTreeGrowers.WINDBLOWN_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
 
 
     //Corpse blocks

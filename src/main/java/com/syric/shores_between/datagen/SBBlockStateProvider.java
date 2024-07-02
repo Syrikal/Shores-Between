@@ -71,7 +71,14 @@ public class SBBlockStateProvider extends BlockStateProvider {
         hangingSign(SBBlocks.MISTWOOD_HANGING_SIGN, SBBlocks.MISTWOOD_WALL_HANGING_SIGN, SBBlocks.MISTWOOD_PLANKS);
         ladder(SBBlocks.MISTWOOD_LADDER, SBBlocks.MISTWOOD_PLANKS);
         block(SBBlocks.MISTWOOD_LEAVES);
-        crossBlock(SBBlocks.MISTWOOD_SAPLING); //Needs attention
+        crossBlockCutout(SBBlocks.MISTWOOD_SAPLING);
+        crossBlockCutout(SBBlocks.MISTWOOD_EDGE_SAPLING);
+        crossBlockCutout(SBBlocks.MISTWOOD_TALL_SAPLING);
+        crossBlockCutout(SBBlocks.MISTWOOD_THIN_SAPLING);
+        crossBlockCutout(SBBlocks.MISTWOOD_BUSH_SAPLING);
+        crossBlockCutout(SBBlocks.WINDBLOWN_SAPLING);
+        crossBlockCutout(SBBlocks.DEAD_SAPLING);
+        crossBlockCutout(SBBlocks.PETRIFIED_SAPLING);
         block(SBBlocks.ROTTING_FLESH_BLOCK);
         block(SBBlocks.INFESTED_FLESH_BLOCK);
         block(SBBlocks.BLOATED_FLESH);
@@ -83,7 +90,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.TITAN_BONE);
         block(SBBlocks.CORRODED_TITAN_BONE);
         block(SBBlocks.ABERRANT_SHELL);
-        crossBlock(SBBlocks.DUNEGRASS); //Needs attention
+        crossBlockCutout(SBBlocks.DUNEGRASS); //Needs attention
         block(SBBlocks.SEAWEED_BLOCK); //Needs custom model
         halfSlab(SBBlocks.SEAWEED_SLAB, SBBlocks.SEAWEED_BLOCK); //Needs custom model
         carpet(SBBlocks.SEAWEED_CARPET); //Needs custom model
@@ -135,13 +142,13 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.ENGRAVED_DARK_SHALE);
         block(SBBlocks.DARK_OBELISK); //Needs custom model
         block(SBBlocks.CRAB_POT); //Needs custom model
-        totem(SBBlocks.WHALEBONE_TOTEM); //Needs custom model
-        chest(SBBlocks.DRIFTWOOD_CHEST); //Needs attention
-        barrel(SBBlocks.DRIFTWOOD_BARREL); //Needs attention
-        chest(SBBlocks.MISTWOOD_CHEST); //Needs attention
-        barrel(SBBlocks.MISTWOOD_BARREL); //Needs attention
-        chest(SBBlocks.ANCIENT_CHEST); //Needs attention
-        lantern(SBBlocks.CORRODED_LANTERN); //Needs custom model
+        totem(SBBlocks.WHALEBONE_TOTEM);
+        chest(SBBlocks.DRIFTWOOD_CHEST);
+        barrel(SBBlocks.DRIFTWOOD_BARREL);
+        chest(SBBlocks.MISTWOOD_CHEST);
+        barrel(SBBlocks.MISTWOOD_BARREL);
+        chest(SBBlocks.ANCIENT_CHEST);
+        lantern(SBBlocks.CORRODED_LANTERN);
         block(SBBlocks.BURIED_IRON_SCRAP); //Needs custom model
         block(SBBlocks.BURIED_RUSTY_SCRAP); //Needs custom model
         block(SBBlocks.IRON_SCRAP_BLOCK);
@@ -194,6 +201,11 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
     private void crossBlock(DeferredBlock<Block> block) {
         ModelFile crossBlockModel = models().cross(block.getId().getPath(), texture(block));
+        simpleBlock(block.get(), crossBlockModel);
+    }
+
+    private void crossBlockCutout(DeferredBlock<Block> block) {
+        ModelFile crossBlockModel = models().cross(block.getId().getPath(), texture(block)).renderType("cutout");
         simpleBlock(block.get(), crossBlockModel);
     }
 

@@ -1,4 +1,4 @@
-// 1.20.6	2024-06-15T11:42:54.9538428	Tags for minecraft:block mod id shores_between
+// 1.20.6	2024-06-27T20:37:08.9670806	Tags for minecraft:block mod id shores_between
 72c1939ac526c91d23caa0329a4f6d16e00fdbca data/c/tags/blocks/barrels/wooden.json
 26ac2722ce96332636255bb240a973d70f5f0368 data/c/tags/blocks/chests.json
 41f11e500b83e7f1a2a8db8dc2b9b8f8eb898454 data/c/tags/blocks/chests/wooden.json
@@ -47,6 +47,7 @@ fdb3c38e7a99000fbc2d0cef163a339f03833fbd data/minecraft/tags/blocks/wooden_slabs
 acf330d4645717eb145fe46491881037c8f728fc data/minecraft/tags/blocks/wooden_stairs.json
 5ac9a011a61754279133478e123804a80cd30c88 data/minecraft/tags/blocks/wooden_trapdoors.json
 a7a52578856a25becc86e70144511dd25f49461e data/neoforge/tags/blocks/needs_netherite_tool.json
+e75c4761cf4578ce59ba51b1a63673be1c91c4d9 data/shores_between/tags/blocks/concrete.json
 786d9d5e184a6ff84afded319ce5a9fbefc8247b data/shores_between/tags/blocks/driftwood_logs.json
 0b7e736325d762536ca36687730767af8c3a1a33 data/shores_between/tags/blocks/mistwood_logs.json
 d3c7111bbd10cd152ee9a05fdc6f184148d2e7e7 data/shores_between/tags/blocks/petrified_logs.json

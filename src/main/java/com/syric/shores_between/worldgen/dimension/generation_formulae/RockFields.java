@@ -33,9 +33,9 @@ public class RockFields {
         //Rock Field Patches Noise is used to decide where to put small rock fields outside the actual Rock Fields biome.
         context.register(ROCK_FIELD_PATCHES_NOISE, new NormalNoise.NoiseParameters(-7, DoubleList.of(1, 2, 2, 1)));
         //Rock Gullies is used to place smooth gullies in rock fields.
-        context.register(ROCK_GULLIES_NOISE, new NormalNoise.NoiseParameters(-5, 3));
+        context.register(ROCK_GULLIES_NOISE, new NormalNoise.NoiseParameters(-4, 3));
         //Rock Gullies Fuzzier is used to place fuzzier, more jagged gullies in rock fields.
-        context.register(ROCK_GULLIES_FUZZIER_NOISE, new NormalNoise.NoiseParameters(-5, 3, 0, 0.5, 1.2, 1));
+        context.register(ROCK_GULLIES_FUZZIER_NOISE, new NormalNoise.NoiseParameters(-4, 3, 0, 0.5, 1.2, 1));
     }
 
     public static void bootstrapRockFieldsDensity(BootstrapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
@@ -90,24 +90,24 @@ public class RockFields {
 
                         //MGA absval
                         DensityFunctions.mul(
-                                DensityFunctions.constant(0.04), //Coefficient
+                                DensityFunctions.constant(0.06), //Coefficient
                                 new DensityFunctions.HolderHolder(major_gullies_alpha)
                                         .squeeze().abs()),
 
                         //MGB absval
                         DensityFunctions.mul(
-                                DensityFunctions.constant(0.04), //Coefficient
+                                DensityFunctions.constant(0.06), //Coefficient
                                 new DensityFunctions.HolderHolder(major_gullies_beta)
                                         .squeeze().abs()),
 
                         //Major Gullies Alpha range choice
-                        //Adds or subtracts 0.05 depending on whether it's in a positive or negative area
+                        //Adds or subtracts 0.06 depending on whether it's in a positive or negative area
                         DensityFunctions.rangeChoice(
                                 new DensityFunctions.HolderHolder(major_gullies_alpha),
                                 0,
                                 10,
-                                DensityFunctions.constant(0.05),
-                                DensityFunctions.constant(-0.05))
+                                DensityFunctions.constant(0.06),
+                                DensityFunctions.constant(-0.06))
                 ).clamp(0.15, 0.65),
 
 
@@ -122,24 +122,24 @@ public class RockFields {
                         //Major gullies alpha
                         //MGA gullies aren't any bigger than MGB ones, but their overall pattern is larger.
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(major_gullies_alpha))
-                                .addPoint(-0.33F, 0, 0)
-                                .addPoint(-0.24F, -0.05F,-0.5F)
-                                .addPoint(-0.14F,-0.2F, -1)
+                                .addPoint(-0.44F, 0, 0)
+                                .addPoint(-0.32F, -0.05F,-0.5F)
+                                .addPoint(-0.18F,-0.2F, -1)
                                 .addPoint(0,-1, 0)
-                                .addPoint(0.14F,-0.2F, 1)
-                                .addPoint(0.24F, -0.05F, 0.5F)
-                                .addPoint(0.33F, 0, 0)
+                                .addPoint(0.18F,-0.2F, 1)
+                                .addPoint(0.32F, -0.05F, 0.5F)
+                                .addPoint(0.44F, 0, 0)
                                 .build()),
 
                         //Major gullies beta (smaller pattern)
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(major_gullies_beta))
-                                .addPoint(-0.5F, 0, 0)
-                                .addPoint(-0.35F,-0.05F, -0.5F)
-                                .addPoint(-0.2F, -0.2F,-1F)
+                                .addPoint(-0.6F, 0, 0)
+                                .addPoint(-0.42F,-0.05F, -0.5F)
+                                .addPoint(-0.24F, -0.2F,-1F)
                                 .addPoint(0,-1, 0)
-                                .addPoint(0.2F,-0.2F, 1)
-                                .addPoint(0.35F,-0.05F, 0.5F)
-                                .addPoint(0.5F,0,0)
+                                .addPoint(0.24F,-0.2F, 1)
+                                .addPoint(0.42F,-0.05F, 0.5F)
+                                .addPoint(0.6F,0,0)
                                 .build()),
 
                         //Minor gullies 1
@@ -149,9 +149,9 @@ public class RockFields {
                                         DensityFunctions.constant(-10000), //Z shift
                                         -0.2, //Scale (smaller is bigger)
                                         noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
-                                .addPoint(-0.03F,0,0)
-                                .addPoint(0,-0.25F, 0)
-                                .addPoint(0.03F,0,0)
+                                .addPoint(-0.04F,0,0)
+                                .addPoint(0,-0.3F, 0)
+                                .addPoint(0.04F,0,0)
                                 .build()),
 
                         //Minor gullies 2
@@ -161,9 +161,9 @@ public class RockFields {
                                         DensityFunctions.zero(), //Z shift
                                         0.3, //Scale (smaller is bigger)
                                         noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
-                                .addPoint(-0.04F, 0, 0)
-                                .addPoint(0, -0.2F, 0)
-                                .addPoint(0.04F, 0, 0)
+                                .addPoint(-0.06F, 0, 0)
+                                .addPoint(0, -0.25F, 0)
+                                .addPoint(0.06F, 0, 0)
                                 .build()),
 
                         //Minor gullies 3
@@ -173,9 +173,9 @@ public class RockFields {
                                         DensityFunctions.constant(10000), //Z shift
                                         -0.4, //Scale (smaller is bigger)
                                         noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
-                                .addPoint(-0.03F, 0, 0)
+                                .addPoint(-0.06F, 0, 0)
                                 .addPoint(0, -0.15F,0)
-                                .addPoint(0.03F, 0, 0)
+                                .addPoint(0.06F, 0, 0)
                                 .build()),
 
                         //Minor gullies 4
@@ -185,9 +185,9 @@ public class RockFields {
                                         DensityFunctions.zero(), //Z shift
                                         0.6, //Scale (smaller is bigger)
                                         noises.getOrThrow(ROCK_GULLIES_FUZZIER_NOISE)))))) //Noise
-                                .addPoint(-0.1F, 0, 0)
-                                .addPoint(0, -0.1F, 0)
-                                .addPoint(0.1F, 0, 0)
+                                .addPoint(-0.25F, 0, 0)
+                                .addPoint(0, -0.15F, 0)
+                                .addPoint(0.25F, 0, 0)
                                 .build()),
 
                         //Minor gullies 5
@@ -197,9 +197,9 @@ public class RockFields {
                                                 DensityFunctions.zero(), //Z shift
                                                 -1, //Scale (smaller is bigger)
                                                 noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
-                                .addPoint(-0.1F, 0, 0)
-                                .addPoint(0, -0.07F, 0)
-                                .addPoint(0.1F, 0, 0)
+                                .addPoint(-0.2F, 0, 0)
+                                .addPoint(0, -0.1F, 0)
+                                .addPoint(0.2F, 0, 0)
                                 .build())
                 )
         );
@@ -226,10 +226,10 @@ public class RockFields {
         * This is added to the RockFieldsTexture, leaving it unchanged in rock fields areas and below -4 in non-rock-fields areas.
         * */
 
-        //Biomes is 1 when rockiness is > 0.7 and vitality is < 0.7.
+        //Biomes is 1 when rockiness is > 0.6 and vitality is < 0.6.
         DensityFunction biomes = DensityFunctions.min(
-                DensityFunctions.add(DensityFunctions.mul(rockiness, DensityFunctions.constant(5)), DensityFunctions.constant(-2.5)),
-                DensityFunctions.add(DensityFunctions.mul(vitality, DensityFunctions.constant(-5)), DensityFunctions.constant(-2.5)))
+                DensityFunctions.add(DensityFunctions.mul(rockiness, DensityFunctions.constant(5)), DensityFunctions.constant(-2)),
+                DensityFunctions.add(DensityFunctions.mul(vitality, DensityFunctions.constant(-5)), DensityFunctions.constant(-2)))
                 .clamp(0,1);
         //Patches is 1 when 0.75*rockiness + patches_noise > 1.2
         /*It subtracts up to 1 from that value as the strand terrain drops.
@@ -288,10 +288,10 @@ public class RockFields {
                         .addPoint(50,0.6F,-0.04F)
                         .addPoint(60,0.2F,-0.07F)
                         .addPoint(63,0,-0.075F)
-                        .addPoint(65,-0.15F,-0.1F)
-                        .addPoint(69,-0.5F,-0.25F)
-                        .addPoint(71,-1,-0.5F)
-                        .addPoint(73,-2,-1)
+                        .addPoint(64,-0.15F,-0.1F)
+                        .addPoint(67,-0.5F,-0.25F)
+                        .addPoint(69,-1,-0.5F)
+                        .addPoint(71,-2,-1)
                         .build())
         );
 
