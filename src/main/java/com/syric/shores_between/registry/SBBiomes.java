@@ -22,7 +22,7 @@ public class SBBiomes {
     public static final ResourceKey<Biome> GRASSY_STRAND_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "grassy_strand"));
     public static final ResourceKey<Biome> DRIFTWOOD_BEACH_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "driftwood_beach"));
     public static final ResourceKey<Biome> MISTWOOD_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "mistwood"));
-    public static final ResourceKey<Biome> MISTWOOD_EDGE = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "mistwood_edge"));
+    public static final ResourceKey<Biome> MISTWOOD_EDGE_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "mistwood_edge"));
     public static final ResourceKey<Biome> FORSAKEN_OCEAN_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "forsaken_ocean"));
     public static final ResourceKey<Biome> SEAMOUNTS_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "seamounts"));
 
@@ -37,7 +37,7 @@ public class SBBiomes {
         context.register(GRASSY_STRAND_BIOME, GrassyStrandBiome(context));
         context.register(DRIFTWOOD_BEACH_BIOME, DriftwoodBeachBiome(context));
         context.register(MISTWOOD_BIOME, MistwoodBiome(context));
-        context.register(MISTWOOD_EDGE, MistwoodEdgeBiome(context));
+        context.register(MISTWOOD_EDGE_BIOME, MistwoodEdgeBiome(context));
         context.register(FORSAKEN_OCEAN_BIOME, ForsakenOceanBiome(context));
         context.register(SEAMOUNTS_BIOME, SeamountsBiome(context));
     }

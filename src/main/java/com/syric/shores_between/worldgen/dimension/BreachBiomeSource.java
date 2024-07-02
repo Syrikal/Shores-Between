@@ -27,7 +27,7 @@ public class BreachBiomeSource extends BiomeSource {
                             RegistryOps.retrieveElement(SBBiomes.GRASSY_STRAND_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.DRIFTWOOD_BEACH_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.MISTWOOD_BIOME),
-                            RegistryOps.retrieveElement(SBBiomes.MISTWOOD_EDGE),
+                            RegistryOps.retrieveElement(SBBiomes.MISTWOOD_EDGE_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.FORSAKEN_OCEAN_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.SEAMOUNTS_BIOME)
                     )
@@ -58,7 +58,7 @@ public class BreachBiomeSource extends BiomeSource {
                 pBiomeGetter.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_BIOME),
-                pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_EDGE),
+                pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.SEAMOUNTS_BIOME)
         );
@@ -91,31 +91,41 @@ public class BreachBiomeSource extends BiomeSource {
 
     @Override
     public Holder<Biome> getNoiseBiome(int x, int y, int z, Climate.Sampler sampler) {
+
+        //Smooth
         int i = QuartPos.toBlock(x);
         int j = QuartPos.toBlock(y);
         int k = QuartPos.toBlock(z);
 
-        int i1 = (SectionPos.blockToSectionCoord(i) * 2 + 1) * 8;
-        int k1 = (SectionPos.blockToSectionCoord(k) * 2 + 1) * 8;
+        //Chunk-ish
+//        int i1 = (SectionPos.blockToSectionCoord(i) * 2 + 1) * 8;
+//        int k1 = (SectionPos.blockToSectionCoord(k) * 2 + 1) * 8;
 
-        double continentalness = sampler.continentalness().compute(new DensityFunction.SinglePointContext(i1, j, k1));
+        //Half-chunk
+        int i1 = ((i >> 3) * 2 + 1) * 4;
+        int k1 = ((k >> 3) * 2 + 1) * 4;
+
+        //Quarter-chunk
+        int i2 = ((i >> 2) * 2 + 1) * 2;
+        int k2 = ((k >> 2) * 2 + 1) * 2;
+
+        double continentalness = sampler.continentalness().compute(new DensityFunction.SinglePointContext(i, j, k));
         double vitality = sampler.humidity().compute(new DensityFunction.SinglePointContext(i1, j, k1));
         double rockiness = sampler.temperature().compute(new DensityFunction.SinglePointContext(i1, j, k1));
+        double mistwood = sampler.erosion().compute(new DensityFunction.SinglePointContext(i, j, k));
 
-        return getBiome(continentalness, vitality, rockiness);
+        return getBiome(continentalness, vitality, rockiness, mistwood);
     }
 
-    private Holder<Biome> getBiome(double continentalness, double vitality, double rockiness) {
+    private Holder<Biome> getBiome(double continentalness, double vitality, double rockiness, double mistwood) {
 
-        if (continentalness >= 1) {
-            return this.mistwood;
-        } else if (continentalness >= 0.98) {
-            return this.mistwood_edge;
+        if (continentalness >= 0.9 && mistwood > 0.15) {
+            return mistwood > 0.3 ? this.mistwood : this.mistwood_edge;
         } else if (-0.5 < continentalness && continentalness < -0.1) {
             return this.forsaken_ocean;
         } else if (-0.5 >= continentalness) {
             return getDeepOceanBiome(rockiness);
-        } else if (0.8 < continentalness) {
+        } else if (0.85 < continentalness) {
             return getBorderBeachBiome(vitality, rockiness);
         } else {
             return getBeachBiome(vitality, rockiness);
@@ -185,6 +195,7 @@ public class BreachBiomeSource extends BiomeSource {
         float f = Climate.unquantizeCoord(climate$targetpoint.continentalness());
         float f2 = Climate.unquantizeCoord(climate$targetpoint.temperature());
         float f3 = Climate.unquantizeCoord(climate$targetpoint.humidity());
+        float f4 = Climate.unquantizeCoord(climate$targetpoint.erosion());
         pInfo.add(
                 "Breach Continentalness: "
                         + f
@@ -192,6 +203,8 @@ public class BreachBiomeSource extends BiomeSource {
                         + f2
                         + ", Vitality: "
                         + f3
+                        + ", Mistwood: "
+                        + f4
         );
     }
 

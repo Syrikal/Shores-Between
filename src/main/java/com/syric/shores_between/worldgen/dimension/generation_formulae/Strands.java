@@ -52,45 +52,51 @@ public class Strands {
 
         //Strands Major is a spline of the breach_continentalness noise.
         //It has beaches at 0 and 0.37.
+        //It NO LONGER produces mistwood islands, breaking the water's surface at 0.95 and rising till 1.
         Holder<DensityFunction> strands_major = Holder.direct(DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(
                 functions.getOrThrow(CONTINENTALNESS)))
                 .addPoint(-0.5F, -0.8F, 0.5F)
                 .addPoint(-0.2F,-0.4F,2)
-                .addPoint(-0.03F,0,0.7F)
+                .addPoint(-0.04F,0,1)
                 .addPoint(0,0.02F,0)
-                .addPoint(0.03F,0,-0.7F)
+                .addPoint(0.04F,0,1)
                 .addPoint(0.15F,-0.2F,0)
-                .addPoint(0.34F,0,1)
-                .addPoint(0.37F,0.03F,0)
-                .addPoint(0.4F, 0, 1)
-                .addPoint(0.5F,-0.3F,-0.5F)
+                .addPoint(0.34F,0,1.2F)
+                .addPoint(0.37F,0.02F,0)
+                .addPoint(0.4F, 0, -1.2F)
+                .addPoint(0.6F,-0.35F,-0.5F)
+//                .addPoint(0.92F, 0, 0.2F)
+//                .addPoint(1, 0.03F, 0.1F)
                 .build()));
 
         //Strands Minor is a spline of a much smaller version of the breach_continentalness noise.
         //The rangeChoice is so that it only exists in positive continental areas.
-        Holder<DensityFunction> strands_minor = Holder.direct(
-                DensityFunctions.rangeChoice(
-                        new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)),
-                        0, //Min value
-                        5, //Max value
-
-                        DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                DensityFunctions.shiftedNoise2d(
-                                        DensityFunctions.constant(5000), //X shift
-                                        DensityFunctions.zero(), //Z shift
-                                        6, //Scale
-                                        noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE))))) //Noise
+        DensityFunction strands_minor = DensityFunctions.rangeChoice(
+                new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)),
+                0, //Min value
+                5, //Max value
+                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
+                        DensityFunctions.shiftedNoise2d(
+                                DensityFunctions.constant(5000), //X shift
+                                DensityFunctions.zero(), //Z shift
+                                6, //Scale
+                                noises.getOrThrow(SBDimensions.BREACH_CONTINENTAL_NOISE))))) //Noise
                         .addPoint(-0.4F, -0.3F, 0.5F)
-                        .addPoint(-0.08F, 0, 0.25F)
-                        .addPoint(0, 0.015F, 0)
-                        .addPoint(0.08F, 0, -0.25F)
+                        .addPoint(-0.13F, 0, 0.1F)
+                        .addPoint(0, 0.01F, 0)
+                        .addPoint(0.13F, 0, -0.1F)
                         .addPoint(0.4F, -0.3F, -0.5F)
                         .build()),
-
-                        DensityFunctions.constant(-1000)
-
-                )
+                DensityFunctions.constant(-1000)
         );
+
+        Holder<DensityFunction> strands_minor_final = Holder.direct(DensityFunctions.add(
+                strands_minor,
+                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(CONTINENTALNESS)))
+                        .addPoint(0.9F, 0, 0)
+                        .addPoint(0.96F, -0.015F, -1)
+                        .build())
+        ));
 
         //Sandbars is like Strands Minor. They're smaller and typically submerged.
         Holder<DensityFunction> sandbars = Holder.direct(
@@ -138,7 +144,7 @@ public class Strands {
                 DensityUtil.applyAll(DensityFunctions::mul,
                         DensityFunctions.constant(0.1), //Coefficient
                         DensityFunctions.noise(noises.getOrThrow(OCEAN_ROUGHNESS_NOISE), 1, 0), //Roughness
-                        //Spline to put it only in continental areas
+                        //Spline to put it only in ocean areas
                         DensityFunctions.spline(CubicSpline.builder(
                                 new DensityFunctions.Spline.Coordinate(functions.getOrThrow(CONTINENTALNESS)))
                                 .addPoint(-0.7F, 1, 0)
@@ -152,7 +158,7 @@ public class Strands {
         DensityFunction strands_density = DensityUtil.applyAll(DensityFunctions::add,
                 DensityUtil.applyAll(DensityFunctions::max,
                         new DensityFunctions.HolderHolder(strands_major),
-                        new DensityFunctions.HolderHolder(strands_minor),
+                        new DensityFunctions.HolderHolder(strands_minor_final),
                         new DensityFunctions.HolderHolder(sandbars)),
                 new DensityFunctions.HolderHolder(strands_roughness),
                 new DensityFunctions.HolderHolder(ocean_roughness)

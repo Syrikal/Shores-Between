@@ -109,7 +109,8 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     compileOnly("curse.maven:the-undergarden-379849:5381985")
-    implementation("curse.maven:jei-238222:5426649")
+    implementation("curse.maven:jei-238222:5466528")
+    implementation("curse.maven:journeymap-32274:5457883")
 
 }
 

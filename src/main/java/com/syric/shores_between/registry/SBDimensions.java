@@ -2,6 +2,7 @@ package com.syric.shores_between.registry;
 
 import com.syric.shores_between.worldgen.dimension.BreachBiomeSource;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.DensityUtil;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.Mistwood;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
@@ -120,15 +121,17 @@ public class SBDimensions {
 //                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.VEGETATION)),
                         new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)), //Continents
 //                        NoiseRouterData.getFunction(functions, NoiseRouterData.CONTINENTS),
+                        new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_ISLANDS)), //Erosion (Mistwood Islands)
+//                        NoiseRouterData.getFunction(functions, NoiseRouterData.EROSION),
 
-                        NoiseRouterData.getFunction(functions, NoiseRouterData.EROSION), //Erosion
                         NoiseRouterData.getFunction(functions, NoiseRouterData.DEPTH), //Depth
                         NoiseRouterData.getFunction(functions, NoiseRouterData.RIDGES), //Ridges
 //                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)), //initial density without jaggedness
                         DensityFunctions.zero(), //initial density without jaggedness
                         DensityUtil.applyAll(DensityFunctions::max,
                                 new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL)),
-                                new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL))
+                                new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)),
+                                new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_FINAL))
                         ), //Final density
                         DensityFunctions.zero(), //vein toggle
                         DensityFunctions.zero(), //vein ridged
@@ -159,17 +162,71 @@ public class SBDimensions {
                                 )
                         ),
 
+                        //Biome Painting
+                        //Colors each biome with a layer of concrete
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
+                                SurfaceRules.ifTrue(
+                                        SurfaceRules.waterBlockCheck(-1, 0),
+                                        SurfaceRules.sequence(
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.DESOLATE_STRAND_BIOME),
+                                                        SurfaceRules.state(Blocks.GRAY_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.BARREN_STRAND_BIOME),
+                                                        SurfaceRules.state(Blocks.WHITE_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.ROCKY_STRAND_BIOME),
+                                                        SurfaceRules.state(Blocks.BLACK_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.ROCK_FIELDS_BIOME),
+                                                        SurfaceRules.state(Blocks.PURPLE_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.CRAGS_BIOME),
+                                                        SurfaceRules.state(Blocks.PINK_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.GRASSY_STRAND_BIOME),
+                                                        SurfaceRules.state(Blocks.LIME_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.DRIFTWOOD_BEACH_BIOME),
+                                                        SurfaceRules.state(Blocks.BROWN_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.DROWNED_FOREST_BIOME),
+                                                        SurfaceRules.state(Blocks.YELLOW_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.MISTWOOD_EDGE_BIOME),
+                                                        SurfaceRules.state(Blocks.ORANGE_CONCRETE.defaultBlockState())
+                                                ),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.isBiome(SBBiomes.MISTWOOD_BIOME),
+                                                        SurfaceRules.state(Blocks.RED_CONCRETE.defaultBlockState())
+                                                )
+                                        )
+                                )
+                        ),
+
+
+
+
                         //Shoreline gravel
                                 //Tapers from 55 to 63 and back down to 65
                                 //Then a surface depth check
                         SurfaceRules.ifTrue(
-                                SurfaceRules.verticalGradient("shores_between:shoreline_gravel_top", VerticalAnchor.absolute(63), VerticalAnchor.absolute(65)),
+                                SurfaceRules.verticalGradient("shores_between:shoreline_gravel_top", VerticalAnchor.absolute(62), VerticalAnchor.absolute(64)),
                                 SurfaceRules.ifTrue(
-                                        SurfaceRules.not(SurfaceRules.verticalGradient("shores_between:shoreline_gravel_bottom", VerticalAnchor.absolute(55), VerticalAnchor.absolute(63))),
+                                        SurfaceRules.not(SurfaceRules.verticalGradient("shores_between:shoreline_gravel_bottom", VerticalAnchor.absolute(55), VerticalAnchor.absolute(62))),
                                         SurfaceRules.ifTrue(
                                                 SurfaceRules.stoneDepthCheck(1, false, 0, CaveSurface.FLOOR),
                                                 SurfaceRules.ifTrue(
-                                                        SurfaceRules.noiseCondition(Noises.ICE, 0.24, 1.8),
+                                                        SurfaceRules.noiseCondition(Noises.ICE, 0.2, 2),
                                                         SurfaceRules.state(Blocks.GRAVEL.defaultBlockState())
                                                 )
                                         )
@@ -185,14 +242,37 @@ public class SBDimensions {
                         //Tangled shingle
                         //Do as ore instead?
 
-                        //Grass
+
+                        //Surface Things
                         SurfaceRules.ifTrue(
-                                SurfaceRules.stoneDepthCheck(1, false, 0, CaveSurface.FLOOR),
-                                SurfaceRules.ifTrue(
-                                        SurfaceRules.isBiome(SBBiomes.MISTWOOD_BIOME),
+                                SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
+                                //Split by biome
+                                SurfaceRules.sequence(
+                                        //Mistwood
                                         SurfaceRules.ifTrue(
-                                                SurfaceRules.verticalGradient("shores_between:dunegrass", VerticalAnchor.absolute(64),VerticalAnchor.absolute(66)),
-                                                SurfaceRules.state(Blocks.GRASS_BLOCK.defaultBlockState())
+                                                SurfaceRules.isBiome(SBBiomes.MISTWOOD_BIOME, SBBiomes.MISTWOOD_EDGE_BIOME),
+                                                SurfaceRules.ifTrue(
+                                                        SurfaceRules.verticalGradient("shores_between:mistwood_stuff", VerticalAnchor.absolute(64), VerticalAnchor.absolute(66)),
+                                                        SurfaceRules.sequence(
+                                                                //Coarse dirt
+                                                                SurfaceRules.ifTrue(
+                                                                        SurfaceRules.noiseCondition(Noises.SURFACE, 0.4, 100),
+                                                                        SurfaceRules.state(Blocks.COARSE_DIRT.defaultBlockState())
+                                                                ),
+                                                                //Podzol and grass
+                                                                SurfaceRules.ifTrue(
+                                                                        SurfaceRules.waterBlockCheck(-1, 0),
+                                                                        SurfaceRules.sequence(
+                                                                                //Podzol
+                                                                                SurfaceRules.ifTrue(
+                                                                                        SurfaceRules.noiseCondition(Noises.SURFACE, 0, 100),
+                                                                                        SurfaceRules.state(Blocks.PODZOL.defaultBlockState())
+                                                                                ),
+                                                                                SurfaceRules.state(Blocks.GRASS_BLOCK.defaultBlockState())
+                                                                        )
+                                                                )
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -220,9 +300,9 @@ public class SBDimensions {
 
     //Generates the noise functions used to place biomes.
     public static void bootstrapBiomeNoise(BootstrapContext<NormalNoise.NoiseParameters> context) {
-        context.register(ROCKINESS_NOISE, new NormalNoise.NoiseParameters(-8, DoubleList.of(2, 1, 0, 2, 1, 1, 1)));
-        context.register(VITALITY_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(2, 1, 1, 0, 1, 1, 1)));
-        context.register(BREACH_CONTINENTAL_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(1.4, 1, 0.8, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)));
+        context.register(ROCKINESS_NOISE, new NormalNoise.NoiseParameters(-9, DoubleList.of(1, 2, 0, 2, 1)));
+        context.register(VITALITY_NOISE, new NormalNoise.NoiseParameters(-10, DoubleList.of(1.5, 1, 1)));
+        context.register(BREACH_CONTINENTAL_NOISE, new NormalNoise.NoiseParameters(-10, DoubleList.of(1.5, 1, 1, 0, 1, 1, 0, 1)));
     }
 
     //Generates the altered density functions used to modify the biome noise.
@@ -235,6 +315,7 @@ public class SBDimensions {
                 .addPoint(0.6F, 0.7F, 0.5F)
                 .addPoint(1, 1, 0)
                 .build()));
+//        Holder<DensityFunction> splined_rockiness = context.register(SPLINED_ROCKINESS, DensityFunctions.noise(noises.getOrThrow(ROCKINESS_NOISE), 1, 0));
 
         Holder<DensityFunction> splined_vitality = context.register(SPLINED_VITALITY, DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(DensityFunctions.noise(noises.getOrThrow(VITALITY_NOISE), 1, 0))))
                 .addPoint(-1, -1, 0)
@@ -242,6 +323,8 @@ public class SBDimensions {
                 .addPoint(0.6F, 0.7F, 0.5F)
                 .addPoint(1, 1, 0)
                 .build()));
+//        Holder<DensityFunction> splined_vitality = context.register(SPLINED_VITALITY, DensityFunctions.noise(noises.getOrThrow(VITALITY_NOISE), 1, 0));
+
 
         Holder<DensityFunction> breach_continentalness = context.register(CONTINENTALNESS, DensityFunctions.noise(noises.getOrThrow(BREACH_CONTINENTAL_NOISE), 1, 0));
 

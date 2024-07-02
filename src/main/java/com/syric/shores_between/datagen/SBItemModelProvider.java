@@ -97,6 +97,13 @@ public class SBItemModelProvider extends ItemModelProvider {
         blockWithOwnFlatTexture(SBBlocks.MISTWOOD_LADDER);
         simpleBlockItem(SBBlocks.MISTWOOD_LEAVES);
         blockWithOwnFlatTexture(SBBlocks.MISTWOOD_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.MISTWOOD_EDGE_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.MISTWOOD_TALL_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.MISTWOOD_THIN_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.MISTWOOD_BUSH_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.WINDBLOWN_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.PETRIFIED_SAPLING);
+        blockWithOwnFlatTexture(SBBlocks.DEAD_SAPLING);
         simpleBlockItem(SBBlocks.ROTTING_FLESH_BLOCK);
         simpleBlockItem(SBBlocks.INFESTED_FLESH_BLOCK);
         simpleBlockItem(SBBlocks.BLOATED_FLESH);

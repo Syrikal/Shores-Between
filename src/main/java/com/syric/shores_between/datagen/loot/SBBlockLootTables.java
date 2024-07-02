@@ -76,6 +76,13 @@ public class SBBlockLootTables extends BlockLootSubProvider {
         dropSelf(SBBlocks.MISTWOOD_HANGING_SIGN.get());
         dropSelf(SBBlocks.MISTWOOD_LADDER.get());
         dropSelf(SBBlocks.MISTWOOD_SAPLING.get());
+        dropSelf(SBBlocks.MISTWOOD_EDGE_SAPLING.get());
+        dropSelf(SBBlocks.MISTWOOD_TALL_SAPLING.get());
+        dropSelf(SBBlocks.MISTWOOD_THIN_SAPLING.get());
+        dropSelf(SBBlocks.MISTWOOD_BUSH_SAPLING.get());
+        dropSelf(SBBlocks.WINDBLOWN_SAPLING.get());
+        dropSelf(SBBlocks.PETRIFIED_SAPLING.get());
+        dropSelf(SBBlocks.DEAD_SAPLING.get());
         dropSelf(SBBlocks.ROTTING_FLESH_BLOCK.get());
         dropSelf(SBBlocks.BLOATED_FLESH.get());
         dropSelf(SBBlocks.MUMMIFIED_FLESH.get());

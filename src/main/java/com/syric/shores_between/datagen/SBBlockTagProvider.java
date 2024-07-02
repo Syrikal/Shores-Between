@@ -6,6 +6,7 @@ import com.syric.shores_between.registry.SBTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -98,6 +99,23 @@ public class SBBlockTagProvider extends BlockTagsProvider {
                 .add(SBBlocks.MISTWOOD_LOG.get(), SBBlocks.MISTWOOD_WOOD.get(), SBBlocks.STRIPPED_MISTWOOD_LOG.get(), SBBlocks.STRIPPED_MISTWOOD_WOOD.get());
         this.tag(SBTags.Blocks.PETRIFIED_LOGS)
                 .add(SBBlocks.PETRIFIED_LOG.get(), SBBlocks.PETRIFIED_WOOD.get(), SBBlocks.STRIPPED_PETRIFIED_LOG.get(), SBBlocks.STRIPPED_PETRIFIED_WOOD.get());
+        this.tag(SBTags.Blocks.CONCRETE)
+                .add(Blocks.BLACK_CONCRETE,
+                        Blocks.GRAY_CONCRETE,
+                        Blocks.LIGHT_GRAY_CONCRETE,
+                        Blocks.WHITE_CONCRETE,
+                        Blocks.BROWN_CONCRETE,
+                        Blocks.RED_CONCRETE,
+                        Blocks.ORANGE_CONCRETE,
+                        Blocks.YELLOW_CONCRETE,
+                        Blocks.LIME_CONCRETE,
+                        Blocks.GREEN_CONCRETE,
+                        Blocks.CYAN_CONCRETE,
+                        Blocks.LIGHT_BLUE_CONCRETE,
+                        Blocks.BLUE_CONCRETE,
+                        Blocks.PURPLE_CONCRETE,
+                        Blocks.MAGENTA_CONCRETE,
+                        Blocks.PINK_CONCRETE);
 
         //Neoforge block tags
         this.tag(Tags.Blocks.BARRELS_WOODEN)
