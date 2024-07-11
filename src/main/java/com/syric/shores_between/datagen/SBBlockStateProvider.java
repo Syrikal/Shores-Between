@@ -27,8 +27,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.TANGLED_SHINGLE);
         block(SBBlocks.PEBBLES);
         block(SBBlocks.GRASSY_SHINGLE);
-        block(SBBlocks.SHALE);
-        block(SBBlocks.DARK_SHALE);
+        log(SBBlocks.SHALE);
+        log(SBBlocks.DARK_SHALE);
         block(SBBlocks.OVERGROWN_SHALE);
         block(SBBlocks.SALTSTONE);
         log(SBBlocks.DRIFTWOOD_LOG);
@@ -70,7 +70,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         sign(SBBlocks.MISTWOOD_SIGN, SBBlocks.MISTWOOD_WALL_SIGN, SBBlocks.MISTWOOD_PLANKS);
         hangingSign(SBBlocks.MISTWOOD_HANGING_SIGN, SBBlocks.MISTWOOD_WALL_HANGING_SIGN, SBBlocks.MISTWOOD_PLANKS);
         ladder(SBBlocks.MISTWOOD_LADDER, SBBlocks.MISTWOOD_PLANKS);
-        block(SBBlocks.MISTWOOD_LEAVES);
+        leaves(SBBlocks.MISTWOOD_LEAVES);
         crossBlockCutout(SBBlocks.MISTWOOD_SAPLING);
         crossBlockCutout(SBBlocks.MISTWOOD_EDGE_SAPLING);
         crossBlockCutout(SBBlocks.MISTWOOD_TALL_SAPLING);
@@ -173,6 +173,12 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
     private void log(DeferredBlock<Block> block) {
         logBlock((RotatedPillarBlock) block.get());
+    }
+
+    private void leaves(DeferredBlock<Block> block) {
+        ModelFile leavesModel = models().withExistingParent(block.getId().getPath(), "leaves")
+                .texture("all", texture(block));
+        simpleBlock(block.get(), leavesModel);
     }
 
     private void wood(DeferredBlock<Block> block, DeferredBlock<Block> log) {

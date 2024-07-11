@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
     "end": "shores_between:block/dark_shale_top",
     "side": "shores_between:block/dark_shale"

@@ -1,6 +1,7 @@
 package com.syric.shores_between;
 
 import com.mojang.logging.LogUtils;
+import com.syric.shores_between.event.ShoresBetweenClientEvents;
 import com.syric.shores_between.registry.*;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +16,8 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
+
+import static net.neoforged.fml.loading.FMLEnvironment.dist;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ShoresBetween.MODID)
@@ -32,7 +35,11 @@ public class ShoresBetween
 //        NeoForge.EVENT_BUS.register(this);
 
         // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
+//        modEventBus.addListener(this::commonSetup);
+
+        if (dist == Dist.CLIENT) {
+            modEventBus.addListener(ShoresBetweenClientEvents::registerBlockColors);
+        }
 
         SBItems.register(modEventBus);
         SBBlocks.register(modEventBus);
