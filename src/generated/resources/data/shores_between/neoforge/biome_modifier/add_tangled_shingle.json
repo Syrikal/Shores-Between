@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#shores_between:has_tangled_shingle",
-  "features": "shores_between:tangled_shingle_placed",
-  "step": "underground_ores"
-}

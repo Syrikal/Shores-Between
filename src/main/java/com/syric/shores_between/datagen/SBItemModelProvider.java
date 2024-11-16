@@ -51,10 +51,15 @@ public class SBItemModelProvider extends ItemModelProvider {
         simpleBlockItem(SBBlocks.SHINGLE);
         simpleBlockItem(SBBlocks.TANGLED_SHINGLE);
         simpleBlockItem(SBBlocks.PEBBLES);
+        simpleBlockItem(SBBlocks.DARK_PEBBLES);
+        simpleBlockItem(SBBlocks.PALE_PEBBLES);
         simpleBlockItem(SBBlocks.GRASSY_SHINGLE);
+        simpleBlockItem(SBBlocks.PODZOL_SHINGLE);
+        simpleBlockItem(SBBlocks.DIRT_SHINGLE);
         simpleBlockItem(SBBlocks.SHALE);
         simpleBlockItem(SBBlocks.DARK_SHALE);
         simpleBlockItem(SBBlocks.OVERGROWN_SHALE);
+        simpleBlockItem(SBBlocks.OVERGROWN_SHALE_SLAB);
         simpleBlockItem(SBBlocks.SALTSTONE);
         simpleBlockItem(SBBlocks.DRIFTWOOD_LOG);
         simpleBlockItem(SBBlocks.DRIFTWOOD_WOOD);

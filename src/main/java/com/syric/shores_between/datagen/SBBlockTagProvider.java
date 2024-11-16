@@ -52,13 +52,13 @@ public class SBBlockTagProvider extends BlockTagsProvider {
         this.tag(BlockTags.LEAVES)
                 .add(SBBlocks.MISTWOOD_LEAVES.get());
         this.tag(BlockTags.DIRT)
-                .add(SBBlocks.GRASSY_SHINGLE.get());
+                .add(SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.PODZOL_SHINGLE.get(), SBBlocks.DIRT_SHINGLE.get(), SBBlocks.MISTWOOD_MOSS_BLOCK.get());
         this.tag(BlockTags.ENDERMAN_HOLDABLE)
-                .add(SBBlocks.SHINGLE.get(), SBBlocks.PEBBLES.get());
+                .add(SBBlocks.SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.DARK_PEBBLES.get(), SBBlocks.PALE_PEBBLES.get(), SBBlocks.MISTWOOD_MOSS_BLOCK.get());
         this.tag(BlockTags.VALID_SPAWN)
-                .add(SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.OVERGROWN_SHALE.get());
+                .add(SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.PODZOL_SHINGLE.get(), SBBlocks.DIRT_SHINGLE.get(), SBBlocks.OVERGROWN_SHALE.get(), SBBlocks.MISTWOOD_MOSS_BLOCK.get());
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON)
-                .add(SBBlocks.SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.OVERGROWN_SHALE.get());
+                .add(SBBlocks.SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.DARK_PEBBLES.get(), SBBlocks.PALE_PEBBLES.get(), SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.PODZOL_SHINGLE.get(), SBBlocks.DIRT_SHINGLE.get(), SBBlocks.OVERGROWN_SHALE.get(), SBBlocks.MISTWOOD_MOSS_BLOCK.get());
         this.tag(BlockTags.STANDING_SIGNS)
                 .add(SBBlocks.DRIFTWOOD_SIGN.get(), SBBlocks.MISTWOOD_SIGN.get());
         this.tag(BlockTags.WALL_SIGNS)
@@ -89,6 +89,8 @@ public class SBBlockTagProvider extends BlockTagsProvider {
                 .add(SBBlocks.MUMMIFIED_FLESH.get());
         this.tag(BlockTags.FEATURES_CANNOT_REPLACE)
                 .add(SBBlocks.TITAN_BONE.get(), SBBlocks.CORRODED_TITAN_BONE.get(), SBBlocks.ABERRANT_SHELL.get());
+        this.tag(BlockTags.REPLACEABLE_BY_TREES)
+                .add(SBBlocks.MISTWOOD_MOSS_CARPET.get());
         this.tag(BlockTags.REPLACEABLE)
                 .add(SBBlocks.DUNEGRASS.get());
         
@@ -116,6 +118,32 @@ public class SBBlockTagProvider extends BlockTagsProvider {
                         Blocks.PURPLE_CONCRETE,
                         Blocks.MAGENTA_CONCRETE,
                         Blocks.PINK_CONCRETE);
+        this.tag(SBTags.Blocks.MOSS_CARPET_GROWS_ON)
+                .add(Blocks.GRASS_BLOCK,
+                        SBBlocks.MISTWOOD_MOSS_BLOCK.get(),
+                        SBBlocks.OVERGROWN_SHALE.get(),
+                        SBBlocks.GRASSY_SHINGLE.get(),
+                        SBBlocks.MISTWOOD_LOG.get(),
+                        SBBlocks.MISTWOOD_WOOD.get(),
+                        SBBlocks.SHALE.get());
+        this.tag(SBTags.Blocks.FALLEN_LOGS_REPLACE)
+                .add(SBBlocks.MISTWOOD_MOSS_CARPET.get())
+                .addTag(SBTags.Blocks.BREACH_GROUND);
+        this.tag(SBTags.Blocks.BREACH_GROUND)
+                .add(Blocks.GRASS_BLOCK,
+                        SBBlocks.MISTWOOD_MOSS_BLOCK.get(),
+                        SBBlocks.SHINGLE.get(),
+                        SBBlocks.GRASSY_SHINGLE.get(),
+                        SBBlocks.PODZOL_SHINGLE.get(),
+                        SBBlocks.DIRT_SHINGLE.get(),
+                        SBBlocks.PEBBLES.get(),
+                        SBBlocks.PALE_PEBBLES.get(),
+                        SBBlocks.DARK_PEBBLES.get(),
+                        SBBlocks.TANGLED_SHINGLE.get(),
+                        SBBlocks.BURIED_RUSTY_SCRAP.get(),
+                        Blocks.PODZOL,
+                        Blocks.DIRT,
+                        Blocks.COARSE_DIRT);
 
         //Neoforge block tags
         this.tag(Tags.Blocks.BARRELS_WOODEN)
@@ -129,7 +157,7 @@ public class SBBlockTagProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.FENCES_WOODEN)
                 .add(SBBlocks.DRIFTWOOD_FENCE.get(), SBBlocks.MISTWOOD_FENCE.get());
         this.tag(Tags.Blocks.GRAVELS)
-                .add(SBBlocks.SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.TANGLED_SHINGLE.get(), SBBlocks.GRASSY_SHINGLE.get());
+                .add(SBBlocks.SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.DARK_PEBBLES.get(), SBBlocks.PALE_PEBBLES.get(), SBBlocks.TANGLED_SHINGLE.get(), SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.PODZOL_SHINGLE.get(), SBBlocks.DIRT_SHINGLE.get());
         this.tag(Tags.Blocks.ORE_RATES_SINGULAR)
                 .add(SBBlocks.CORRODED_TITAN_BONE.get());
         this.tag(Tags.Blocks.ORES)
@@ -141,9 +169,9 @@ public class SBBlockTagProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(SBBlocks.ROTTING_FLESH_BLOCK.get(), SBBlocks.INFESTED_FLESH_BLOCK.get(), SBBlocks.BLOATED_FLESH.get(), SBBlocks.MUMMIFIED_FLESH.get(), SBBlocks.JELLIED_ICHOR.get(), SBBlocks.SEAWEED_SLAB.get(), SBBlocks.SEAWEED_CARPET.get(), SBBlocks.MISTWOOD_MOSS_BLOCK.get(), SBBlocks.MISTWOOD_MOSS_CARPET.get(), SBBlocks.DEAD_FISH_SLAB.get());
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(SBBlocks.SHINGLE.get(), SBBlocks.TANGLED_SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.SUSPICIOUS_SHINGLE.get(), SBBlocks.BURIED_IRON_SCRAP.get(), SBBlocks.BURIED_RUSTY_SCRAP.get());
+                .add(SBBlocks.SHINGLE.get(), SBBlocks.TANGLED_SHINGLE.get(), SBBlocks.PEBBLES.get(), SBBlocks.DARK_PEBBLES.get(), SBBlocks.PALE_PEBBLES.get(), SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.PODZOL_SHINGLE.get(), SBBlocks.DIRT_SHINGLE.get(), SBBlocks.SUSPICIOUS_SHINGLE.get(), SBBlocks.BURIED_IRON_SCRAP.get(), SBBlocks.BURIED_RUSTY_SCRAP.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(SBBlocks.ANCIENT_CHEST.get(), SBBlocks.BARNACLES.get(), SBBlocks.CHISELED_DARK_SHALE.get(), SBBlocks.CHISELED_SHALE.get(), SBBlocks.CORRODED_CONCRETE.get(), SBBlocks.CORRODED_LANTERN.get(), SBBlocks.CORRODED_TITAN_BONE.get(), SBBlocks.CRAB_POT.get(), SBBlocks.CRACKED_DARK_SHALE_BRICKS.get(), SBBlocks.CRACKED_DARK_SHALE_TILES.get(), SBBlocks.CRACKED_SHALE_BRICKS.get(), SBBlocks.DARK_OBELISK.get(), SBBlocks.DARK_SHALE.get(), SBBlocks.DARK_SHALE_BRICK_SLAB.get(), SBBlocks.DARK_SHALE_BRICK_STAIRS.get(), SBBlocks.DARK_SHALE_BRICK_WALL.get(), SBBlocks.DARK_SHALE_BRICKS.get(), SBBlocks.DARK_SHALE_SLAB.get(), SBBlocks.DARK_SHALE_STAIRS.get(), SBBlocks.DARK_SHALE_TILE_SLAB.get(), SBBlocks.DARK_SHALE_TILE_STAIRS.get(), SBBlocks.DARK_SHALE_TILE_WALL.get(), SBBlocks.DARK_SHALE_TILES.get(), SBBlocks.DARK_SHALE_WALL.get(), SBBlocks.ENGRAVED_DARK_SHALE.get(), SBBlocks.IRON_SCRAP_BLOCK.get(), SBBlocks.LEVIATHAN_BONE.get(), SBBlocks.LEVIATHAN_KERATIN.get(), SBBlocks.MOSSY_SHALE_BRICK_SLAB.get(), SBBlocks.MOSSY_SHALE_BRICK_STAIRS.get(), SBBlocks.MOSSY_SHALE_BRICK_WALL.get(), SBBlocks.MOSSY_SHALE_BRICKS.get(), SBBlocks.OVERGROWN_SHALE.get(), SBBlocks.OYSTERS.get(), SBBlocks.PETRIFIED_LOG.get(), SBBlocks.PETRIFIED_PLANKS.get(), SBBlocks.PETRIFIED_SLAB.get(), SBBlocks.PETRIFIED_STAIRS.get(), SBBlocks.PETRIFIED_WOOD.get(), SBBlocks.POLISHED_DARK_SHALE.get(), SBBlocks.POLISHED_DARK_SHALE_SLAB.get(), SBBlocks.POLISHED_DARK_SHALE_STAIRS.get(), SBBlocks.POLISHED_DARK_SHALE_WALL.get(), SBBlocks.POLISHED_SHALE.get(), SBBlocks.POLISHED_SHALE_SLAB.get(), SBBlocks.POLISHED_SHALE_STAIRS.get(), SBBlocks.POLISHED_SHALE_WALL.get(), SBBlocks.RUSTY_SCRAP_BLOCK.get(), SBBlocks.SALTSTONE.get(), SBBlocks.SHALE.get(), SBBlocks.SHALE_BRICK_SLAB.get(), SBBlocks.SHALE_BRICK_STAIRS.get(), SBBlocks.SHALE_BRICK_WALL.get(), SBBlocks.SHALE_BRICKS.get(), SBBlocks.SHALE_SLAB.get(), SBBlocks.SHALE_STAIRS.get(), SBBlocks.SHALE_WALL.get(), SBBlocks.STRIPPED_PETRIFIED_LOG.get(), SBBlocks.STRIPPED_PETRIFIED_WOOD.get(), SBBlocks.WHALEBONE_TOTEM.get());
+                .add(SBBlocks.ANCIENT_CHEST.get(), SBBlocks.BARNACLES.get(), SBBlocks.CHISELED_DARK_SHALE.get(), SBBlocks.CHISELED_SHALE.get(), SBBlocks.CORRODED_CONCRETE.get(), SBBlocks.CORRODED_LANTERN.get(), SBBlocks.CORRODED_TITAN_BONE.get(), SBBlocks.CRAB_POT.get(), SBBlocks.CRACKED_DARK_SHALE_BRICKS.get(), SBBlocks.CRACKED_DARK_SHALE_TILES.get(), SBBlocks.CRACKED_SHALE_BRICKS.get(), SBBlocks.DARK_OBELISK.get(), SBBlocks.DARK_SHALE.get(), SBBlocks.DARK_SHALE_BRICK_SLAB.get(), SBBlocks.DARK_SHALE_BRICK_STAIRS.get(), SBBlocks.DARK_SHALE_BRICK_WALL.get(), SBBlocks.DARK_SHALE_BRICKS.get(), SBBlocks.DARK_SHALE_SLAB.get(), SBBlocks.DARK_SHALE_STAIRS.get(), SBBlocks.DARK_SHALE_TILE_SLAB.get(), SBBlocks.DARK_SHALE_TILE_STAIRS.get(), SBBlocks.DARK_SHALE_TILE_WALL.get(), SBBlocks.DARK_SHALE_TILES.get(), SBBlocks.DARK_SHALE_WALL.get(), SBBlocks.ENGRAVED_DARK_SHALE.get(), SBBlocks.IRON_SCRAP_BLOCK.get(), SBBlocks.LEVIATHAN_BONE.get(), SBBlocks.LEVIATHAN_KERATIN.get(), SBBlocks.MOSSY_SHALE_BRICK_SLAB.get(), SBBlocks.MOSSY_SHALE_BRICK_STAIRS.get(), SBBlocks.MOSSY_SHALE_BRICK_WALL.get(), SBBlocks.MOSSY_SHALE_BRICKS.get(), SBBlocks.OVERGROWN_SHALE.get(), SBBlocks.OVERGROWN_SHALE_SLAB.get(), SBBlocks.OYSTERS.get(), SBBlocks.PETRIFIED_LOG.get(), SBBlocks.PETRIFIED_PLANKS.get(), SBBlocks.PETRIFIED_SLAB.get(), SBBlocks.PETRIFIED_STAIRS.get(), SBBlocks.PETRIFIED_WOOD.get(), SBBlocks.POLISHED_DARK_SHALE.get(), SBBlocks.POLISHED_DARK_SHALE_SLAB.get(), SBBlocks.POLISHED_DARK_SHALE_STAIRS.get(), SBBlocks.POLISHED_DARK_SHALE_WALL.get(), SBBlocks.POLISHED_SHALE.get(), SBBlocks.POLISHED_SHALE_SLAB.get(), SBBlocks.POLISHED_SHALE_STAIRS.get(), SBBlocks.POLISHED_SHALE_WALL.get(), SBBlocks.RUSTY_SCRAP_BLOCK.get(), SBBlocks.SALTSTONE.get(), SBBlocks.SHALE.get(), SBBlocks.SHALE_BRICK_SLAB.get(), SBBlocks.SHALE_BRICK_STAIRS.get(), SBBlocks.SHALE_BRICK_WALL.get(), SBBlocks.SHALE_BRICKS.get(), SBBlocks.SHALE_SLAB.get(), SBBlocks.SHALE_STAIRS.get(), SBBlocks.SHALE_WALL.get(), SBBlocks.STRIPPED_PETRIFIED_LOG.get(), SBBlocks.STRIPPED_PETRIFIED_WOOD.get(), SBBlocks.WHALEBONE_TOTEM.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(SBBlocks.IRON_SCRAP_BLOCK.get(), SBBlocks.RUSTY_SCRAP_BLOCK.get());

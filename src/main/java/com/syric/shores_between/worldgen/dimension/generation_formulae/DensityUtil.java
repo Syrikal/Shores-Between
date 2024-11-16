@@ -51,4 +51,10 @@ public class DensityUtil {
         );
     }
 
+    public static DensityFunction togglableCache(DensityFunction a, boolean two_d) {
+//        return a;
+        return DensityFunctions.cacheOnce(a);
+//        return two_d ? DensityFunctions.cache2d(a) : DensityFunctions.cacheOnce(a);
+    }
+
 }

@@ -9,9 +9,9 @@
           "Name": "shores_between:tangled_shingle"
         },
         "target": {
-          "block": "minecraft:gray_concrete",
+          "block": "shores_between:shingle",
           "predicate_type": "minecraft:random_block_match",
-          "probability": 0.15
+          "probability": 0.2
         }
       }
     ]

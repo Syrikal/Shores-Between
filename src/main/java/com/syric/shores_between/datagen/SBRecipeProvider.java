@@ -86,6 +86,15 @@ public class SBRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy(getHasName(SBBlocks.SHALE.get()), has(SBBlocks.SHALE.get()))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, SBBlocks.OVERGROWN_SHALE_SLAB.get(), 6)
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', SBBlocks.OVERGROWN_SHALE.get())
+                .unlockedBy(getHasName(SBBlocks.OVERGROWN_SHALE.get()), has(SBBlocks.OVERGROWN_SHALE.get()))
+                .save(output);
+
+        stonecutting(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.OVERGROWN_SHALE_SLAB.get(), SBBlocks.OVERGROWN_SHALE.get(), 2);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SBBlocks.SALTSTONE.get(), 1)
                 .pattern("SS")
                 .pattern("SS")

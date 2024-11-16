@@ -1,5 +1,6 @@
 package com.syric.shores_between.worldgen.dimension.generation_formulae;
 
+import com.syric.shores_between.datagen.SBWorldGenProvider;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -42,6 +43,7 @@ public class RockFields {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
         Holder<DensityFunction> major_gullies_alpha = Holder.direct(DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(DensityFunctions.constant(1000), DensityFunctions.zero(), -0.67, noises.getOrThrow(ROCK_GULLIES_FUZZIER_NOISE))));
+
         Holder<DensityFunction> major_gullies_beta = Holder.direct(DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(DensityFunctions.zero(), DensityFunctions.zero(), 1, noises.getOrThrow(ROCK_GULLIES_FUZZIER_NOISE))));
 
         Holder<DensityFunction> rock_fields_texture = context.register(ROCK_FIELDS_TEXTURE, RockFieldsTexture(context, major_gullies_alpha, major_gullies_beta));
@@ -144,11 +146,11 @@ public class RockFields {
 
                         //Minor gullies 1
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(
+                                DensityFunctions.shiftedNoise2d(
                                         DensityFunctions.zero(), //X shift
                                         DensityFunctions.constant(-10000), //Z shift
                                         -0.2, //Scale (smaller is bigger)
-                                        noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
+                                        noises.getOrThrow(ROCK_GULLIES_NOISE))))) //Noise
                                 .addPoint(-0.04F,0,0)
                                 .addPoint(0,-0.3F, 0)
                                 .addPoint(0.04F,0,0)
@@ -156,11 +158,11 @@ public class RockFields {
 
                         //Minor gullies 2
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(
+                                DensityFunctions.shiftedNoise2d(
                                         DensityFunctions.constant(-10000), //X shift
                                         DensityFunctions.zero(), //Z shift
                                         0.3, //Scale (smaller is bigger)
-                                        noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
+                                        noises.getOrThrow(ROCK_GULLIES_NOISE))))) //Noise
                                 .addPoint(-0.06F, 0, 0)
                                 .addPoint(0, -0.25F, 0)
                                 .addPoint(0.06F, 0, 0)
@@ -168,11 +170,11 @@ public class RockFields {
 
                         //Minor gullies 3
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(
+                                DensityFunctions.shiftedNoise2d(
                                         DensityFunctions.zero(), //X shift
                                         DensityFunctions.constant(10000), //Z shift
                                         -0.4, //Scale (smaller is bigger)
-                                        noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
+                                        noises.getOrThrow(ROCK_GULLIES_NOISE))))) //Noise
                                 .addPoint(-0.06F, 0, 0)
                                 .addPoint(0, -0.15F,0)
                                 .addPoint(0.06F, 0, 0)
@@ -180,11 +182,11 @@ public class RockFields {
 
                         //Minor gullies 4
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(
+                                DensityFunctions.shiftedNoise2d(
                                         DensityFunctions.constant(10000), //X shift
                                         DensityFunctions.zero(), //Z shift
                                         0.6, //Scale (smaller is bigger)
-                                        noises.getOrThrow(ROCK_GULLIES_FUZZIER_NOISE)))))) //Noise
+                                        noises.getOrThrow(ROCK_GULLIES_FUZZIER_NOISE))))) //Noise
                                 .addPoint(-0.25F, 0, 0)
                                 .addPoint(0, -0.15F, 0)
                                 .addPoint(0.25F, 0, 0)
@@ -192,18 +194,18 @@ public class RockFields {
 
                         //Minor gullies 5
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
-                                        DensityFunctions.cache2d(DensityFunctions.shiftedNoise2d(
+                                        DensityFunctions.shiftedNoise2d(
                                                 DensityFunctions.zero(), //X shift
                                                 DensityFunctions.zero(), //Z shift
                                                 -1, //Scale (smaller is bigger)
-                                                noises.getOrThrow(ROCK_GULLIES_NOISE)))))) //Noise
+                                                noises.getOrThrow(ROCK_GULLIES_NOISE))))) //Noise
                                 .addPoint(-0.2F, 0, 0)
                                 .addPoint(0, -0.1F, 0)
                                 .addPoint(0.2F, 0, 0)
                                 .build())
                 )
         );
-        return texture;
+        return DensityFunctions.cache2d(texture);
     }
 
     private static DensityFunction RockFieldsPresence(BootstrapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
@@ -267,7 +269,7 @@ public class RockFields {
                 .addPoint(1,0,0)
                 .build());
 
-        return splinedPresence;
+        return DensityFunctions.cache2d(splinedPresence);
     }
 
     private static DensityFunction RockFieldsFinal(BootstrapContext<DensityFunction> context, Holder<DensityFunction> rock_fields_texture, Holder<DensityFunction> rock_fields_presence) {
@@ -295,7 +297,7 @@ public class RockFields {
                         .build())
         );
 
-        return rock_fields_final;
+        return DensityFunctions.cacheOnce(rock_fields_final);
     }
 
 }

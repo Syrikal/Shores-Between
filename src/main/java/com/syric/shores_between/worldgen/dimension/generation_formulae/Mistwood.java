@@ -80,7 +80,7 @@ public class Mistwood {
                                 .build())
                 )
         );
-        return islands;
+        return DensityFunctions.cache2d(islands);
     }
 
     //Mistwood terrain adds up to 0.07 and subtracts up to 0.05, depending on mistwood noise.
@@ -119,7 +119,7 @@ public class Mistwood {
         );
 
 
-        return DensityFunctions.mul(roughness, multiplier);
+        return DensityFunctions.cache2d(DensityFunctions.mul(roughness, multiplier));
     }
 
     private static DensityFunction MistwoodChannels(BootstrapContext<DensityFunction> context, Holder<DensityFunction> mistwood_islands) {
@@ -135,14 +135,11 @@ public class Mistwood {
 
         //Only present when islands is negative and continentalness is over 0.99
         DensityFunction multiplier = DensityFunctions.mul(
-                DensityFunctions.max(
-                        DensityFunctions.constant(0),
-                        //Only present when islands is positive
-                        DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(mistwood_islands))
-                                .addPoint(-0.2F, 1, 0)
-                                .addPoint(-0.02F, 0, 0)
-                                .build())
-                ),
+                //Only present when islands is positive
+                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(mistwood_islands))
+                        .addPoint(-0.2F, 1, 0)
+                        .addPoint(-0.02F, 0, 0)
+                        .build()),
                 //Only present when continentalness is over 0.99
                 DensityFunctions.max(
                         DensityFunctions.constant(0),
@@ -154,17 +151,17 @@ public class Mistwood {
                 )
         );
 
-        return DensityFunctions.mul(roughness, multiplier);
+        return DensityFunctions.cache2d(DensityFunctions.mul(roughness, multiplier));
     }
 
     //Mistwood Intermediate does basically nothing but add the islands and terrain together.
     private static DensityFunction MistwoodIntermediate(Holder<DensityFunction> mistwood_islands, Holder<DensityFunction> mistwood_terrain, Holder<DensityFunction> mistwood_channels) {
-        return DensityUtil.applyAll(
+        return DensityFunctions.cache2d(DensityUtil.applyAll(
                 DensityFunctions::add,
                 new DensityFunctions.HolderHolder(mistwood_islands),
                 new DensityFunctions.HolderHolder(mistwood_terrain),
                 new DensityFunctions.HolderHolder(mistwood_channels)
-        );
+        ));
     }
 
         //Final mistwood density adds the islands to the terrain, then splines by Y to get actual terrain height
@@ -194,7 +191,7 @@ public class Mistwood {
                         .build())
         );
 
-        return mistwood_final;
+        return DensityFunctions.cacheOnce(mistwood_final);
     }
 
 }

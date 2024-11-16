@@ -27,10 +27,15 @@ public class SBCreativeTabs {
                         pOutput.accept(SBBlocks.SHINGLE.asItem());
                         pOutput.accept(SBBlocks.TANGLED_SHINGLE.asItem());
                         pOutput.accept(SBBlocks.PEBBLES.asItem());
+                        pOutput.accept(SBBlocks.DARK_PEBBLES.asItem());
+                        pOutput.accept(SBBlocks.PALE_PEBBLES.asItem());
                         pOutput.accept(SBBlocks.GRASSY_SHINGLE.asItem());
+                        pOutput.accept(SBBlocks.PODZOL_SHINGLE.asItem());
+                        pOutput.accept(SBBlocks.DIRT_SHINGLE.asItem());
                         pOutput.accept(SBBlocks.SHALE.asItem());
                         pOutput.accept(SBBlocks.DARK_SHALE.asItem());
                         pOutput.accept(SBBlocks.OVERGROWN_SHALE.asItem());
+                        pOutput.accept(SBBlocks.OVERGROWN_SHALE_SLAB.asItem());
                         pOutput.accept(SBBlocks.SALTSTONE.asItem());
                         pOutput.accept(SBBlocks.DRIFTWOOD_LOG.asItem());
                         pOutput.accept(SBBlocks.DRIFTWOOD_WOOD.asItem());

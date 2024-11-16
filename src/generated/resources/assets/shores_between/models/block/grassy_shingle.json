@@ -1,6 +1,10 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/grass_block",
   "textures": {
-    "all": "shores_between:block/grassy_shingle"
+    "bottom": "shores_between:block/dirt_shingle",
+    "overlay": "shores_between:block/grassy_shingle_overlay",
+    "particle": "shores_between:block/grassy_shingle_top",
+    "side": "shores_between:block/grassy_shingle_side",
+    "top": "shores_between:block/grassy_shingle_top"
   }
 }

@@ -1,6 +1,9 @@
 {
   "values": [
     "shores_between:shingle",
-    "shores_between:pebbles"
+    "shores_between:pebbles",
+    "shores_between:dark_pebbles",
+    "shores_between:pale_pebbles",
+    "shores_between:mistwood_moss_block"
   ]
 }

@@ -1,6 +1,11 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/grass_block",
+  "render_type": "minecraft:cutout",
   "textures": {
-    "all": "shores_between:block/overgrown_shale"
+    "bottom": "shores_between:block/shale_top",
+    "overlay": "shores_between:block/overgrown_shale_side_overlay",
+    "particle": "shores_between:block/mistwood_moss_block",
+    "side": "shores_between:block/overgrown_shale_side",
+    "top": "shores_between:block/mistwood_moss_block"
   }
 }

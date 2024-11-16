@@ -1,6 +1,9 @@
 {
   "values": [
     "shores_between:grassy_shingle",
-    "shores_between:overgrown_shale"
+    "shores_between:podzol_shingle",
+    "shores_between:dirt_shingle",
+    "shores_between:overgrown_shale",
+    "shores_between:mistwood_moss_block"
   ]
 }

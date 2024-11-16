@@ -155,14 +155,14 @@ public class Strands {
         );
 
         //The final density is the (smooth) max of the three strand systems, plus the two roughness functions.
-        DensityFunction strands_density = DensityUtil.applyAll(DensityFunctions::add,
+        DensityFunction strands_density = DensityFunctions.cache2d(DensityUtil.applyAll(DensityFunctions::add,
                 DensityUtil.applyAll(DensityFunctions::max,
                         new DensityFunctions.HolderHolder(strands_major),
                         new DensityFunctions.HolderHolder(strands_minor_final),
                         new DensityFunctions.HolderHolder(sandbars)),
                 new DensityFunctions.HolderHolder(strands_roughness),
                 new DensityFunctions.HolderHolder(ocean_roughness)
-                );
+                ));
 
         return strands_density;
     }
@@ -176,7 +176,7 @@ public class Strands {
          * 2) A spline based on the Y value, to put the terrain at the appropriate height based on its 2D density.
          * */
 
-        DensityFunction strandsFinal = DensityFunctions.add(
+        DensityFunction strandsFinal = DensityFunctions.cacheOnce(DensityFunctions.add(
                 new DensityFunctions.HolderHolder(strandsDensity),
                 DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(NoiseRouterData.Y)))
                         .addPoint(33, 1, -0.04F)
@@ -190,7 +190,7 @@ public class Strands {
                         .addPoint(70, -0.15F, -0.15F)
                         .addPoint(71,-0.3F,-0.3F)
                         .build())
-        );
+        ));
 
         return strandsFinal;
 

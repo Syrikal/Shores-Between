@@ -15,6 +15,7 @@ import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -34,6 +35,8 @@ public class SBBlockLootTables extends BlockLootSubProvider {
         dropSelf(SBBlocks.DEFAULT_BLOCK.get());
         dropSelf(SBBlocks.SHINGLE.get());
         dropSelf(SBBlocks.PEBBLES.get());
+        dropSelf(SBBlocks.DARK_PEBBLES.get());
+        dropSelf(SBBlocks.PALE_PEBBLES.get());
         dropSelf(SBBlocks.SHALE.get());
         dropSelf(SBBlocks.DARK_SHALE.get());
         dropSelf(SBBlocks.DRIFTWOOD_LOG.get());
@@ -151,7 +154,10 @@ public class SBBlockLootTables extends BlockLootSubProvider {
                 block -> createSingleItemTable(SBItems.MISTWOOD_HANGING_SIGN));
 
         otherUnlessSilkTouch(SBBlocks.GRASSY_SHINGLE.get(), SBBlocks.SHINGLE.asItem());
+        otherUnlessSilkTouch(SBBlocks.PODZOL_SHINGLE.get(), SBBlocks.PODZOL_SHINGLE.asItem());
+        otherUnlessSilkTouch(SBBlocks.DIRT_SHINGLE.get(), SBBlocks.DIRT_SHINGLE.asItem());
         otherUnlessSilkTouch(SBBlocks.OVERGROWN_SHALE.get(), SBBlocks.SHALE.asItem());
+        otherUnlessSilkTouchSlab(SBBlocks.OVERGROWN_SHALE_SLAB.get(), SBBlocks.SHALE_SLAB.asItem());
         glowstoneLike(SBBlocks.SALTSTONE.get(), SBItems.SALT.get());
         add(SBBlocks.MISTWOOD_LEAVES.get(),
                 result -> createLeavesDrops(SBBlocks.MISTWOOD_LEAVES.get(), SBBlocks.MISTWOOD_SAPLING.get(), 0.05F, 0.0625F, 0.083333336F, 0.1F));
@@ -201,6 +207,45 @@ public class SBBlockLootTables extends BlockLootSubProvider {
 
     private void otherUnlessSilkTouch(Block block, Item other) {
         add(block, (result) -> createSingleItemTableWithSilkTouch(block, other));
+    }
+
+    private void otherUnlessSilkTouchSlab(Block block, Item other) {
+        add(block, (result) -> createSlabWithSilkTouch(block, other));
+    }
+
+    protected LootTable.Builder createSlabWithSilkTouch(Block block, Item other) {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(
+                                        this.applyExplosionDecay(
+                                                block,
+                                                LootItem.lootTableItem(block)
+                                                        .apply(
+                                                                SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                                                                        .when(
+                                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))
+                                                                        )
+                                                        )
+                                        ).when(HAS_SILK_TOUCH)
+                                                .otherwise(
+                                                        this.applyExplosionDecay(
+                                                                block,
+                                                                LootItem.lootTableItem(other)
+                                                                        .apply(
+                                                                                SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                                                                                        .when(
+                                                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))
+                                                                                        )
+                                                                        )
+                                                        )
+                                                )
+                                )
+
+                );
     }
 
     //Drops block if silk touch, else 2-4 of item

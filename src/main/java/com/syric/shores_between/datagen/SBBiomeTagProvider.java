@@ -36,13 +36,104 @@ public class SBBiomeTagProvider extends BiomeTagsProvider {
                 .add(biomes.getOrThrow(SBBiomes.MISTWOOD_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME).key())
-                .add(biomes.getOrThrow(SBBiomes.SEAMOUNTS_BIOME).key())
-        ;
+                .add(biomes.getOrThrow(SBBiomes.SEAMOUNTS_BIOME).key());
 
         this.tag(SBTags.Biomes.HAS_TANGLED_SHINGLE)
                 .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_RUSTY_SCRAP)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key());
+
+        this.tag(SBTags.Biomes.MISTWOOD)
+                .add(biomes.getOrThrow(SBBiomes.MISTWOOD_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_DRIFTWOOD_LOGS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_PETRIFIED_LOGS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_SEAWEED_CLUMPS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_DEAD_FISH)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_SMALL_BOULDERS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_LARGE_BOULDERS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_MORE_BOULDERS)
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_SMALL_OUTCROPS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_MOSSY_OUTCROPS)
+                .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.MISTWOOD_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_RARE_MOSSY_OUTCROPS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_EERIE_BOULDERS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_CORPSE_BOULDERS)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_SPARSE_BUSHES)
                 .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
     }

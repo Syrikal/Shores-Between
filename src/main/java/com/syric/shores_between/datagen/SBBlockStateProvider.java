@@ -1,5 +1,6 @@
 package com.syric.shores_between.datagen;
 
+import com.ibm.icu.text.Normalizer2;
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.registry.SBBlocks;
 import net.minecraft.core.Direction;
@@ -7,9 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -26,10 +25,15 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.SHINGLE);
         block(SBBlocks.TANGLED_SHINGLE);
         block(SBBlocks.PEBBLES);
-        block(SBBlocks.GRASSY_SHINGLE);
+        block(SBBlocks.DARK_PEBBLES);
+        block(SBBlocks.PALE_PEBBLES);
+        grassyShingle(SBBlocks.GRASSY_SHINGLE);
+        podzolShingle(SBBlocks.PODZOL_SHINGLE);
+        block(SBBlocks.DIRT_SHINGLE);
         log(SBBlocks.SHALE);
         log(SBBlocks.DARK_SHALE);
-        block(SBBlocks.OVERGROWN_SHALE);
+        overgrownShale(SBBlocks.OVERGROWN_SHALE);
+        overgrownShaleSlab(SBBlocks.OVERGROWN_SHALE_SLAB, SBBlocks.OVERGROWN_SHALE);
         block(SBBlocks.SALTSTONE);
         log(SBBlocks.DRIFTWOOD_LOG);
         wood(SBBlocks.DRIFTWOOD_WOOD, SBBlocks.DRIFTWOOD_LOG);
@@ -94,8 +98,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.SEAWEED_BLOCK); //Needs custom model
         halfSlab(SBBlocks.SEAWEED_SLAB, SBBlocks.SEAWEED_BLOCK); //Needs custom model
         carpet(SBBlocks.SEAWEED_CARPET); //Needs custom model
-        carpet(SBBlocks.MISTWOOD_MOSS_CARPET); //Needs custom model
-        block(SBBlocks.MISTWOOD_MOSS_BLOCK);
+//        overhangCarpet(SBBlocks.MISTWOOD_MOSS_CARPET); //Needs custom model
+        leaves(SBBlocks.MISTWOOD_MOSS_BLOCK);
         block(SBBlocks.CORRODED_CONCRETE);
         block(SBBlocks.SUSPICIOUS_SHINGLE);
         block(SBBlocks.SEAGULL_NEST); //Needs custom model
@@ -104,7 +108,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         block(SBBlocks.DEAD_FISH_BLOCK); //Needs custom model
         halfSlab(SBBlocks.DEAD_FISH_SLAB, SBBlocks.DEAD_FISH_BLOCK); //Needs custom model
         block(SBBlocks.PORTAL_BLOCK); //Needs custom model
-        halfSlab(SBBlocks.SHALE_SLAB, SBBlocks.SHALE);
+        topBottomSlab(SBBlocks.SHALE_SLAB, SBBlocks.SHALE);
         stairs(SBBlocks.SHALE_STAIRS, SBBlocks.SHALE);
         wall(SBBlocks.SHALE_WALL, SBBlocks.SHALE);
         block(SBBlocks.POLISHED_SHALE);
@@ -120,7 +124,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         halfSlab(SBBlocks.MOSSY_SHALE_BRICK_SLAB, SBBlocks.MOSSY_SHALE_BRICKS);
         stairs(SBBlocks.MOSSY_SHALE_BRICK_STAIRS, SBBlocks.MOSSY_SHALE_BRICKS);
         wall(SBBlocks.MOSSY_SHALE_BRICK_WALL, SBBlocks.MOSSY_SHALE_BRICKS);
-        halfSlab(SBBlocks.DARK_SHALE_SLAB, SBBlocks.DARK_SHALE);
+        topBottomSlab(SBBlocks.DARK_SHALE_SLAB, SBBlocks.DARK_SHALE);
         stairs(SBBlocks.DARK_SHALE_STAIRS, SBBlocks.DARK_SHALE);
         wall(SBBlocks.DARK_SHALE_WALL, SBBlocks.DARK_SHALE);
         block(SBBlocks.POLISHED_DARK_SHALE);
@@ -159,8 +163,19 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleBlock(block.get());
     }
 
+    private void topBottomBlock(DeferredBlock<Block> block) {
+        models().cubeBottomTop(block.getId().getPath(),
+                texture(block, "side"),
+                texture(block, "bottom"),
+                texture(block, "top"));
+    }
+
     private void halfSlab(DeferredBlock<Block> slab, DeferredBlock<Block> fullBlock) {
         this.slabBlock((SlabBlock) slab.get(), texture(fullBlock), texture(fullBlock));
+    }
+
+    private void topBottomSlab(DeferredBlock<Block> slab, DeferredBlock<Block> fullBlock) {
+        this.slabBlock((SlabBlock) slab.get(), texture(fullBlock), texture(fullBlock), texture(fullBlock, "top"), texture(fullBlock, "top"));
     }
 
     private void stairs(DeferredBlock<Block> stairs, DeferredBlock<Block> fullBlock) {
@@ -204,6 +219,12 @@ public class SBBlockStateProvider extends BlockStateProvider {
     private void carpet(DeferredBlock<Block> carpet) {
         simpleBlockWithItem(carpet.get(), models().carpet(carpet.getRegisteredName(), texture(carpet)));
     }
+
+//    private void overhangCarpet(DeferredBlock<Block> carpet) {
+//        BlockModelBuilder carpetBuilder = models().carpet(carpet.getRegisteredName(), texture(carpet));
+//        carpetBuilder.element().from(0, -8, -0.01F).to(16.02F, 8.02F, 0).
+//        simpleBlockWithItem(carpet.get(), carpetModel);
+//    }
 
     private void crossBlock(DeferredBlock<Block> block) {
         ModelFile crossBlockModel = models().cross(block.getId().getPath(), texture(block));
@@ -293,6 +314,119 @@ public class SBBlockStateProvider extends BlockStateProvider {
                             .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot() + 180)) % 360)
                             .build();
                 });
+    }
+
+    private void grassyShingle(DeferredBlock<Block> grass) {
+        ModelFile grassModel = models().withExistingParent(grass.getId().getPath(), "grass_block")
+                .texture("particle", texture(grass, "top"))
+                .texture("bottom", texture("dirt_shingle"))
+                .texture("top", texture(grass, "top"))
+                .texture("side", texture(grass, "side"))
+                .texture("overlay", texture(grass, "overlay"));
+        simpleBlock(grass.get(), grassModel);
+    }
+
+    private void overgrownShale(DeferredBlock<Block> overgrown_shale) {
+        ModelFile grassModel = models().withExistingParent(overgrown_shale.getId().getPath(), "grass_block")
+                .texture("particle", texture("mistwood_moss_block"))
+                .texture("bottom", texture("shale_top"))
+                .texture("top", texture("mistwood_moss_block"))
+                .texture("side", texture(overgrown_shale, "side"))
+                .texture("overlay", texture(overgrown_shale, "side_overlay"))
+                .renderType("cutout");
+        simpleBlock(overgrown_shale.get(), grassModel);
+    }
+
+    private void overgrownShaleSlab(DeferredBlock<Block> overgrown_shale_slab, DeferredBlock<Block> overgrown_shale) {
+//        ModelFile bottom_model = models().getBuilder(overgrown_shale_slab.getId().getPath())
+//                    .texture("side", texture("overgrown_shale_side"))
+//                    .texture("top", texture("mistwood_moss_block"))
+//                    .texture("bottom", texture("shale_top"))
+//                    .texture("particle", "#top")
+//                    .texture("overlay", texture("overgrown_shale_side_overlay"))
+//                .element().from(0, 0, 0).to(16, 8, 16)
+//                    .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top").tintindex(0).end()
+//                    .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#bottom").cullface(Direction.DOWN).end()
+//                    .face(Direction.NORTH).uvs(0,8,16,16).texture("#side").cullface(Direction.NORTH).end()
+//                    .face(Direction.SOUTH).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.SOUTH).end()
+//                    .face(Direction.EAST).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.EAST).end()
+//                    .face(Direction.WEST).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.WEST).end()
+//                        .end()
+//                .element().from(0, 0, 0).to(16, 8, 16)
+//                    .face(Direction.NORTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.NORTH).end()
+//                    .face(Direction.SOUTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.SOUTH).end()
+//                    .face(Direction.EAST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.EAST).end()
+//                    .face(Direction.WEST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.WEST).end()
+//                        .end().renderType("cutout");
+//        ModelFile top_model = models().getBuilder(overgrown_shale_slab.getId().getPath() + "_top")
+//                    .texture("side", texture("overgrown_shale_side"))
+//                    .texture("top", texture("mistwood_moss_block"))
+//                    .texture("bottom", texture("shale_top"))
+//                    .texture("particle", "#top")
+//                    .texture("overlay", texture("overgrown_shale_side_overlay"))
+//                .element().from(0, 8, 0).to(16, 16, 16)
+//                    .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top").tintindex(0).end()
+//                    .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#bottom").cullface(Direction.DOWN).end()
+//                    .face(Direction.NORTH).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.NORTH).end()
+//                    .face(Direction.SOUTH).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.SOUTH).end()
+//                    .face(Direction.EAST).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.EAST).end()
+//                    .face(Direction.WEST).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.WEST).end()
+//                        .end()
+//                .element().from(0, 8, 0).to(16, 16, 16)
+//                    .face(Direction.NORTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.NORTH).end()
+//                    .face(Direction.SOUTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.SOUTH).end()
+//                    .face(Direction.EAST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.EAST).end()
+//                    .face(Direction.WEST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.WEST).end()
+//                        .end().renderType("cutout");
+        ModelFile bottom_model = models().withExistingParent(overgrown_shale_slab.getId().getPath(), "slab")
+                .texture("side", texture("overgrown_shale_side"))
+                .texture("top", texture("mistwood_moss_block"))
+                .texture("bottom", texture("shale_top"))
+                .texture("particle", "#top")
+                .texture("overlay", texture("overgrown_shale_side_overlay"))
+                .element().from(0, 0, 0).to(16, 8, 16)
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top").tintindex(0).end()
+                .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#bottom").cullface(Direction.DOWN).end()
+                .face(Direction.NORTH).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.SOUTH).end()
+                .face(Direction.EAST).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.EAST).end()
+                .face(Direction.WEST).uvs(0, 8, 16, 16).texture("#side").cullface(Direction.WEST).end()
+                .end()
+                .element().from(0, 0, 0).to(16, 8, 16)
+                .face(Direction.NORTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.SOUTH).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.EAST).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.WEST).end()
+                .end().renderType("cutout");
+        ModelFile top_model = models().withExistingParent(overgrown_shale_slab.getId().getPath() + "_top", "slab_top")
+                .texture("side", texture("overgrown_shale_side"))
+                .texture("top", texture("mistwood_moss_block"))
+                .texture("bottom", texture("shale_top"))
+                .texture("particle", "#top")
+                .texture("overlay", texture("overgrown_shale_side_overlay"))
+                .element().from(0, 8, 0).to(16, 16, 16)
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top").tintindex(0).end()
+                .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#bottom").cullface(Direction.DOWN).end()
+                .face(Direction.NORTH).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.SOUTH).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.EAST).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 8).texture("#side").cullface(Direction.WEST).end()
+                .end()
+                .element().from(0, 8, 0).to(16, 16, 16)
+                .face(Direction.NORTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.SOUTH).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.EAST).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 8).texture("#overlay").tintindex(0).cullface(Direction.WEST).end()
+                .end().renderType("cutout");
+        this.slabBlock((SlabBlock) overgrown_shale_slab.get(), bottom_model, top_model, models().getExistingFile(texture(overgrown_shale)));
+    }
+
+    private void podzolShingle(DeferredBlock<Block> podzol) {
+        ModelFile podzolModel = models().cubeBottomTop(podzol.getId().getPath(),
+                texture(podzol, "side"),
+                texture("dirt_shingle"),
+                texture(podzol, "top"));
+        simpleBlock(podzol.get(), podzolModel);
     }
 
     private ResourceLocation texture(String name) {

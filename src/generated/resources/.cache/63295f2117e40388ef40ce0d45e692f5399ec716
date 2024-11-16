@@ -1,4 +1,4 @@
-// 1.20.6	2024-06-28T14:05:43.9034304	Item Models: shores_between
+// 1.20.6	2024-07-22T16:30:48.1151533	Item Models: shores_between
 c7b057f4b7cb417e78ff4e00c32592db81bff231 assets/shores_between/models/item/aberrant_shell.json
 4f1b716fa899aff5f2c6e5f69953a1e595f29a1e assets/shores_between/models/item/ambergris.json
 a6919ddfc6fee829132bf7b963ee65277b5b8622 assets/shores_between/models/item/ancient_chest.json
@@ -22,6 +22,7 @@ aefddce5dd522113a9dd0663c5fa3b9b9dff3e30 assets/shores_between/models/item/corro
 764721fb73d712a577d2c5cc219b82d6dbfb690f assets/shores_between/models/item/cracked_dark_shale_tiles.json
 d72153c55968c50ea94c02c1f24c838f8269467c assets/shores_between/models/item/cracked_shale_bricks.json
 d864d008b88f76493fef4ef6b12a801827573063 assets/shores_between/models/item/dark_obelisk.json
+26c8921db70560a34c3c515e3cf168d2f078732c assets/shores_between/models/item/dark_pebbles.json
 118bbd3c39613441fc9da5d3beefd590748e01d8 assets/shores_between/models/item/dark_shale.json
 03651d219c2825dca92063d56fc3e14fde1dc58d assets/shores_between/models/item/dark_shale_bricks.json
 30ce37f3a7acb75cfe1675f2a890eafe1486844a assets/shores_between/models/item/dark_shale_brick_slab.json
@@ -36,6 +37,7 @@ fa92c0696089f1dd0bf96927d7fefbfaf7443540 assets/shores_between/models/item/dark_
 374859d785278b44fcab2db8110af8b960614aeb assets/shores_between/models/item/dark_shale_wall.json
 e846c8e8595508787cde65846a0cc42f27776ed0 assets/shores_between/models/item/dead_fish_slab.json
 69503144d36cd5f82d06e6becde2f14791d4466d assets/shores_between/models/item/dead_sapling.json
+a348e261ad59093d84d96829fabe6313c7b4e7a6 assets/shores_between/models/item/dirt_shingle.json
 2d0d6d1c006dfd339f9a7d05c141155589684f98 assets/shores_between/models/item/driftwood_barrel.json
 eb116c7f88301cfbb4e427c70599568ba3eb7b55 assets/shores_between/models/item/driftwood_button.json
 404569ab5b06e6afcc656e9949e430927e719b33 assets/shores_between/models/item/driftwood_chest.json
@@ -95,8 +97,10 @@ abe38c0ad556d9603dc7a1b9c17e1e568482391b assets/shores_between/models/item/mistw
 1e21990ba6459eb4098db8c23a29e01bdf91af7c assets/shores_between/models/item/mummified_flesh.json
 35175bc8915a9703e20a1cd04fec567b684fee77 assets/shores_between/models/item/odd_fish.json
 72aa6e855b3d5d463ab8517901bf47587ddc2d9c assets/shores_between/models/item/overgrown_shale.json
+cd9ed558ff2a6763a01f59fd009a6893c15200af assets/shores_between/models/item/overgrown_shale_slab.json
 b049eeedc9dcef853c34c95486e1a63537853923 assets/shores_between/models/item/oyster.json
 b0f1bab8b32a0860cf9fecc586b03be241d63e9f assets/shores_between/models/item/oysters.json
+e15e8d0be81a6106620ebce93bc93f9ae4c86f70 assets/shores_between/models/item/pale_pebbles.json
 1369d85239f55cbf9d86108823c56acc649f1e96 assets/shores_between/models/item/pebbles.json
 a9d59db908077c078ff95700ddc9b272f1d91fdb assets/shores_between/models/item/petrified_log.json
 e03567da712f131d9bad7af5a107d4cc6ea4dfe0 assets/shores_between/models/item/petrified_planks.json
@@ -104,6 +108,7 @@ e03567da712f131d9bad7af5a107d4cc6ea4dfe0 assets/shores_between/models/item/petri
 0f08d26c5f22e000108e7ea686d6ee40881922a6 assets/shores_between/models/item/petrified_slab.json
 bc494dc9788d88e7d073429856b467e2d4ecc490 assets/shores_between/models/item/petrified_stairs.json
 88cde8f65ac5fc18d17a0ee8155325071ff71b98 assets/shores_between/models/item/petrified_wood.json
+f59c8e66a84d22abb48b1823592943204c56c3a2 assets/shores_between/models/item/podzol_shingle.json
 13c76135bea322924cde7654eb3c1b2e0ce7899f assets/shores_between/models/item/polished_dark_shale.json
 2cfc788455efd730e8f009b54a5387cdbfb0629e assets/shores_between/models/item/polished_dark_shale_slab.json
 b267aae7deaff4d35bdbd89f1d450eb74aa93be4 assets/shores_between/models/item/polished_dark_shale_stairs.json

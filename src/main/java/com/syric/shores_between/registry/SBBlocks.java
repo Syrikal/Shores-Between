@@ -1,7 +1,7 @@
 package com.syric.shores_between.registry;
 
 import com.syric.shores_between.block.*;
-import com.syric.shores_between.worldgen.tree.SBTreeGrowers;
+import com.syric.shores_between.worldgen.feature.tree.SBTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -48,16 +48,27 @@ public class SBBlocks {
     public static final DeferredBlock<Block> PEBBLES = registerWithItem("pebbles",
             () -> new ColoredFallingBlock(new ColorRGBA(-8356741),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL)));
-    //TODO - grassy shingle should become regular shingle when it falls
-    //TODO - grassy shingle should have hybrid grass / shingle sounds
-    //TODO - grassy shingle needs a grassy model/texture
+    public static final DeferredBlock<Block> DARK_PEBBLES = registerWithItem("dark_pebbles",
+            () -> new ColoredFallingBlock(new ColorRGBA(-8356741),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL)));
+    public static final DeferredBlock<Block> PALE_PEBBLES = registerWithItem("pale_pebbles",
+            () -> new ColoredFallingBlock(new ColorRGBA(-8356741),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL)));
+    //TODO - grassy/podzol shingle should become dirt shingle when it falls
+    //TODO - grassy/podzol shingle should have hybrid grass / shingle sounds
+    //TODO - grassy/podzol shingle needs a grassy model/texture
     public static final DeferredBlock<Block> GRASSY_SHINGLE = registerWithItem("grassy_shingle",
             () -> new ColoredFallingBlock(new ColorRGBA(-8356741),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).sound(SoundType.MOSS).mapColor(MapColor.GRASS)));
+    public static final DeferredBlock<Block> PODZOL_SHINGLE = registerWithItem("podzol_shingle",
+            () -> new ColoredFallingBlock(new ColorRGBA(-8356741),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).sound(SoundType.MOSS).mapColor(MapColor.PODZOL)));
+    public static final DeferredBlock<Block> DIRT_SHINGLE = registerWithItem("dirt_shingle",
+            () -> new ColoredFallingBlock(new ColorRGBA(-8356741),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).sound(SoundType.GRAVEL).mapColor(MapColor.PODZOL)));
 
 
     //Stone blocks
-    //TODO - shale and dark shale need rotated pillar models/textures
     public static final DeferredBlock<Block> SHALE = registerWithItem("shale",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).sound(SoundType.TUFF).strength(1.3F, 3.0F)));
     public static final DeferredBlock<Block> DARK_SHALE = registerWithItem("dark_shale",
@@ -67,6 +78,8 @@ public class SBBlocks {
     //TODO - overgrown shale needs a grassy model/texture
     public static final DeferredBlock<Block> OVERGROWN_SHALE = registerWithItem("overgrown_shale",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(SHALE.get()).mapColor(MapColor.GRASS).randomTicks()));
+    public static final DeferredBlock<Block> OVERGROWN_SHALE_SLAB = registerWithItem("overgrown_shale_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(OVERGROWN_SHALE.get())));
     public static final DeferredBlock<Block> SALTSTONE = registerWithItem("saltstone",
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.TERRACOTTA_WHITE)
@@ -236,7 +249,7 @@ public class SBBlocks {
     public static final DeferredBlock<Block> MISTWOOD_THIN_SAPLING = registerWithItem("mistwood_thin_sapling",
             () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_THIN_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
     public static final DeferredBlock<Block> MISTWOOD_BUSH_SAPLING = registerWithItem("mistwood_bush_sapling",
-            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_BUSH, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
+            () -> new SaplingBlock(SBTreeGrowers.MISTWOOD_EDGE_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
     public static final DeferredBlock<Block> PETRIFIED_SAPLING = registerWithItem("petrified_sapling",
             () -> new SaplingBlock(SBTreeGrowers.PETRIFIED_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
     public static final DeferredBlock<Block> DEAD_SAPLING = registerWithItem("dead_sapling",

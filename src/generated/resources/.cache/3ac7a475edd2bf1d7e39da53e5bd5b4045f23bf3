@@ -1,3 +1,17 @@
-// 1.20.6	2024-06-27T15:35:09.8285366	Tags for minecraft:worldgen/biome mod id shores_between
+// 1.20.6	2024-10-20T12:57:48.1127728	Tags for minecraft:worldgen/biome mod id shores_between
+a61ecfc21bd63234ea8c8437a83ed3a7fdcd69e4 data/shores_between/tags/worldgen/biome/has_corpse_boulders.json
+f5aaa7e2988c9357bad52961873387843e798361 data/shores_between/tags/worldgen/biome/has_dead_fish.json
+38edd24076df5e4b12131c46d59f239bfad0ec16 data/shores_between/tags/worldgen/biome/has_driftwood_logs.json
+ee769cdac76e066da4861313e77e3c5ef37d2b10 data/shores_between/tags/worldgen/biome/has_eerie_boulders.json
+6e208446173e1aa4016e1724e58aae9f3126477a data/shores_between/tags/worldgen/biome/has_large_boulders.json
+51209944d14dad42522de64292ae3a6d4c89036d data/shores_between/tags/worldgen/biome/has_mossy_outcrops.json
+9b225f33e937985f073265c9c290c82adf430ebb data/shores_between/tags/worldgen/biome/has_petrified_logs.json
+f467104e6f6402abf808cc00bd29be61fb62adc7 data/shores_between/tags/worldgen/biome/has_rare_mossy_outcrops.json
+7c08c56fa993ac414c40227cfc481c5fe90d5a68 data/shores_between/tags/worldgen/biome/has_rusty_scrap.json
+3a098d37a25917242f56e0972c7d2f4cef703ed3 data/shores_between/tags/worldgen/biome/has_seaweed_clumps.json
+51f964f65cc6c9991cfd4400f841bf3df9b1fb18 data/shores_between/tags/worldgen/biome/has_small_boulders.json
+7b60ffead44afd313d2df06986a6ceb139696fd1 data/shores_between/tags/worldgen/biome/has_small_outcrops.json
+bfbac0ff591b15823aa0600be937453eb3dd0db2 data/shores_between/tags/worldgen/biome/has_sparse_bushes.json
 e497d1ab8d45bde11a65d7f01b04fcd2d44b7601 data/shores_between/tags/worldgen/biome/has_tangled_shingle.json
 20d60035aa6d905cdd27f350c605b63f04692950 data/shores_between/tags/worldgen/biome/is_breach.json
+a1d325a02f4e2dfd8d10a87de2b0fc7c387eb5c3 data/shores_between/tags/worldgen/biome/mistwood.json
