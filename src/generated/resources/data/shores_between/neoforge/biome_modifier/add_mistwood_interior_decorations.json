@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:mistwood",
+  "features": [
+    "shores_between:mistwood_log_placed",
+    "shores_between:mistwood_ferns_placed",
+    "shores_between:mistwood_large_ferns_placed"
+  ],
+  "step": "vegetal_decoration"
+}

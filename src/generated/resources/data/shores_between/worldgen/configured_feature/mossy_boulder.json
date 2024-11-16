@@ -1,0 +1,97 @@
+{
+  "type": "shores_between:boulder",
+  "config": {
+    "clefts": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 0
+    },
+    "compress_vertical": 0.6,
+    "decorators": [
+      {
+        "type": "shores_between:top_scatter",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:overgrown_shale"
+          }
+        },
+        "probability": 0.8,
+        "proportion": {
+          "type": "minecraft:uniform",
+          "max_exclusive": 0.8,
+          "min_inclusive": 0.4
+        },
+        "slab_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:overgrown_shale_slab",
+            "Properties": {
+              "type": "bottom",
+              "waterlogged": "false"
+            }
+          }
+        }
+      },
+      {
+        "type": "shores_between:above",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:mistwood_moss_carpet"
+          }
+        },
+        "place_on_slabs": false,
+        "probability": 0.6,
+        "proportion": {
+          "type": "minecraft:uniform",
+          "max_exclusive": 0.8,
+          "min_inclusive": 0.4
+        }
+      }
+    ],
+    "eccentricity": 1.0,
+    "irregularity_amplitude": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.2,
+      "min_inclusive": 0.8
+    },
+    "irregularity_frequency": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.2,
+      "min_inclusive": 0.8
+    },
+    "outcrop": false,
+    "overlaps": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": -4
+    },
+    "prow": 0.0,
+    "rock_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 15,
+      "min_inclusive": 6
+    },
+    "slab_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "use_slabs": true
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "type": "shores_between:boulder",
+  "config": {
+    "clefts": 0,
+    "compress_vertical": 0.6,
+    "decorators": [
+      {
+        "type": "shores_between:interior_layered",
+        "layer_thickness": 1,
+        "layers": [
+          {
+            "Name": "shores_between:leviathan_keratin"
+          },
+          {
+            "Name": "shores_between:rotting_flesh_block"
+          }
+        ],
+        "probability": 1.0
+      },
+      {
+        "type": "shores_between:interior_scatter",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:infested_flesh_block"
+          }
+        },
+        "interior_only": true,
+        "probability": 0.4,
+        "proportion": 0.15,
+        "replaceable": [
+          "shores_between:rotting_flesh_block"
+        ]
+      },
+      {
+        "type": "shores_between:interior_scatter",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:bloated_flesh"
+          }
+        },
+        "interior_only": true,
+        "probability": 0.4,
+        "proportion": 0.15,
+        "replaceable": [
+          "shores_between:rotting_flesh_block"
+        ]
+      },
+      {
+        "type": "shores_between:interior_scatter",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:leviathan_bone"
+          }
+        },
+        "interior_only": true,
+        "probability": 0.4,
+        "proportion": 0.1,
+        "replaceable": [
+          "shores_between:rotting_flesh_block"
+        ]
+      },
+      {
+        "type": "shores_between:buried_blob",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:rotting_flesh_block"
+          }
+        },
+        "probability": 0.1
+      },
+      {
+        "type": "shores_between:undercut",
+        "probability": 0.3,
+        "size_multiplier": 0.5
+      }
+    ],
+    "eccentricity": 0.4,
+    "irregularity_amplitude": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.0,
+      "min_inclusive": 0.6
+    },
+    "irregularity_frequency": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.0,
+      "min_inclusive": 0.6
+    },
+    "outcrop": false,
+    "overlaps": 1,
+    "prow": 0.0,
+    "rock_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 10,
+      "min_inclusive": 6
+    },
+    "slab_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "use_slabs": true
+  }
+}

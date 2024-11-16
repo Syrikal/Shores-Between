@@ -1,0 +1,75 @@
+{
+  "type": "shores_between:patch",
+  "config": {
+    "block_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:dead_fish_slab",
+        "Properties": {
+          "type": "double",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "carpet_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:dead_fish_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "center_thickness": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 20.0,
+      "min_inclusive": 10.0
+    },
+    "edge_thickness": 4.0,
+    "noise_provider": {
+      "type": "minecraft:noise_threshold_provider",
+      "default_state": {
+        "Name": "minecraft:black_concrete"
+      },
+      "high_chance": 0.0,
+      "high_states": [],
+      "low_states": [
+        {
+          "Name": "minecraft:white_concrete"
+        }
+      ],
+      "noise": {
+        "amplitudes": [
+          1.0,
+          0.3
+        ],
+        "firstOctave": -4
+      },
+      "scale": 1.0,
+      "seed": 5,
+      "threshold": 0.0
+    },
+    "size_cap": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 12,
+      "min_inclusive": 6
+    },
+    "slab_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:dead_fish_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "slope_length": 4,
+    "sparseness": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 5.0,
+      "min_inclusive": 0.0
+    }
+  }
+}

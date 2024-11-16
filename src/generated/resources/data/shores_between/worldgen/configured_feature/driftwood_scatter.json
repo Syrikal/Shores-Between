@@ -1,0 +1,71 @@
+{
+  "type": "shores_between:patch",
+  "config": {
+    "block_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:oak_slab",
+        "Properties": {
+          "type": "double",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "carpet_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:oak_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "center_thickness": 2.0,
+    "edge_thickness": 2.0,
+    "noise_provider": {
+      "type": "minecraft:noise_threshold_provider",
+      "default_state": {
+        "Name": "minecraft:black_concrete"
+      },
+      "high_chance": 0.0,
+      "high_states": [],
+      "low_states": [
+        {
+          "Name": "minecraft:white_concrete"
+        }
+      ],
+      "noise": {
+        "amplitudes": [
+          1.0,
+          0.3
+        ],
+        "firstOctave": -2
+      },
+      "scale": 1.0,
+      "seed": 55,
+      "threshold": 0.0
+    },
+    "size_cap": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 16,
+      "min_inclusive": 10
+    },
+    "slab_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:oak_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "slope_length": 1,
+    "sparseness": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 16.0,
+      "min_inclusive": 0.0
+    }
+  }
+}

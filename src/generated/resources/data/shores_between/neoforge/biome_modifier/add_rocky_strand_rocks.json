@@ -1,0 +1,16 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:rocky_strand",
+  "features": [
+    "shores_between:small_boulder_placed",
+    "shores_between:more_small_boulders_placed",
+    "shores_between:even_more_small_boulders_placed",
+    "shores_between:large_boulder_placed",
+    "shores_between:more_large_boulders_placed",
+    "shores_between:even_more_large_boulders_placed",
+    "shores_between:corpse_boulder_placed",
+    "shores_between:eerie_boulder_placed",
+    "shores_between:small_outcrop_placed"
+  ],
+  "step": "local_modifications"
+}

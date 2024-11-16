@@ -1,0 +1,16 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:driftwood_beach",
+  "features": [
+    "shores_between:driftwood_log_placed",
+    "shores_between:driftwood_log_on_driftwood_beach_placed",
+    "shores_between:large_mistwood_bush_placed",
+    "shores_between:small_mistwood_bush_placed",
+    "shores_between:seaweed_clump_placed",
+    "shores_between:rare_driftwood_scatter_placed",
+    "shores_between:driftwood_scatter_placed",
+    "shores_between:sparse_driftwood_scatter_placed",
+    "shores_between:driftwood_mat_placed"
+  ],
+  "step": "vegetal_decoration"
+}

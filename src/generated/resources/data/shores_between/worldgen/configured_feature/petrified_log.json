@@ -1,0 +1,34 @@
+{
+  "type": "shores_between:fallen_log",
+  "config": {
+    "buried": {
+      "type": "minecraft:weighted_list",
+      "distribution": [
+        {
+          "data": 1,
+          "weight": 1
+        },
+        {
+          "data": 2,
+          "weight": 5
+        }
+      ]
+    },
+    "length": {
+      "type": "minecraft:clamped_normal",
+      "deviation": 1.5,
+      "max_inclusive": 9,
+      "mean": 6.0,
+      "min_inclusive": 4
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:petrified_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#shores_between:mistwood",
+  "features": [
+    "shores_between:mistwood_small_mistwood_bush_placed",
+    "shores_between:mistwood_large_mistwood_bush_placed",
+    "shores_between:mistwood_moss_placed"
+  ],
+  "step": "vegetal_decoration"
+}

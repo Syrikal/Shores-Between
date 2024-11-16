@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:rock_fields",
+  "features": [
+    "shores_between:driftwood_log_placed",
+    "shores_between:seaweed_clump_placed"
+  ],
+  "step": "vegetal_decoration"
+}

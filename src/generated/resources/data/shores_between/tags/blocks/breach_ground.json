@@ -1,0 +1,18 @@
+{
+  "values": [
+    "minecraft:grass_block",
+    "shores_between:mistwood_moss_block",
+    "shores_between:shingle",
+    "shores_between:grassy_shingle",
+    "shores_between:podzol_shingle",
+    "shores_between:dirt_shingle",
+    "shores_between:pebbles",
+    "shores_between:pale_pebbles",
+    "shores_between:dark_pebbles",
+    "shores_between:tangled_shingle",
+    "shores_between:buried_rusty_scrap",
+    "minecraft:podzol",
+    "minecraft:dirt",
+    "minecraft:coarse_dirt"
+  ]
+}

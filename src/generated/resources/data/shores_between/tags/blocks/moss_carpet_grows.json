@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:grass_block",
+    "shores_between:mistwood_moss_block",
+    "shores_between:overgrown_shale",
+    "shores_between:grassy_shingle",
+    "shores_between:mistwood_log",
+    "shores_between:mistwood_wood",
+    "shores_between:shale"
+  ]
+}

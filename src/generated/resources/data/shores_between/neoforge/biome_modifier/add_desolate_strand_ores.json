@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:desolate_strand",
+  "features": [
+    "shores_between:tangled_shingle_placed",
+    "shores_between:rusty_scrap_placed",
+    "shores_between:saltstone_placed"
+  ],
+  "step": "underground_ores"
+}

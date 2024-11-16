@@ -1,0 +1,93 @@
+{
+  "type": "shores_between:boulder",
+  "config": {
+    "clefts": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 0
+    },
+    "compress_vertical": 0.4,
+    "decorators": [
+      {
+        "type": "shores_between:sides",
+        "blobs": true,
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:chiseled_shale"
+          }
+        },
+        "number_of_patches": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 3,
+          "min_inclusive": 1
+        },
+        "probability": 0.05,
+        "proportion": 0.1
+      },
+      {
+        "type": "shores_between:barnacles",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "shores_between:barnacles"
+          }
+        },
+        "number_of_patches": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 3,
+          "min_inclusive": 1
+        },
+        "patch_radius": {
+          "type": "minecraft:uniform",
+          "max_exclusive": 3.0,
+          "min_inclusive": 1.0
+        },
+        "probability": 0.2
+      }
+    ],
+    "eccentricity": 1.0,
+    "irregularity_amplitude": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.0,
+      "min_inclusive": 0.8
+    },
+    "irregularity_frequency": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.0,
+      "min_inclusive": 0.8
+    },
+    "outcrop": false,
+    "overlaps": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": -4
+    },
+    "prow": 0.0,
+    "rock_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 35,
+      "min_inclusive": 25
+    },
+    "slab_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "use_slabs": true
+  }
+}

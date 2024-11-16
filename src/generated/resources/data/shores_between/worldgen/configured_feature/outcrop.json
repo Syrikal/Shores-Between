@@ -1,0 +1,51 @@
+{
+  "type": "shores_between:boulder",
+  "config": {
+    "clefts": 0,
+    "compress_vertical": 0.6,
+    "decorators": [],
+    "eccentricity": 0.7,
+    "irregularity_amplitude": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.2,
+      "min_inclusive": 0.8
+    },
+    "irregularity_frequency": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.2,
+      "min_inclusive": 0.8
+    },
+    "outcrop": true,
+    "overlaps": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": -6
+    },
+    "prow": 0.4,
+    "rock_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 12,
+      "min_inclusive": 6
+    },
+    "slab_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:shale_slab",
+        "Properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "use_slabs": true
+  }
+}

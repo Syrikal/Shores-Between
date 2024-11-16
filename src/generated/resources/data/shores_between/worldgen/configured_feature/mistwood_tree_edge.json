@@ -1,0 +1,49 @@
+{
+  "type": "shores_between:nbt_tree",
+  "config": {
+    "bonus_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "buttress_height": 0,
+    "buttresses": 0,
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:mistwood_leaves",
+        "Properties": {
+          "distance": "7",
+          "persistent": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "replaceExposedFoundation": true,
+    "tree_locations": [
+      "shores_between:features/nbt_trees/mistwood/mistwood_1",
+      "shores_between:features/nbt_trees/mistwood/mistwood_2",
+      "shores_between:features/nbt_trees/mistwood/mistwood_3",
+      "shores_between:features/nbt_trees/mistwood/mistwood_4",
+      "shores_between:features/nbt_trees/mistwood/mistwood_5"
+    ],
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:mistwood_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "wood_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "shores_between:mistwood_wood",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

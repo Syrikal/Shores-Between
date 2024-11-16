@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "shores_between:block/dirt_shingle",
+    "side": "shores_between:block/podzol_shingle_side",
+    "top": "shores_between:block/podzol_shingle_top"
+  }
+}

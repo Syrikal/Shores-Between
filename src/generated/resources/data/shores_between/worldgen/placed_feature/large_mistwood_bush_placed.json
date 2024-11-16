@@ -1,0 +1,25 @@
+{
+  "feature": "shores_between:large_mistwood_bush",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 2
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "absolute": 90
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

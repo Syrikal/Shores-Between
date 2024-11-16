@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:forsaken_ocean",
+  "features": [
+    "shores_between:small_boulder_placed",
+    "shores_between:large_boulder_placed"
+  ],
+  "step": "local_modifications"
+}
