@@ -38,9 +38,9 @@
       "noise": {
         "amplitudes": [
           1.0,
-          0.3
+          1.0
         ],
-        "firstOctave": -1
+        "firstOctave": -5
       },
       "scale": 1.0,
       "seed": 55,

@@ -17,14 +17,13 @@
       "max_water_depth": 0
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "absolute": 65
-      }
-    },
-    {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "shores_between:height_filter",
+      "max_inclusive": 80,
+      "min_inclusive": 65
     },
     {
       "type": "minecraft:biome"

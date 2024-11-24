@@ -5,6 +5,7 @@ import com.syric.shores_between.registry.SBDimensions;
 import com.syric.shores_between.worldgen.SBBiomeModifiers;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.Mistwood;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.SBNoises;
 import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
 import com.syric.shores_between.worldgen.feature.SBConfiguredFeatures;
 import com.syric.shores_between.worldgen.feature.SBPlacedFeatures;
@@ -47,6 +48,7 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
         RockFields.bootstrapRockFieldsNoise(context);
         Strands.bootstrapStrandNoise(context);
         Mistwood.bootstrapMistwoodNoise(context);
+        SBNoises.bootstrapNoises(context);
     }
 
     private static void bootstrapAllDensity(BootstrapContext<DensityFunction> context) {

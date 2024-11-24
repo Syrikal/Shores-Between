@@ -38,9 +38,9 @@
       "noise": {
         "amplitudes": [
           1.0,
-          0.3
+          1.0
         ],
-        "firstOctave": -2
+        "firstOctave": -4
       },
       "scale": 1.0,
       "seed": 55,
@@ -49,7 +49,7 @@
     "size_cap": {
       "type": "minecraft:uniform",
       "max_inclusive": 16,
-      "min_inclusive": 10
+      "min_inclusive": 8
     },
     "slab_provider": {
       "type": "minecraft:simple_state_provider",

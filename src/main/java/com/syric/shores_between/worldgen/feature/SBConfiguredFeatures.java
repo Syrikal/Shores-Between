@@ -421,7 +421,7 @@ public class SBConfiguredFeatures {
     private static void patches(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         register(context, SEAWEED_CLUMP, SBFeatures.PATCH.get(), new PatchConfiguration(
                 new NoiseThresholdProvider(0,
-                        new NormalNoise.NoiseParameters(-3, (List<Double>) List.of(1.0, 0.3)),
+                        new NormalNoise.NoiseParameters(-2, (List<Double>) List.of(1.0, 0.7, 0.5)),
                         1F,
                         0F,
                         0,
@@ -432,16 +432,16 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(SBBlocks.SEAWEED_SLAB.get().defaultBlockState().setValue(SlabBlock.TYPE, SlabType.DOUBLE)),
                 BlockStateProvider.simple(SBBlocks.SEAWEED_SLAB.get()),
                 BlockStateProvider.simple(SBBlocks.SEAWEED_CARPET.get()),
-                ConstantInt.of(3),
-                UniformInt.of(6, 9),
+                ConstantInt.of(5),
+                UniformInt.of(3, 6),
                 UniformFloat.of(10, 14),
                 ConstantFloat.of(2),
-                UniformFloat.of(0, 2)
+                UniformFloat.of(0, 3)
         ));
 
         register(context, DEAD_FISH_PILE, SBFeatures.PATCH.get(), new PatchConfiguration(
                 new NoiseThresholdProvider(5,
-                        new NormalNoise.NoiseParameters(-4, (List<Double>) List.of(1.0, 0.3)),
+                        new NormalNoise.NoiseParameters(-3, (List<Double>) List.of(1.0, 0.7, 0.5)),
                         1F,
                         0F,
                         0,
@@ -452,8 +452,8 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(SBBlocks.DEAD_FISH_SLAB.get().defaultBlockState().setValue(SlabBlock.TYPE, SlabType.DOUBLE)),
                 BlockStateProvider.simple(SBBlocks.DEAD_FISH_SLAB.get()),
                 BlockStateProvider.simple(SBBlocks.DEAD_FISH_SLAB.get()),
-                ConstantInt.of(4),
-                UniformInt.of(6, 12),
+                ConstantInt.of(5),
+                UniformInt.of(3, 6),
                 UniformFloat.of(10, 20),
                 ConstantFloat.of(4),
                 UniformFloat.of(0, 5)
@@ -461,7 +461,7 @@ public class SBConfiguredFeatures {
 
         register(context, DRIFTWOOD_MAT, SBFeatures.PATCH.get(), new PatchConfiguration(
                 new NoiseThresholdProvider(12,
-                        new NormalNoise.NoiseParameters(-3, (List<Double>) List.of(1.0, 0.3)),
+                        new NormalNoise.NoiseParameters(-3, (List<Double>) List.of(1.0, 1.0)),
                         1F,
                         0F,
                         0,
@@ -473,7 +473,7 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.OAK_SLAB),
                 BlockStateProvider.simple(Blocks.OAK_SLAB),
                 ConstantInt.of(2),
-                UniformInt.of(6, 12),
+                UniformInt.of(4, 8),
                 ConstantFloat.of(8),
                 ConstantFloat.of(2),
                 UniformFloat.of(0, 5)
@@ -481,7 +481,7 @@ public class SBConfiguredFeatures {
 
         register(context, DRIFTWOOD_SCATTER, SBFeatures.PATCH.get(), new PatchConfiguration(
                 new NoiseThresholdProvider(55,
-                        new NormalNoise.NoiseParameters(-2, (List<Double>) List.of(1.0, 0.3)),
+                        new NormalNoise.NoiseParameters(-4, (List<Double>) List.of(1.0, 1.0)),
                         1F,
                         0F,
                         0,
@@ -493,7 +493,7 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.OAK_SLAB),
                 BlockStateProvider.simple(Blocks.OAK_SLAB),
                 ConstantInt.of(1),
-                UniformInt.of(10, 16),
+                UniformInt.of(8, 16),
                 ConstantFloat.of(2),
                 ConstantFloat.of(2),
                 UniformFloat.of(0, 16)
@@ -501,7 +501,7 @@ public class SBConfiguredFeatures {
 
         register(context, SPARSE_DRIFTWOOD_SCATTER, SBFeatures.PATCH.get(), new PatchConfiguration(
                 new NoiseThresholdProvider(55,
-                        new NormalNoise.NoiseParameters(-1, (List<Double>) List.of(1.0, 0.3)),
+                        new NormalNoise.NoiseParameters(-5, (List<Double>) List.of(1.0, 1.0)),
                         1F,
                         0F,
                         0,

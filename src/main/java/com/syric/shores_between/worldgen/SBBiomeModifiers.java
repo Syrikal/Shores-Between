@@ -17,8 +17,6 @@ import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-import static net.minecraft.data.worldgen.biome.OverworldBiomes.ocean;
-
 public class SBBiomeModifiers {
 
     public static final ResourceKey<BiomeModifier> ADD_TANGLED_SHINGLE = registerKey("add_tangled_shingle");
@@ -457,8 +455,8 @@ public class SBBiomeModifiers {
         context.register(ADD_MISTWOOD_INTERIOR_TREES, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(SBBiomes.MISTWOOD_BIOME)),
                 HolderSet.direct(
-                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_TREE_INTERIOR_PLACED_KEY),
-                        placedFeatures.getOrThrow(SBPlacedFeatures.TALL_MISTWOOD_TREE_PLACED_KEY)
+                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_STANDARD_TREE_INTERIOR_PLACED_KEY),
+                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_TALL_TREE_PLACED_KEY)
                 ),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
@@ -466,8 +464,8 @@ public class SBBiomeModifiers {
         context.register(ADD_MISTWOOD_EDGE_TREES, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME)),
                 HolderSet.direct(
-                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_EDGE_TREE_PLACED_KEY),
-                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_TREE_EDGE_PLACED_KEY)
+                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_FLUFFY_TREE_PLACED_KEY),
+                        placedFeatures.getOrThrow(SBPlacedFeatures.MISTWOOD_STANDARD_TREE_EDGE_PLACED_KEY)
                 ),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));

@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 5
+      "chance": 45
     },
     {
       "type": "minecraft:in_square"
@@ -14,13 +14,12 @@
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR_WG"
+      "heightmap": "OCEAN_FLOOR"
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "absolute": 60
-      }
+      "type": "shores_between:height_filter",
+      "max_inclusive": 64,
+      "min_inclusive": 63
     },
     {
       "type": "minecraft:biome"

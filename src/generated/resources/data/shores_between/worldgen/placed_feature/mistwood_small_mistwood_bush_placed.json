@@ -12,11 +12,11 @@
           },
           {
             "data": 1,
-            "weight": 2
+            "weight": 4
           },
           {
             "data": 2,
-            "weight": 2
+            "weight": 3
           }
         ]
       }
@@ -29,20 +29,13 @@
       "max_water_depth": 0
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "absolute": 70
-        },
-        "min_inclusive": {
-          "absolute": 64
-        }
-      }
-    },
-    {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "shores_between:height_filter",
+      "max_inclusive": 75,
+      "min_inclusive": 64
     },
     {
       "type": "minecraft:biome"

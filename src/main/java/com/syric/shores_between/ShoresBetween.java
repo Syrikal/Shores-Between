@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.syric.shores_between.event.ShoresBetweenClientEvents;
 import com.syric.shores_between.registry.*;
 import com.syric.shores_between.worldgen.feature.SBFeatures;
+import com.syric.shores_between.worldgen.feature.SBPlacementModifierTypes;
 import com.syric.shores_between.worldgen.feature.rocks.boulder_decoration.BoulderDecoratorType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,6 +51,7 @@ public class ShoresBetween
         SBBiomeSources.register(modEventBus);
         SBFeatures.register(modEventBus);
         BoulderDecoratorType.register(modEventBus);
+        SBPlacementModifierTypes.register(modEventBus);
 
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us

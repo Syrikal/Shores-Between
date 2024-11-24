@@ -1,11 +1,7 @@
 package com.syric.shores_between.registry;
 
-import com.syric.shores_between.datagen.SBWorldGenProvider;
 import com.syric.shores_between.worldgen.dimension.BreachBiomeSource;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.DensityUtil;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.Mistwood;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.*;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -358,6 +354,56 @@ public class SBDimensions {
                                                                 SurfaceRules.not(SurfaceRules.verticalGradient("shores_between:driftwood_beach_dirt", VerticalAnchor.absolute(63), VerticalAnchor.absolute(73))),
                                                                 SurfaceRules.state(Blocks.COARSE_DIRT.defaultBlockState())
                                                                 //TODO Replace with dirt shingle
+                                                        )
+                                                )
+                                        ),
+                                        //Barren Strand
+                                        SurfaceRules.ifTrue(
+                                                SurfaceRules.isBiome(SBBiomes.BARREN_STRAND_BIOME),
+                                                SurfaceRules.sequence(
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_NOISE, -0.025, 0.025),
+                                                                SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_NOISE, -0.05, 0.05),
+                                                                SurfaceRules.ifTrue(
+                                                                        SurfaceRules.verticalGradient("shores_between:barren_strand_pale_streaks", VerticalAnchor.absolute(50), VerticalAnchor.absolute(100)),
+                                                                        SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                                )
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_NOISE, 0.4, 0.45),
+                                                                SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_NOISE, 0.38, 0.47),
+                                                                SurfaceRules.ifTrue(
+                                                                        SurfaceRules.verticalGradient("shores_between:barren_strand_pale_streaks", VerticalAnchor.absolute(50), VerticalAnchor.absolute(100)),
+                                                                        SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                                )
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_NOISE, -0.4, -0.45),
+                                                                SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_NOISE, -0.38, -0.47),
+                                                                SurfaceRules.ifTrue(
+                                                                        SurfaceRules.verticalGradient("shores_between:barren_strand_pale_streaks", VerticalAnchor.absolute(50), VerticalAnchor.absolute(100)),
+                                                                        SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                                )
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_2_NOISE, -0.025, 0.025),
+                                                                SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                        ),
+                                                        SurfaceRules.ifTrue(
+                                                                SurfaceRules.noiseCondition(SBNoises.BARREN_PALE_STREAK_2_NOISE, -0.05, 0.05),
+                                                                SurfaceRules.ifTrue(
+                                                                        SurfaceRules.verticalGradient("shores_between:barren_strand_pale_streaks", VerticalAnchor.absolute(50), VerticalAnchor.absolute(100)),
+                                                                        SurfaceRules.state(SBBlocks.PALE_PEBBLES.get().defaultBlockState())
+                                                                )
                                                         )
                                                 )
                                         )

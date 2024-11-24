@@ -4,6 +4,7 @@ import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.registry.SBBlocks;
 import com.syric.shores_between.registry.SBTags;
 import com.syric.shores_between.worldgen.SBOrePlacement;
+import com.syric.shores_between.worldgen.feature.placement_util.HeightFilter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -16,11 +17,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.*;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
-import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
@@ -37,10 +37,10 @@ public class SBPlacedFeatures {
     public static ResourceKey<PlacedFeature> MISTWOOD_FOREST_SMALL_BUSH_PLACED_KEY = registerKey("mistwood_small_mistwood_bush_placed");
     public static ResourceKey<PlacedFeature> MISTWOOD_FOREST_LARGE_BUSH_PLACED_KEY = registerKey("mistwood_large_mistwood_bush_placed");
 
-    public static ResourceKey<PlacedFeature> MISTWOOD_TREE_EDGE_PLACED_KEY = registerKey("mistwood_tree_edge_placed");
-    public static ResourceKey<PlacedFeature> MISTWOOD_TREE_INTERIOR_PLACED_KEY = registerKey("mistwood_tree_interior_placed");
-    public static ResourceKey<PlacedFeature> TALL_MISTWOOD_TREE_PLACED_KEY = registerKey("tall_mistwood_tree_placed");
-    public static ResourceKey<PlacedFeature> MISTWOOD_EDGE_TREE_PLACED_KEY = registerKey("mistwood_edge_tree_placed");
+    public static ResourceKey<PlacedFeature> MISTWOOD_STANDARD_TREE_EDGE_PLACED_KEY = registerKey("mistwood_standard_tree_edge_placed");
+    public static ResourceKey<PlacedFeature> MISTWOOD_STANDARD_TREE_INTERIOR_PLACED_KEY = registerKey("mistwood_standard_tree_interior_placed");
+    public static ResourceKey<PlacedFeature> MISTWOOD_TALL_TREE_PLACED_KEY = registerKey("mistwood_tall_tree_placed");
+    public static ResourceKey<PlacedFeature> MISTWOOD_FLUFFY_TREE_PLACED_KEY = registerKey("mistwood_fluffy_tree_placed");
 
     public static ResourceKey<PlacedFeature> MISTWOOD_LOG_PLACED_KEY = registerKey("mistwood_log_placed");
     public static ResourceKey<PlacedFeature> DRIFTWOOD_LOG_PLACED_KEY = registerKey("driftwood_log_placed");
@@ -112,8 +112,8 @@ public class SBPlacedFeatures {
         register(context, SMALL_BOULDER_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.SMALL_BOULDER),
                 List.of(RarityFilter.onAverageOnceEvery(25),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -122,8 +122,8 @@ public class SBPlacedFeatures {
         register(context, MORE_SMALL_BOULDERS_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.SMALL_BOULDER),
                 List.of(RarityFilter.onAverageOnceEvery(15),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -133,8 +133,8 @@ public class SBPlacedFeatures {
         register(context, EVEN_MORE_SMALL_BOULDERS_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.SMALL_BOULDER),
                 List.of(RarityFilter.onAverageOnceEvery(4),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -143,8 +143,8 @@ public class SBPlacedFeatures {
         register(context, LARGE_BOULDER_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.LARGE_BOULDER),
                 List.of(RarityFilter.onAverageOnceEvery(35),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -153,8 +153,8 @@ public class SBPlacedFeatures {
         register(context, MORE_LARGE_BOULDERS_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.LARGE_BOULDER),
                 List.of(RarityFilter.onAverageOnceEvery(25),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -163,19 +163,19 @@ public class SBPlacedFeatures {
         register(context, EVEN_MORE_LARGE_BOULDERS_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.LARGE_BOULDER),
                 List.of(RarityFilter.onAverageOnceEvery(5),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
         );
 
         register(context, MOSSY_BOULDER_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MOSSY_BOULDER),
-                List.of(RarityFilter.onAverageOnceEvery(8),
+                List.of(RarityFilter.onAverageOnceEvery(6),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(1),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(75)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(64, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -184,30 +184,30 @@ public class SBPlacedFeatures {
         register(context, SMALL_OUTCROP_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.OUTCROP),
                 List.of(RarityFilter.onAverageOnceEvery(20),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(50, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
         );
 
         register(context, MOSSY_OUTCROP_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MOSSY_OUTCROP),
-                List.of(RarityFilter.onAverageOnceEvery(8),
+                List.of(RarityFilter.onAverageOnceEvery(2),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.absolute(75)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(65, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
         );
 
         register(context, RARE_MOSSY_OUTCROPS_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MOSSY_OUTCROP),
-                List.of(RarityFilter.onAverageOnceEvery(30),
+                List.of(RarityFilter.onAverageOnceEvery(15),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(66), VerticalAnchor.absolute(75)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(66, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -217,19 +217,19 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(40),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(2),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(60), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(60, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
         );
 
         register(context, CORPSE_BOULDER_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.CORPSE_BOULDER),
-                List.of(RarityFilter.onAverageOnceEvery(100),
+                List.of(RarityFilter.onAverageOnceEvery(80),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(3),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(60), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(60, 70),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -242,19 +242,19 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(30),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(64)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 64),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
         );
 
         register(context, DEAD_FISH_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.DEAD_FISH_PILE),
-                List.of(RarityFilter.onAverageOnceEvery(5),
+                List.of(RarityFilter.onAverageOnceEvery(45),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        PlacementUtils.HEIGHTMAP_TOP_SOLID,
-                        HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(60))),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 64),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -264,8 +264,8 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(15),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(63))),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 63),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -275,8 +275,8 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(10),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(65)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 65),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -286,8 +286,8 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(35),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(64)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 64),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -297,8 +297,8 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(5),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(64)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 64),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -312,6 +312,7 @@ public class SBPlacedFeatures {
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
@@ -320,8 +321,8 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(15),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(62), VerticalAnchor.absolute(64)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 64),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -331,8 +332,8 @@ public class SBPlacedFeatures {
                 List.of(CountPlacement.of(BiasedToBottomInt.of(1, 4)),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(62), VerticalAnchor.absolute(65)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 65),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -341,8 +342,8 @@ public class SBPlacedFeatures {
         register(context, PETRIFIED_LOG_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.PETRIFIED_LOG),
                 List.of(CountPlacement.of(BiasedToBottomInt.of(1, 6)),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(67)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 67),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 )
@@ -351,45 +352,40 @@ public class SBPlacedFeatures {
         register(context, BURIED_PETRIFIED_LOG_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.BURIED_PETRIFIED_LOG),
                 List.of(RarityFilter.onAverageOnceEvery(4),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(67)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 67),
                         BiomeFilter.biome()
                 )
         );
     }
 
     private static void trees(BootstrapContext<PlacedFeature> context, HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures) {
-        register(context, MISTWOOD_TREE_EDGE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TREE_EDGE),
+        register(context, MISTWOOD_STANDARD_TREE_EDGE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TREE_EDGE),
                 VegetationPlacements.treePlacement(CountPlacement.of(UniformInt.of(3, 5)), SBBlocks.MISTWOOD_SAPLING.get()));
 
-//        register(context, MISTWOOD_TREE_INTERIOR_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TREE_INTERIOR),
-//                VegetationPlacements.treePlacement(CountPlacement.of(UniformInt.of(2, 5)), SBBlocks.MISTWOOD_SAPLING.get()));
-
-//        List<PlacementModifier> tall_tree_placement = VegetationPlacements.treePlacement(CountPlacement.of(UniformInt.of(5, 7)), SBBlocks.MISTWOOD_TALL_SAPLING.get());
-//        tall_tree_placement.add(HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(65))));
-        register(context, TALL_MISTWOOD_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TALL_TREE),
+        register(context, MISTWOOD_TALL_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TALL_TREE),
                 List.of(CountPlacement.of(UniformInt.of(5, 7)),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(65))),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(65, 80),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(SBBlocks.MISTWOOD_TALL_SAPLING.get().defaultBlockState(), BlockPos.ZERO)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
 
-        register(context, MISTWOOD_TREE_INTERIOR_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TREE_INTERIOR),
+        register(context, MISTWOOD_STANDARD_TREE_INTERIOR_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_TREE_INTERIOR),
                 List.of(CountPlacement.of(UniformInt.of(2, 5)),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(65))),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(65, 80),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(SBBlocks.MISTWOOD_TALL_SAPLING.get().defaultBlockState(), BlockPos.ZERO)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
 
-        register(context, MISTWOOD_EDGE_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_EDGE_TREE),
+        register(context, MISTWOOD_FLUFFY_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_EDGE_TREE),
                 VegetationPlacements.treePlacement(CountPlacement.of(UniformInt.of(15, 25)), SBBlocks.MISTWOOD_EDGE_SAPLING.get()));
     }
 
@@ -398,6 +394,7 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(4),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
+                        HeightFilter.of(64, 70),
                         BiomeFilter.biome()));
 
         register(context, MISTWOOD_FERNS_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_FERN_PATCH),
@@ -406,11 +403,11 @@ public class SBPlacedFeatures {
                 VegetationPlacements.worldSurfaceSquaredWithCount(8));
 
         register(context, MISTWOOD_FOREST_SMALL_BUSH_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.SMALL_MISTWOOD_BUSH),
-                List.of(CountPlacement.of(new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder().add(ConstantInt.ZERO, 1).add(ConstantInt.of(1), 2).add(ConstantInt.of(2), 2).build())),
+                List.of(CountPlacement.of(new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder().add(ConstantInt.ZERO, 1).add(ConstantInt.of(1), 4).add(ConstantInt.of(2), 3).build())),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(64, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
@@ -419,8 +416,8 @@ public class SBPlacedFeatures {
                 List.of(RarityFilter.onAverageOnceEvery(2),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(64, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
@@ -428,34 +425,30 @@ public class SBPlacedFeatures {
 
     private static void foliage(BootstrapContext<PlacedFeature> context, HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures) {
         register(context, SMALL_MISTWOOD_BUSH_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.SMALL_MISTWOOD_BUSH),
-                List.of(RarityFilter.onAverageOnceEvery(15),
+                List.of(RarityFilter.onAverageOnceEvery(10),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.absolute(70)),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(65, 75),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
-//        register(context, LARGE_MISTWOOD_BUSH_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.LARGE_MISTWOOD_BUSH),
-//                List.of(RarityFilter.onAverageOnceEvery(30),
-//                        InSquarePlacement.spread(),
-//                        SurfaceWaterDepthFilter.forMaxDepth(0),
-//                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.absolute(70)),
-//                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-//                        BiomeFilter.biome(),
-//                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
-//                ));
+
 
         register(context, LARGE_MISTWOOD_BUSH_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.LARGE_MISTWOOD_BUSH),
-                List.of(RarityFilter.onAverageOnceEvery(2),
+                List.of(RarityFilter.onAverageOnceEvery(20),
                         InSquarePlacement.spread(),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
-//                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.absolute(70)),
-                        HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(90))),
-                        BiomeFilter.biome()
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(65, 75),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
     }
 
+    private static PlacementModifier placeOnSurface() {
+        return SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, 0, 0);
+    }
 
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

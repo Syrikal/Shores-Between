@@ -13,6 +13,11 @@
       "heightmap": "MOTION_BLOCKING"
     },
     {
+      "type": "shores_between:height_filter",
+      "max_inclusive": 70,
+      "min_inclusive": 64
+    },
+    {
       "type": "minecraft:biome"
     }
   ]
