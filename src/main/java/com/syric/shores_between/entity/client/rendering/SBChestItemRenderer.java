@@ -1,4 +1,4 @@
-package com.syric.shores_between.entity.rendering;
+package com.syric.shores_between.entity.client.rendering;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.syric.shores_between.entity.SBChestBlockEntity;

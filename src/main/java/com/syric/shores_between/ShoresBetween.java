@@ -1,12 +1,14 @@
 package com.syric.shores_between;
 
 import com.mojang.logging.LogUtils;
+import com.syric.shores_between.entity.client.rendering.MosasaurusRenderer;
 import com.syric.shores_between.event.ShoresBetweenClientEvents;
 import com.syric.shores_between.registry.*;
 import com.syric.shores_between.worldgen.feature.SBFeatures;
 import com.syric.shores_between.worldgen.feature.SBPlacementModifierTypes;
 import com.syric.shores_between.worldgen.feature.rocks.boulder_decoration.BoulderDecoratorType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -52,6 +54,7 @@ public class ShoresBetween
         SBFeatures.register(modEventBus);
         BoulderDecoratorType.register(modEventBus);
         SBPlacementModifierTypes.register(modEventBus);
+        SBEntities.register(modEventBus);
 
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
@@ -86,6 +89,7 @@ public class ShoresBetween
             // Some client setup code
             Sheets.addWoodType(SBWoodTypes.DRIFTWOOD);
             Sheets.addWoodType(SBWoodTypes.MISTWOOD);
+            EntityRenderers.register(SBEntities.MOSASAURUS.get(), MosasaurusRenderer::new);
         }
     }
 }

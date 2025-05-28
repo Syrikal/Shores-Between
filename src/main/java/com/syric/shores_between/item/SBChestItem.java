@@ -1,6 +1,6 @@
 package com.syric.shores_between.item;
 
-import com.syric.shores_between.entity.rendering.SBChestItemRenderer;
+import com.syric.shores_between.entity.client.rendering.SBChestItemRenderer;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

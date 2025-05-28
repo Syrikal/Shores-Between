@@ -1,4 +1,4 @@
-package com.syric.shores_between.entity.rendering;
+package com.syric.shores_between.entity.client.rendering;
 
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.block.SBChestBlock;

@@ -186,5 +186,7 @@
   "item.shores_between.message_in_a_bottle": "Message In A Bottle",
   "item.shores_between.totem_of_warning": "Totem Of Warning",
   "item.shores_between.totem_of_revealing": "Totem Of Revealing",
-  "item.shores_between.strand_armor_trim_smithing_template": "Strand Armor Trim Smithing Template"
+  "item.shores_between.strand_armor_trim_smithing_template": "Strand Armor Trim Smithing Template",
+
+  "entity.mccourse.mosasaurus": "Mosasaurus"
 }
