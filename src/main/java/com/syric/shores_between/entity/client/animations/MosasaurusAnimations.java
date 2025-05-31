@@ -115,4 +115,11 @@ public class MosasaurusAnimations {
             ))
             .build();
 
+        public static final AnimationDefinition ANIM_MOSA_SINK = AnimationDefinition.Builder.withLength(1.0F)
+                .addAnimation("MainBody", new AnimationChannel(AnimationChannel.Targets.POSITION,
+                        new Keyframe(10F, KeyframeAnimations.posVec(0F, -1F, 0F), AnimationChannel.Interpolations.LINEAR))).build();
+        public static final AnimationDefinition ANIM_MOSA_SINK_2 = AnimationDefinition.Builder.withLength(1.0F)
+                .addAnimation("MainBody", new AnimationChannel(AnimationChannel.Targets.POSITION,
+                        new Keyframe(10F, KeyframeAnimations.posVec(0F, -3F, 0F), AnimationChannel.Interpolations.LINEAR))).build();
+
 }

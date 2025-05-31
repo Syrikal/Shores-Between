@@ -6,20 +6,19 @@ import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.entity.client.animations.MosasaurusAnimations;
 import com.syric.shores_between.entity.custom.MosasaurusEntity;
 import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.neoforged.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 public class MosasaurusModel<T extends MosasaurusEntity> extends HierarchicalModel<T> {
 
 
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ShoresBetween.MODID, "mosasaurus"), "main");
+    private final ModelPart root;
     private final ModelPart MainBody;
     private final ModelPart Neck;
     private final ModelPart Head;
@@ -33,6 +32,7 @@ public class MosasaurusModel<T extends MosasaurusEntity> extends HierarchicalMod
     private final ModelPart LeftPectoral;
 
     public MosasaurusModel(ModelPart root) {
+        this.root = root;
         this.MainBody = root.getChild("MainBody");
         this.Neck = this.MainBody.getChild("Neck");
         this.Head = this.Neck.getChild("Head");
@@ -121,19 +121,20 @@ public class MosasaurusModel<T extends MosasaurusEntity> extends HierarchicalMod
     @Override
     public void setupAnim(MosasaurusEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-
-        this.animateWalk(MosasaurusAnimations.ANIM_MOSA_BACK, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.animate(entity.idle, MosasaurusAnimations.ANIM_MOSA_BELLY, ageInTicks, 1f);
+        this.animate(entity.belly, MosasaurusAnimations.ANIM_MOSA_BELLY, ageInTicks, 2f);
+        this.animate(entity.side, MosasaurusAnimations.ANIM_MOSA_SIDE, ageInTicks, 2f);
+        this.animate(entity.back, MosasaurusAnimations.ANIM_MOSA_BACK, ageInTicks, 2f);
+        this.animate(entity.sink, MosasaurusAnimations.ANIM_MOSA_SINK, ageInTicks, 1f);
+        this.animate(entity.sink2, MosasaurusAnimations.ANIM_MOSA_SINK_2, ageInTicks, 1f);
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         MainBody.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
-    public ModelPart root() {
-        return MainBody;
+    public @NotNull ModelPart root() {
+        return root;
     }
-
 }

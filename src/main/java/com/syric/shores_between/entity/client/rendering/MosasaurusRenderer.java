@@ -11,12 +11,22 @@ import net.minecraft.resources.ResourceLocation;
 
 public class MosasaurusRenderer extends MobRenderer<MosasaurusEntity, MosasaurusModel<MosasaurusEntity>> {
     public MosasaurusRenderer(EntityRendererProvider.Context context) {
-        super(context, new MosasaurusModel<>(context.bakeLayer(MosasaurusModel.LAYER_LOCATION)), 2F);
+        super(context, new MosasaurusModel<>(context.bakeLayer(MosasaurusModel.LAYER_LOCATION)), 0F);
     }
 
     @Override
     public ResourceLocation getTextureLocation(MosasaurusEntity entity) {
-        return new ResourceLocation(ShoresBetween.MODID, "textures/entity/beached_corpse/mosasaurus/corpse.png");
+        boolean bloated = entity.isBloated();
+        boolean skeletal = (double) entity.getCollectionProgress() / entity.getMaxCollection() > 0.5;
+
+        if (skeletal) {
+            return new ResourceLocation(ShoresBetween.MODID, "textures/entity/beached_corpse/mosasaurus/skeleton.png");
+        } else if (bloated) {
+            return new ResourceLocation(ShoresBetween.MODID, "textures/entity/beached_corpse/mosasaurus/bloated.png");
+        } else {
+            return new ResourceLocation(ShoresBetween.MODID, "textures/entity/beached_corpse/mosasaurus/corpse.png");
+        }
+
     }
 
     @Override

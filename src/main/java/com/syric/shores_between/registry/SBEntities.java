@@ -15,7 +15,7 @@ public class SBEntities {
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, ShoresBetween.MODID);
 
     public static final Supplier<EntityType<MosasaurusEntity>> MOSASAURUS = ENTITY_TYPES.register("mosasaurus", () -> EntityType.Builder.of(MosasaurusEntity::new, MobCategory.CREATURE)
-            .sized(3F, 2F).build("mosasaurus"));
+            .sized(1.8F, 1.9F).build("mosasaurus"));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);
