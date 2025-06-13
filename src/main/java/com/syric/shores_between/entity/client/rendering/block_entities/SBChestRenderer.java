@@ -1,8 +1,8 @@
-package com.syric.shores_between.entity.client.rendering;
+package com.syric.shores_between.entity.client.rendering.block_entities;
 
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.block.SBChestBlock;
-import com.syric.shores_between.entity.SBChestBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBChestBlockEntity;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;

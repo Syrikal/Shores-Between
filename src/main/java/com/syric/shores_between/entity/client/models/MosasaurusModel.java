@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.entity.client.animations.MosasaurusAnimations;
-import com.syric.shores_between.entity.custom.MosasaurusEntity;
+import com.syric.shores_between.entity.beached_corpses.MosasaurusEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -124,8 +124,9 @@ public class MosasaurusModel<T extends MosasaurusEntity> extends HierarchicalMod
         this.animate(entity.belly, MosasaurusAnimations.ANIM_MOSA_BELLY, ageInTicks, 2f);
         this.animate(entity.side, MosasaurusAnimations.ANIM_MOSA_SIDE, ageInTicks, 2f);
         this.animate(entity.back, MosasaurusAnimations.ANIM_MOSA_BACK, ageInTicks, 2f);
-        this.animate(entity.sink, MosasaurusAnimations.ANIM_MOSA_SINK, ageInTicks, 1f);
-        this.animate(entity.sink2, MosasaurusAnimations.ANIM_MOSA_SINK_2, ageInTicks, 1f);
+        this.animate(entity.bellysink, MosasaurusAnimations.ANIM_MOSA_SINK, ageInTicks, 1f);
+        this.animate(entity.sidesink, MosasaurusAnimations.ANIM_MOSA_SINK_2, ageInTicks, 1f);
+        this.animate(entity.backsink, MosasaurusAnimations.ANIM_MOSA_SINK, ageInTicks, 1f);
     }
 
     @Override

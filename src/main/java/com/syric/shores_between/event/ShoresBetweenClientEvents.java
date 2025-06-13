@@ -1,7 +1,7 @@
 package com.syric.shores_between.event;
 
 import com.syric.shores_between.ShoresBetween;
-import com.syric.shores_between.entity.client.rendering.SBChestRenderer;
+import com.syric.shores_between.entity.client.rendering.block_entities.SBChestRenderer;
 import com.syric.shores_between.registry.SBBlockEntities;
 import com.syric.shores_between.registry.SBBlocks;
 import net.minecraft.client.color.block.BlockColors;

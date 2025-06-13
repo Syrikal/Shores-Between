@@ -1,4 +1,4 @@
-package com.syric.shores_between.entity;
+package com.syric.shores_between.entity.block_entities;
 
 import com.syric.shores_between.registry.SBBlockEntities;
 import net.minecraft.MethodsReturnNonnullByDefault;

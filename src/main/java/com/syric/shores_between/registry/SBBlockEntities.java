@@ -1,9 +1,9 @@
 package com.syric.shores_between.registry;
 
 import com.mojang.datafixers.types.Type;
-import com.syric.shores_between.entity.SBChestBlockEntity;
-import com.syric.shores_between.entity.SBHangingSignBlockEntity;
-import com.syric.shores_between.entity.SBSignBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBChestBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBHangingSignBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBSignBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;

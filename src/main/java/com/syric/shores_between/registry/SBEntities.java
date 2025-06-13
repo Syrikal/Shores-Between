@@ -1,7 +1,7 @@
 package com.syric.shores_between.registry;
 
 import com.syric.shores_between.ShoresBetween;
-import com.syric.shores_between.entity.custom.MosasaurusEntity;
+import com.syric.shores_between.entity.beached_corpses.MosasaurusEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

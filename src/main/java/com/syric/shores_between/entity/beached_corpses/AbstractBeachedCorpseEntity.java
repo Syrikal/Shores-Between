@@ -1,11 +1,13 @@
-package com.syric.shores_between.entity.custom;
+package com.syric.shores_between.entity.beached_corpses;
 
-import com.syric.shores_between.registry.SBEntities;
+import com.syric.shores_between.util.WeightedTable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -23,44 +25,43 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MosasaurusEntity extends Animal {
+public class AbstractBeachedCorpseEntity extends Animal {
 
     /**
      * To do:
-     * - Make AbstractBeachedCorpse and then have various subclasses
-     * - Don't extend Animal?
-     * - Don't take damage DONE
-     * - Not pushable DONE
+     * - Make AbstractBeachedCorpse and then have various subclasses DONE
      * - Pushable only very slowly?
-     * - Don't animate when pushed/taking damage DONE
-     * - Solid hitbox DONE
-     * - Better hitbox
      * - Right-click behavior: produce items, turn into skeleton then disappear BUGGY - 2X SPEED
-     * - Add sounds to right-click behavior
+     * - Add sounds to right-click behavior TEST
      * - Disable frustum check
-     * - Multiple animation states DONE
-     * - Natural generation
-     * - Natural generation randomizes pose and decay state DONE
-     * - Bloated texture
-     * - If it spawns as a skeleton, don't let the ribcage float DONE
      */
 
     public final AnimationState belly = new AnimationState();
     public final AnimationState side = new AnimationState();
     public final AnimationState back = new AnimationState();
-    public final AnimationState sink = new AnimationState();
-    public final AnimationState sink2 = new AnimationState();
 
-    private static final EntityDataAccessor<Integer> COLLECTION_PROGRESS = SynchedEntityData.defineId(MosasaurusEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> BLOATED = SynchedEntityData.defineId(MosasaurusEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> POSE = SynchedEntityData.defineId(MosasaurusEntity.class, EntityDataSerializers.INT);
-    private static final int MAX_COLLECTION = 10;
+    public final AnimationState bellysink = new AnimationState();
+    public final AnimationState sidesink = new AnimationState();
+    public final AnimationState backsink = new AnimationState();
+
+    /**
+     * 'Collection Progress' is how far along in collection it is.
+     * 'Max Collection' is how many times it can be collected from total.
+     * When progress is over half max, the corpse is skeletal.
+     * 'State' is whether it's dead, bloated, or skeletal (0, 1, 2 respectively).
+     * 'Pose' is whether it's on its belly, side or back (0, 1, 2 respectively).
+     */
+
+    private static final EntityDataAccessor<Integer> COLLECTION_PROGRESS = SynchedEntityData.defineId(AbstractBeachedCorpseEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> MAX_COLLECTION = SynchedEntityData.defineId(AbstractBeachedCorpseEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(AbstractBeachedCorpseEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> POSE = SynchedEntityData.defineId(AbstractBeachedCorpseEntity.class, EntityDataSerializers.INT);
 
     private boolean unposed = true;
     private boolean unsunk = true;
 
 
-    public MosasaurusEntity(EntityType<? extends Animal> entityType, Level level) {
+    public AbstractBeachedCorpseEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -78,7 +79,56 @@ public class MosasaurusEntity extends Animal {
 
     @Override
     public @Nullable AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob otherParent) {
-        return SBEntities.MOSASAURUS.get().create(level);
+        return null;
+    }
+
+    public int getRandomState() {
+        WeightedTable<Integer> table = new WeightedTable<Integer>()
+                .add(0, 1)
+                .add(1, 2)
+                .add(2, 5);
+        return table.getRandom(this.random);
+    }
+
+    public int getRandomPose(int state) {
+        //If bloated (state == 1) back is more likely
+        WeightedTable<Integer> table = new WeightedTable<Integer>();
+        if (state == 1) {
+            table.add(0, 1).add(1,2).add(2,6);
+        } else {
+            table.add(0,1).add(1, 2).add(2, 2);
+        }
+        return table.getRandom(this.random);
+    }
+
+    public int getRandomProgress(int state) {
+        int half = this.getMaxCollection() / 2;
+        //Skeleton
+        if (state == 2) {
+            return this.random.nextInt(half, getMaxCollection());
+        } else {
+            return this.random.nextInt(half);
+        }
+    }
+
+    public int getRandomMaxCollection() {
+        return 10;
+    }
+
+    private ItemStack getItem(Player player, Vec3 vec, InteractionHand hand) {
+        //Skeleton
+        if (this.getState() == 2) {
+            return new ItemStack(Items.BONE.asItem());
+//            return new ItemStack(SBItems.WHALEBONE.asItem());
+        }
+        //Corpse or bloated
+        else {
+            return new ItemStack(Items.ROTTEN_FLESH.asItem());
+        }
+    }
+
+    private SoundEvent getSound(ItemStack droppedItem) {
+        return SoundEvents.BONE_BLOCK_BREAK;
     }
 
     private void pose() {
@@ -96,11 +146,17 @@ public class MosasaurusEntity extends Animal {
                 this.pose();
                 unposed = false;
             }
-            if (unsunk && (double) this.entityData.get(COLLECTION_PROGRESS) / MAX_COLLECTION > 0.5) {
-                if (this.entityData.get(POSE) == 1) {
-                    this.sink2.start(this.tickCount);
-                } else {
-                    this.sink.start(this.tickCount);
+            if (unsunk && this.getState() == 2) {
+                switch (this.entityData.get(POSE)) {
+                    case 0:
+                        this.bellysink.start(this.tickCount);
+                        break;
+                    case 1:
+                        this.sidesink.start(this.tickCount);
+                        break;
+                    case 2:
+                        this.backsink.start(this.tickCount);
+                        break;
                 }
                 unsunk = false;
             }
@@ -110,19 +166,12 @@ public class MosasaurusEntity extends Animal {
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         boolean hand_empty = player.getItemInHand(hand).isEmpty();
-        if (hand_empty && this.getCollectionProgress() < this.getMaxCollection() && player.mayBuild() && !this.level().isClientSide()) {
-            if (this.getCollectionProgress() < getMaxCollection() / 2) {
-                ItemStack flesh = new ItemStack(Items.ROTTEN_FLESH.asItem());
-                this.spawnAtLocation(flesh);
-            } else {
-                ItemStack bone = new ItemStack(Items.BONE.asItem());
-                this.spawnAtLocation(bone);
-            }
-            this.entityData.set(COLLECTION_PROGRESS, this.getCollectionProgress() + 1);
-            if (this.getCollectionProgress() == this.getMaxCollection()) {
-                this.remove(RemovalReason.KILLED);
-            }
-            return InteractionResult.SUCCESS;
+        if (hand_empty && player.mayBuild() && !this.level().isClientSide()) {
+            ItemStack dropStack = this.getItem(player, vec, hand);
+            this.spawnAtLocation(dropStack);
+            this.playSound(getSound(dropStack));
+            setCollectionProgress(this.getCollectionProgress() + 1);
+            return InteractionResult.SUCCESS_NO_ITEM_USED;
         } else {
             return super.interactAt(player, vec, hand);
         }
@@ -164,7 +213,8 @@ public class MosasaurusEntity extends Animal {
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(COLLECTION_PROGRESS, 0);
-        builder.define(BLOATED, false);
+        builder.define(MAX_COLLECTION, 0);
+        builder.define(STATE, 0);
         builder.define(POSE, 0);
     }
 
@@ -172,7 +222,8 @@ public class MosasaurusEntity extends Animal {
     public void addAdditionalSaveData(@NotNull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("CollectionProgress", this.entityData.get(COLLECTION_PROGRESS));
-        compound.putBoolean("Bloated", this.entityData.get(BLOATED));
+        compound.putInt("MaxCollection", this.entityData.get(MAX_COLLECTION));
+        compound.putInt("State", this.entityData.get(STATE));
         compound.putInt("Pose", this.entityData.get(POSE));
     }
 
@@ -180,21 +231,20 @@ public class MosasaurusEntity extends Animal {
     public void readAdditionalSaveData(@NotNull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.entityData.set(COLLECTION_PROGRESS, compound.getInt("CollectionProgress"));
-        this.entityData.set(BLOATED, compound.getBoolean("Bloated"));
+        this.entityData.set(MAX_COLLECTION, compound.getInt("MaxCollection"));
+        this.entityData.set(STATE, compound.getInt("State"));
         this.entityData.set(POSE, compound.getInt("Pose"));
     }
 
     @Override
     public @NotNull SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        this.entityData.set(COLLECTION_PROGRESS, this.getRandom().nextInt(10));
-        this.entityData.set(BLOATED, false);
-        this.entityData.set(POSE, this.getRandom().nextInt(3));
+        int state = getRandomState();
+        this.entityData.set(STATE, state);
+        this.entityData.set(COLLECTION_PROGRESS, this.getRandomProgress(state));
+        this.entityData.set(POSE, this.getRandomPose(state));
+        this.entityData.set(MAX_COLLECTION, this.getRandomMaxCollection());
 
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-    }
-
-    public boolean isBloated() {
-        return this.entityData.get(BLOATED);
     }
 
     public int getCollectionProgress() {
@@ -202,7 +252,21 @@ public class MosasaurusEntity extends Animal {
     }
 
     public int getMaxCollection() {
-        return MAX_COLLECTION;
+        return this.entityData.get(MAX_COLLECTION);
+    }
+
+    public int getState() {
+        return this.entityData.get(STATE);
+    }
+
+    private void setCollectionProgress(int progress) {
+        this.entityData.set(COLLECTION_PROGRESS, progress);
+        if (progress > (getMaxCollection() / 2)) {
+            this.entityData.set(STATE, 2);
+        }
+        if (progress >= getMaxCollection()) {
+            this.remove(RemovalReason.KILLED);
+        }
     }
 
     @Override

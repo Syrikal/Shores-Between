@@ -1,6 +1,6 @@
 package com.syric.shores_between.block;
 
-import com.syric.shores_between.entity.SBSignBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBSignBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;

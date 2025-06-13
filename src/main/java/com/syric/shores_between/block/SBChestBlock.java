@@ -1,6 +1,6 @@
 package com.syric.shores_between.block;
 
-import com.syric.shores_between.entity.SBChestBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBChestBlockEntity;
 import com.syric.shores_between.registry.SBBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.ChestBlock;

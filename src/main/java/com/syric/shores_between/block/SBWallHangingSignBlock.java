@@ -1,6 +1,6 @@
 package com.syric.shores_between.block;
 
-import com.syric.shores_between.entity.SBHangingSignBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBHangingSignBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;

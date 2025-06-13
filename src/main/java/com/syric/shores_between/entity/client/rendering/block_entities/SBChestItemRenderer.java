@@ -1,7 +1,7 @@
-package com.syric.shores_between.entity.client.rendering;
+package com.syric.shores_between.entity.client.rendering.block_entities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.syric.shores_between.entity.SBChestBlockEntity;
+import com.syric.shores_between.entity.block_entities.SBChestBlockEntity;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
