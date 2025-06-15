@@ -3,6 +3,7 @@ package com.syric.shores_between.worldgen.feature;
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.registry.SBBlocks;
 import com.syric.shores_between.registry.SBTags;
+import com.syric.shores_between.worldgen.feature.beached_corpse.BeachedCorpseConfiguration;
 import com.syric.shores_between.worldgen.feature.bush.BushConfiguration;
 import com.syric.shores_between.worldgen.feature.log.FallenLogConfiguration;
 import com.syric.shores_between.worldgen.feature.patch.PatchConfiguration;
@@ -91,6 +92,9 @@ public class SBConfiguredFeatures {
     public static ResourceKey<ConfiguredFeature<?, ?>> BURIED_PETRIFIED_LOG = registerKey("buried_petrified_log");
 
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> BEACHED_CORPSE = registerKey("beached_corpse");
+
+
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 
         ores(context);
@@ -106,6 +110,8 @@ public class SBConfiguredFeatures {
         patches(context);
 
         logs(context);
+
+        corpses(context);
 
     }
 
@@ -544,6 +550,10 @@ public class SBConfiguredFeatures {
                 ClampedNormalInt.of(6, 1.5F, 4, 9),
                 ConstantInt.of(2))
         );
+    }
+
+    private static void corpses(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        register(context, BEACHED_CORPSE, SBFeatures.BEACHED_CORPSE.get(), new BeachedCorpseConfiguration(true));
     }
 
 

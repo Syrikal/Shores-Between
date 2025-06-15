@@ -144,6 +144,17 @@ public class SBBlockTagProvider extends BlockTagsProvider {
                         Blocks.PODZOL,
                         Blocks.DIRT,
                         Blocks.COARSE_DIRT);
+        this.tag(SBTags.Blocks.SHINGLE)
+                .add(SBBlocks.SHINGLE.get(),
+                        SBBlocks.GRASSY_SHINGLE.get(),
+                        SBBlocks.PODZOL_SHINGLE.get(),
+                        SBBlocks.DIRT_SHINGLE.get(),
+                        SBBlocks.TANGLED_SHINGLE.get(),
+                        SBBlocks.BURIED_RUSTY_SCRAP.get());
+        this.tag(SBTags.Blocks.PEBBLES)
+                .add(SBBlocks.PEBBLES.get(),
+                        SBBlocks.PALE_PEBBLES.get(),
+                        SBBlocks.DARK_PEBBLES.get());
 
         //Neoforge block tags
         this.tag(Tags.Blocks.BARRELS_WOODEN)

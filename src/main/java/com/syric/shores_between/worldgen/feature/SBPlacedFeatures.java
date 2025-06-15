@@ -71,6 +71,9 @@ public class SBPlacedFeatures {
     public static ResourceKey<PlacedFeature> SMALL_MISTWOOD_BUSH_PLACED_KEY = registerKey("small_mistwood_bush_placed");
     public static ResourceKey<PlacedFeature> LARGE_MISTWOOD_BUSH_PLACED_KEY = registerKey("large_mistwood_bush_placed");
 
+
+    public static ResourceKey<PlacedFeature> BEACHED_CORPSE_PLACED_KEY = registerKey("beached_corpse_placed");
+
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -87,6 +90,8 @@ public class SBPlacedFeatures {
         rocks(context, configuredFeatures);
 
         foliage(context, configuredFeatures);
+
+        corpses(context, configuredFeatures);
 
     }
 
@@ -444,6 +449,20 @@ public class SBPlacedFeatures {
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
                 ));
+    }
+
+    private static void corpses(BootstrapContext<PlacedFeature> context, HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures) {
+
+        register(context, BEACHED_CORPSE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.BEACHED_CORPSE),
+                List.of(RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        SurfaceWaterDepthFilter.forMaxDepth(0),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(63, 64),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
+                ));
+
     }
 
     private static PlacementModifier placeOnSurface() {

@@ -21,6 +21,8 @@ public class SBTags {
         public static final TagKey<Block> MOSS_CARPET_GROWS_ON = tag("moss_carpet_grows");
         public static final TagKey<Block> FALLEN_LOGS_REPLACE = tag("fallen_logs_replace");
         public static final TagKey<Block> BREACH_GROUND = tag("breach_ground");
+        public static final TagKey<Block> SHINGLE = tag("shingle");
+        public static final TagKey<Block> PEBBLES = tag("pebbles");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(ShoresBetween.MODID, name));

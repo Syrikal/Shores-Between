@@ -5,21 +5,19 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 
-public class MosasaurusEntity extends AbstractBeachedCorpseEntity {
+public class Mosasaurus extends AbstractBeachedCorpse {
 
     /**
      * To do:
-     * - Better hitbox
-     * - Natural generation
      * - Bloated texture
      */
 
-    public MosasaurusEntity(EntityType<? extends Animal> entityType, Level level) {
+    public Mosasaurus(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return AbstractBeachedCorpseEntity.createAttributes();
+        return AbstractBeachedCorpse.createAttributes();
     }
 
     @Override

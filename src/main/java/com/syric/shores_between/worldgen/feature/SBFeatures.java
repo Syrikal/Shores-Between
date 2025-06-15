@@ -1,6 +1,8 @@
 package com.syric.shores_between.worldgen.feature;
 
 import com.syric.shores_between.ShoresBetween;
+import com.syric.shores_between.worldgen.feature.beached_corpse.BeachedCorpseConfiguration;
+import com.syric.shores_between.worldgen.feature.beached_corpse.BeachedCorpseFeature;
 import com.syric.shores_between.worldgen.feature.bush.BushConfiguration;
 import com.syric.shores_between.worldgen.feature.bush.BushFeature;
 import com.syric.shores_between.worldgen.feature.log.FallenLogConfiguration;
@@ -26,6 +28,7 @@ public class SBFeatures {
     public static final DeferredHolder<Feature<?>, Feature<PatchConfiguration>> PATCH = FEATURES.register("patch", () -> new PatchFeature(PatchConfiguration.CODEC.stable()));
     public static final DeferredHolder<Feature<?>, Feature<FallenLogConfiguration>> FALLEN_LOG = FEATURES.register("fallen_log", () -> new FallenLogFeature(FallenLogConfiguration.CODEC.stable()));
     public static final DeferredHolder<Feature<?>, Feature<BushConfiguration>> BUSH = FEATURES.register("bush", () -> new BushFeature(BushConfiguration.CODEC.stable()));
+    public static final DeferredHolder<Feature<?>, Feature<BeachedCorpseConfiguration>> BEACHED_CORPSE = FEATURES.register("beached_corpse", () -> new BeachedCorpseFeature(BeachedCorpseConfiguration.CODEC.stable()));
 
 
     public static void register(IEventBus bus) {

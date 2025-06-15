@@ -22,7 +22,7 @@ public class WeightedTable<T> {
     }
 
     public T getRandom(RandomSource randomSource) {
-        if (table.isEmpty() || total_weight == 0) {
+        if (table.isEmpty() || total_weight <= 0) {
             ShoresBetween.LOGGER.error("WeightedTable was empty");
             return null;
         }

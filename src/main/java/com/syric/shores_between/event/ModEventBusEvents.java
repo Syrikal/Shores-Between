@@ -2,7 +2,7 @@ package com.syric.shores_between.event;
 
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.entity.client.models.MosasaurusModel;
-import com.syric.shores_between.entity.beached_corpses.MosasaurusEntity;
+import com.syric.shores_between.entity.beached_corpses.Mosasaurus;
 import com.syric.shores_between.registry.SBEntities;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,7 +19,7 @@ public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(SBEntities.MOSASAURUS.get(), MosasaurusEntity.createAttributes().build());
+        event.put(SBEntities.MOSASAURUS.get(), Mosasaurus.createAttributes().build());
     }
 
 }

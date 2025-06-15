@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.entity.client.animations.MosasaurusAnimations;
-import com.syric.shores_between.entity.beached_corpses.MosasaurusEntity;
+import com.syric.shores_between.entity.beached_corpses.Mosasaurus;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,7 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class MosasaurusModel<T extends MosasaurusEntity> extends HierarchicalModel<T> {
+public class MosasaurusModel<T extends Mosasaurus> extends HierarchicalModel<T> {
 
 
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
@@ -119,7 +119,7 @@ public class MosasaurusModel<T extends MosasaurusEntity> extends HierarchicalMod
     }
 
     @Override
-    public void setupAnim(MosasaurusEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(Mosasaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.animate(entity.belly, MosasaurusAnimations.ANIM_MOSA_BELLY, ageInTicks, 2f);
         this.animate(entity.side, MosasaurusAnimations.ANIM_MOSA_SIDE, ageInTicks, 2f);
