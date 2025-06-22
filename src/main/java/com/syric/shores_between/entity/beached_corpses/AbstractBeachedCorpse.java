@@ -1,8 +1,10 @@
 package com.syric.shores_between.entity.beached_corpses;
 
+import com.github.alexthe666.iceandfire.entity.util.IMultipartEntity;
 import com.syric.shores_between.ShoresBetween;
 import com.syric.shores_between.util.WeightedTable;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +28,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,12 +67,15 @@ public class AbstractBeachedCorpse extends Animal {
     private boolean unsunk = true;
     private boolean buried = false;
 
-//    private final AbstractBeachedCorpsePart[] parts;
+    private final AbstractBeachedCorpsePart[] parts;
 
 
     public AbstractBeachedCorpse(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+        ShoresBetween.LOGGER.debug("Creating an AbstractBeachedCorpse");
+        this.parts = this.getPartsList();
         this.noCulling = true;
+        this.setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1); // Forge: Fix MC-158205: Make sure part ids are successors of parent mob id
     }
 
     private void pose() {
@@ -106,7 +113,7 @@ public class AbstractBeachedCorpse extends Animal {
             List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(0.2F, -0.01F, 0.2F), EntitySelector.pushableBy(this));
             if (!list.isEmpty()) {
                 for (Entity entity : list) {
-                    if (!(entity instanceof ItemEntity)) {
+                    if (!(entity instanceof ItemEntity) && !(entity instanceof AbstractBeachedCorpsePart)) {
                         this.push(entity);
                     }
                 }
@@ -121,6 +128,11 @@ public class AbstractBeachedCorpse extends Animal {
 //                }
 //            }
         }
+    }
+
+    @Override
+    public void aiStep() {
+        this.poseParts();
     }
 
     //region Default Entity Stuff
@@ -184,9 +196,17 @@ public class AbstractBeachedCorpse extends Animal {
     //region Looting
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
-        ShoresBetween.LOGGER.debug("Interacting with beached corpse on the " + (this.level().isClientSide ? "client" : "server") + " side");
+//        ShoresBetween.LOGGER.debug("Interacting with beached corpse on the " + (this.level().isClientSide ? "client" : "server") + " side");
         boolean hand_empty = player.getItemInHand(hand).isEmpty();
         if (hand_empty && player.mayBuild()) {
+
+            ShoresBetween.LOGGER.debug("Interacted");
+            this.poseParts();
+            for (int i = 0; i < this.getPartsList().length; i++) {
+                AbstractBeachedCorpsePart part = this.getPartsList()[i];
+                ShoresBetween.LOGGER.debug("%s position: (%s, %s, %s)".formatted(part.name, part.getX(), part.getY(), part.getZ()));
+            }
+
             ItemStack dropStack = this.getItem(player, vec, hand);
             this.playSound(getSound(dropStack));
             if (!this.level().isClientSide) {
@@ -293,6 +313,10 @@ public class AbstractBeachedCorpse extends Animal {
         return this.entityData.get(STATE);
     }
 
+    public int getCorpsePose() {
+        return this.entityData.get(POSE);
+    }
+
     private void setCollectionProgress(int progress) {
         this.entityData.set(COLLECTION_PROGRESS, progress);
         if (progress >= (getMaxCollection() / 2)) {
@@ -370,6 +394,10 @@ public class AbstractBeachedCorpse extends Animal {
         }
         return super.hurt(source, amount);
     }
+
+    @Override
+    public void checkDespawn() {
+    }
     //endregion
 
     //region Placement
@@ -400,7 +428,28 @@ public class AbstractBeachedCorpse extends Animal {
     }
 
     //region Parts Stuff
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+        for (int i = 0; i < this.parts.length; i++) // Forge: Fix MC-158205: Set part ids to successors of parent mob id
+            this.parts[i].setId(id + i + 1);
+    }
 
+    public AbstractBeachedCorpsePart[] getPartsList() {
+        return new AbstractBeachedCorpsePart[]{};
+    }
+
+    public void poseParts() {}
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public net.neoforged.neoforge.entity.PartEntity<?>[] getParts() {
+        return this.parts;
+    }
 
     //endregion
 

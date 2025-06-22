@@ -7,11 +7,9 @@ import com.syric.shores_between.registry.SBBlocks;
 import com.syric.shores_between.registry.SBEntities;
 import com.syric.shores_between.util.WeightedTable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.util.RandomSource;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.phys.AABB;
@@ -127,11 +125,17 @@ public class BeachedCorpseFeature extends Feature<BeachedCorpseConfiguration> {
             }
         }
 
-//        context.level().getLevel().addFreshEntity(entity);
         entity.setPos(origin.getCenter().add(0, -0.5, 0));
         entity.setYRot(facing_angle);
         entity.setBuried(bury);
         entity.finalizeSpawn(context.level().getLevel(), context.level().getCurrentDifficultyAt(context.origin()), MobSpawnType.CHUNK_GENERATION, null);
+
+        MinecraftServer server = context.level().getLevel().getServer();
+        Runnable spawnCorpse = () -> {
+            context.level().getLevel().addFreshEntity(entity);
+        };
+        server.submit(spawnCorpse);
+
 
         return true;
     }

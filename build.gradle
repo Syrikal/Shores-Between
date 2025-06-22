@@ -110,6 +110,7 @@ dependencies {
 
     compileOnly("curse.maven:the-undergarden-379849:5381985")
     compileOnly("curse.maven:ice-and-fire-dragons-264231:5633453")
+    compileOnly("curse.maven:alexs-mobs-426558:5698791")
     implementation("curse.maven:jei-238222:5466528")
     implementation("curse.maven:journeymap-32274:5457883")
 
