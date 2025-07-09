@@ -55,6 +55,7 @@ public class ShoresBetween
         BoulderDecoratorType.register(modEventBus);
         SBPlacementModifierTypes.register(modEventBus);
         SBEntities.register(modEventBus);
+        SBStructures.register(modEventBus);
 
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us

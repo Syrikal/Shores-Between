@@ -38,13 +38,7 @@ displayName="${mod_name}" #mandatory
 #logoFile="examplemod.png" #optional
 
 # A text field displayed in the mod UI
-credits='''Thanks to:
-- Kaupenjoe and Turtywurty, for the YouTube tutorials
-- Quek, for assistance and for making The Undergarden, which was used as a reference point
-- CorgiTaco, whose Oh The Trees You'll Grow library was used to develop the Breach's tree features
-- the Vanilla Plus team, for the Mistwood Moss Carpet model
-- the Modded Minecraft and NeoForge Discord servers, for miscellaneous assistance
-- my friends, for assistance with complicated math''' #optional
+credits="${credits}"
 
 # A text field displayed in the mod UI
 authors="${mod_authors}" #optional

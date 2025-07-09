@@ -1,4 +1,4 @@
-// 1.20.6	2024-10-20T12:57:48.1127728	Tags for minecraft:worldgen/biome mod id shores_between
+// 1.20.6	2025-07-04T16:47:09.4993962	Tags for minecraft:worldgen/biome mod id shores_between
 a61ecfc21bd63234ea8c8437a83ed3a7fdcd69e4 data/shores_between/tags/worldgen/biome/has_corpse_boulders.json
 f5aaa7e2988c9357bad52961873387843e798361 data/shores_between/tags/worldgen/biome/has_dead_fish.json
 38edd24076df5e4b12131c46d59f239bfad0ec16 data/shores_between/tags/worldgen/biome/has_driftwood_logs.json
@@ -12,6 +12,7 @@ f467104e6f6402abf808cc00bd29be61fb62adc7 data/shores_between/tags/worldgen/biome
 51f964f65cc6c9991cfd4400f841bf3df9b1fb18 data/shores_between/tags/worldgen/biome/has_small_boulders.json
 7b60ffead44afd313d2df06986a6ceb139696fd1 data/shores_between/tags/worldgen/biome/has_small_outcrops.json
 bfbac0ff591b15823aa0600be937453eb3dd0db2 data/shores_between/tags/worldgen/biome/has_sparse_bushes.json
+4a35a40c7e1889f5c07011545b1657c392d25027 data/shores_between/tags/worldgen/biome/has_structure/has_leviathan_bones.json
 e497d1ab8d45bde11a65d7f01b04fcd2d44b7601 data/shores_between/tags/worldgen/biome/has_tangled_shingle.json
 20d60035aa6d905cdd27f350c605b63f04692950 data/shores_between/tags/worldgen/biome/is_breach.json
 a1d325a02f4e2dfd8d10a87de2b0fc7c387eb5c3 data/shores_between/tags/worldgen/biome/mistwood.json

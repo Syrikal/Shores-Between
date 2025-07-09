@@ -44,6 +44,7 @@ public class SBTags {
         public static final TagKey<Biome> IS_BREACH = tag("is_breach");
         public static final TagKey<Biome> MISTWOOD = tag("mistwood");
 
+        //Features
         public static final TagKey<Biome> HAS_TANGLED_SHINGLE = tag("has_tangled_shingle");
         public static final TagKey<Biome> HAS_RUSTY_SCRAP = tag("has_rusty_scrap");
 
@@ -63,6 +64,9 @@ public class SBTags {
         public static final TagKey<Biome> HAS_RARE_MOSSY_OUTCROPS = tag("has_rare_mossy_outcrops");
         public static final TagKey<Biome> HAS_EERIE_BOULDERS = tag("has_eerie_boulders");
         public static final TagKey<Biome> HAS_CORPSE_BOULDERS = tag("has_corpse_boulders");
+
+        //Structures
+        public static final TagKey<Biome> HAS_LEVIATHAN_BONES = tag("has_structure/has_leviathan_bones");
 
 
         private static TagKey<Biome> tag(String name) {

@@ -136,5 +136,8 @@ public class SBBiomeTagProvider extends BiomeTagsProvider {
         this.tag(SBTags.Biomes.HAS_SPARSE_BUSHES)
                 .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_LEVIATHAN_BONES)
+                .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key());
     }
 }
