@@ -71,6 +71,9 @@ public class SBPlacedFeatures {
     public static ResourceKey<PlacedFeature> SMALL_MISTWOOD_BUSH_PLACED_KEY = registerKey("small_mistwood_bush_placed");
     public static ResourceKey<PlacedFeature> LARGE_MISTWOOD_BUSH_PLACED_KEY = registerKey("large_mistwood_bush_placed");
 
+    public static ResourceKey<PlacedFeature> PETRIFIED_TREE_PLACED_KEY = registerKey("petrified_tree_placed");
+    public static ResourceKey<PlacedFeature> SPARSE_PETRIFIED_TREE_PLACED_KEY = registerKey("sparse_petrified_tree_placed");
+
 
     public static ResourceKey<PlacedFeature> BEACHED_CORPSE_PLACED_KEY = registerKey("beached_corpse_placed");
 
@@ -392,6 +395,26 @@ public class SBPlacedFeatures {
 
         register(context, MISTWOOD_FLUFFY_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MISTWOOD_EDGE_TREE),
                 VegetationPlacements.treePlacement(CountPlacement.of(UniformInt.of(15, 25)), SBBlocks.MISTWOOD_EDGE_SAPLING.get()));
+
+        register(context, PETRIFIED_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.PETRIFIED_TREE),
+                List.of(CountPlacement.of(UniformInt.of(4, 8)),
+                        InSquarePlacement.spread(),
+                        SurfaceWaterDepthFilter.forMaxDepth(2),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(61, 64),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.SHINGLE))
+                ));
+
+        register(context, SPARSE_PETRIFIED_TREE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.PETRIFIED_TREE),
+                List.of(RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        SurfaceWaterDepthFilter.forMaxDepth(2),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        HeightFilter.of(65, 70),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.SHINGLE))
+                ));
     }
 
     private static void mistwoodFoliage(BootstrapContext<PlacedFeature> context, HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures) {

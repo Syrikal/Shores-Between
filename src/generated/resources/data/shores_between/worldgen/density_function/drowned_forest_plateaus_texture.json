@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:spline",
+    "spline": {
+      "coordinate": {
+        "type": "minecraft:cache_2d",
+        "argument": {
+          "type": "minecraft:noise",
+          "noise": "shores_between:drowned_forest_plateaus",
+          "xz_scale": 1.0,
+          "y_scale": 1.0
+        }
+      },
+      "points": [
+        {
+          "derivative": -0.7,
+          "location": -1.0,
+          "value": 1.0
+        },
+        {
+          "derivative": 0.0,
+          "location": 0.0,
+          "value": -1.0
+        },
+        {
+          "derivative": 0.7,
+          "location": 1.0,
+          "value": 1.0
+        }
+      ]
+    }
+  }
+}

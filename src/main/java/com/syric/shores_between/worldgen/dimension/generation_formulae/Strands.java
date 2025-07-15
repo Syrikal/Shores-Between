@@ -171,12 +171,13 @@ public class Strands {
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
 
         /* Strands Final is a 3D density function that decides which blocks to place as part of strand generation.
-         * It is the sum of two things:
+         * It is the sum of three things:
          * 1) StrandsDensity, for the baseline
          * 2) A spline based on the Y value, to put the terrain at the appropriate height based on its 2D density.
+         * 3) The sinking function for Drowned Forests
          * */
 
-        DensityFunction strandsFinal = DensityFunctions.cacheOnce(DensityFunctions.add(
+        DensityFunction strandsFinal = DensityUtil.applyAll(DensityFunctions::add,
                 new DensityFunctions.HolderHolder(strandsDensity),
                 DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(NoiseRouterData.Y)))
                         .addPoint(33, 1, -0.04F)
@@ -189,10 +190,11 @@ public class Strands {
                         .addPoint(69, -0.07F, -0.05F)
                         .addPoint(70, -0.15F, -0.15F)
                         .addPoint(71,-0.3F,-0.3F)
-                        .build())
-        ));
+                        .build()),
+                new DensityFunctions.HolderHolder(functions.getOrThrow(DrownedForest.DROWNED_FOREST_SINKING))
+        );
 
-        return strandsFinal;
+        return DensityFunctions.cacheOnce(strandsFinal);
 
     }
 

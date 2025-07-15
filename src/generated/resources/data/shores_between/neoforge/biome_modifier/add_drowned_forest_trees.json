@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:drowned_forest",
+  "features": "shores_between:petrified_tree_placed",
+  "step": "vegetal_decoration"
+}

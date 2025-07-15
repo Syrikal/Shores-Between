@@ -156,7 +156,8 @@ public class SBBlocks {
     //Petrified set
     public static final DeferredBlock<Block> PETRIFIED_LOG = registerWithItem("petrified_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_ANDESITE)
-                    .mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_LIGHT_GRAY : MapColor.TERRACOTTA_BROWN)));
+                    .mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_LIGHT_GRAY : MapColor.TERRACOTTA_BROWN)
+                    .sound(SoundType.BASALT)));
     public static final DeferredBlock<Block> PETRIFIED_WOOD = registerWithItem("petrified_wood",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_LOG.get())
                     .mapColor(MapColor.TERRACOTTA_BROWN)));

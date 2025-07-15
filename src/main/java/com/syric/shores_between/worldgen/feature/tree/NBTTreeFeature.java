@@ -2,6 +2,7 @@ package com.syric.shores_between.worldgen.feature.tree;
 
 import com.mojang.serialization.Codec;
 import com.syric.shores_between.registry.SBBlocks;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -10,10 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -37,8 +35,11 @@ public class NBTTreeFeature extends Feature<NBTTreeConfiguration> {
         StructureTemplateManager structureTemplateManager = level.getLevel().getServer().getStructureManager();
         BlockPos tree_origin = context.origin();
         Rotation rotation = Rotation.getRandom(randomSource);
+        Mirror mirror = Util.getRandom(Mirror.values(), randomSource);
+
 
         StructurePlaceSettings placeSettings = new StructurePlaceSettings().setRotation(rotation);
+        placeSettings = placeSettings.setMirror(mirror);
         NBTTreeConfiguration config = context.config();
 
         ResourceLocation tree = config.treeLocations().get(randomSource.nextInt(config.treeLocations().size()));

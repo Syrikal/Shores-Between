@@ -3,10 +3,7 @@ package com.syric.shores_between.datagen;
 import com.syric.shores_between.registry.SBBiomes;
 import com.syric.shores_between.registry.SBDimensions;
 import com.syric.shores_between.worldgen.SBBiomeModifiers;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.Mistwood;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.RockFields;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.SBNoises;
-import com.syric.shores_between.worldgen.dimension.generation_formulae.Strands;
+import com.syric.shores_between.worldgen.dimension.generation_formulae.*;
 import com.syric.shores_between.worldgen.feature.SBConfiguredFeatures;
 import com.syric.shores_between.worldgen.feature.SBPlacedFeatures;
 import net.minecraft.core.HolderLookup;
@@ -46,6 +43,7 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
     private static void bootstrapAllNoise(BootstrapContext<NormalNoise.NoiseParameters> context) {
         SBDimensions.bootstrapBiomeNoise(context);
         RockFields.bootstrapRockFieldsNoise(context);
+        DrownedForest.bootstrapDrownedForestNoise(context);
         Strands.bootstrapStrandNoise(context);
         Mistwood.bootstrapMistwoodNoise(context);
         SBNoises.bootstrapNoises(context);
@@ -54,6 +52,7 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
     private static void bootstrapAllDensity(BootstrapContext<DensityFunction> context) {
         List<DensityFunction> biomeDensityFunctions = SBDimensions.bootstrapBiomeDensity(context);
         RockFields.bootstrapRockFieldsDensity(context, biomeDensityFunctions);
+        DrownedForest.bootstrapDrownedForestDensity(context, biomeDensityFunctions);
         Mistwood.bootstrapMistwoodDensity(context, biomeDensityFunctions);
         Strands.bootstrapStrandDensity(context);
     }

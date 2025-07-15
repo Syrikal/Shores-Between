@@ -258,13 +258,51 @@ public class SBConfiguredFeatures {
                 new TwoLayersFeatureSize(2, 0, 2)
         ).build());
 
-        register(context, PETRIFIED_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(Blocks.STONE),
-                new FancyTrunkPlacer(4, 2, 2),
+        register(context, PETRIFIED_TREE, SBFeatures.NBT_TREE.get(), new NBTTreeConfiguration(
+                List.of(
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_1"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_2"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_3"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_3"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_3"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_4"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_5"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_6"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_7"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_8"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_9"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_10"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_11"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_12"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_12"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_13"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_14"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_15"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_16"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_16"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_17"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_17"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_17"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_18"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_18"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/nbt_trees/petrified/petrified_tree_18")
+                ),
+                UniformInt.of(1, 3),
+                BlockStateProvider.simple(SBBlocks.PETRIFIED_LOG.get()),
                 BlockStateProvider.simple(Blocks.AIR),
-                new BlobFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), 0),
-                new TwoLayersFeatureSize(1, 0, 2)
-        ).build());
+                BlockStateProvider.simple(SBBlocks.PETRIFIED_WOOD.get()),
+                true,
+                ConstantInt.of(0),
+                ConstantInt.of(0)
+        ));
     }
 
     private static void rocks(BootstrapContext<ConfiguredFeature<?, ?>> context) {

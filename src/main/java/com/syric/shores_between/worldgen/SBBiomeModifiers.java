@@ -32,6 +32,7 @@ public class SBBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_DROWNED_FOREST_ROCKS = registerKey("add_drowned_forest_rocks");
     public static final ResourceKey<BiomeModifier> ADD_DROWNED_FOREST_ORES = registerKey("add_drowned_forest_ores");
     public static final ResourceKey<BiomeModifier> ADD_DROWNED_FOREST_PLANTS = registerKey("add_drowned_forest_plants");
+    public static final ResourceKey<BiomeModifier> ADD_DROWNED_FOREST_TREES = registerKey("add_drowned_forest_trees");
     public static final ResourceKey<BiomeModifier> ADD_DROWNED_FOREST_MISC = registerKey("add_drowned_forest_misc");
 
     //Barren Strand
@@ -196,6 +197,14 @@ public class SBBiomeModifiers {
                         placedFeatures.getOrThrow(SBPlacedFeatures.DRIFTWOOD_LOG_PLACED_KEY),
                         placedFeatures.getOrThrow(SBPlacedFeatures.PETRIFIED_LOG_PLACED_KEY),
                         placedFeatures.getOrThrow(SBPlacedFeatures.BURIED_PETRIFIED_LOG_PLACED_KEY)
+                ),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+
+        context.register(ADD_DROWNED_FOREST_TREES, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME)),
+                HolderSet.direct(
+                        placedFeatures.getOrThrow(SBPlacedFeatures.PETRIFIED_TREE_PLACED_KEY)
                 ),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
