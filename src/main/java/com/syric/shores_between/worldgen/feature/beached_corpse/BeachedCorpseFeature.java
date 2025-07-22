@@ -40,6 +40,7 @@ public class BeachedCorpseFeature extends Feature<BeachedCorpseConfiguration> {
             ShoresBetween.LOGGER.debug("Failed to place beached corpse");
             return false;
         }
+        entity.setPos(origin.getCenter().add(0, -0.5, 0));
 
         //Should face between 60 and 180 degrees away from 'directly towards water'.
         /**
@@ -75,6 +76,11 @@ public class BeachedCorpseFeature extends Feature<BeachedCorpseConfiguration> {
             }
         }
 
+        //If water direction is still 0, 0, 0 (rare but possible!) add a little wiggle to it
+        if (water_direction.length() == 0) {
+            water_direction = new Vec3(context.random().nextDouble() - 0.5, 0, context.random().nextDouble() - 0.5);
+        }
+
         //Add an angle between pi/3 and 5pi/3
         //if it's got no water around (strange but possible) randomize it completely.
         Vec3 facing_direction;
@@ -104,7 +110,6 @@ public class BeachedCorpseFeature extends Feature<BeachedCorpseConfiguration> {
         boolean bury = false;
         if (context.origin().getY() == 64) {
             AtomicInteger empty = new AtomicInteger();
-            boolean rock = false;
 
             AABB first_area = AABB.ofSize(origin.below().getCenter(), entity.getArea(false), 0, entity.getArea(false));
             AABB second_area = AABB.ofSize(origin.below().getCenter().add(facing_direction.scale(-1 * entity.getTailDistance())), entity.getArea(true), 0, entity.getArea(true));
@@ -112,7 +117,7 @@ public class BeachedCorpseFeature extends Feature<BeachedCorpseConfiguration> {
             BlockPos.betweenClosedStream(first_area).filter(x -> context.level().isEmptyBlock(x)).forEach(x -> empty.getAndIncrement());
             BlockPos.betweenClosedStream(second_area).filter(x -> context.level().isEmptyBlock(x)).forEach(x -> empty.getAndIncrement());
 
-            rock = BlockPos.betweenClosedStream(first_area).anyMatch(x -> context.level().getBlockState(x).is(SBBlocks.SHALE)) ||
+            boolean rock = BlockPos.betweenClosedStream(first_area).anyMatch(x -> context.level().getBlockState(x).is(SBBlocks.SHALE)) ||
                     BlockPos.betweenClosedStream(second_area).anyMatch(x -> context.level().getBlockState(x).is(SBBlocks.SHALE));
 
             if (empty.get() >= 5 && !rock) {
@@ -128,7 +133,7 @@ public class BeachedCorpseFeature extends Feature<BeachedCorpseConfiguration> {
         entity.setPos(origin.getCenter().add(0, -0.5, 0));
         entity.setYRot(facing_angle);
         entity.setBuried(bury);
-        entity.finalizeSpawn(context.level().getLevel(), context.level().getCurrentDifficultyAt(context.origin()), MobSpawnType.CHUNK_GENERATION, null);
+        entity.finalizeSpawn(context.level().getLevel(), context.level().getCurrentDifficultyAt(origin), MobSpawnType.CHUNK_GENERATION, null);
 
         MinecraftServer server = context.level().getLevel().getServer();
         Runnable spawnCorpse = () -> {

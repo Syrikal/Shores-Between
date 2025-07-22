@@ -75,7 +75,7 @@ public class Mosasaurus extends AbstractBeachedCorpse {
 
     @Override
     public void poseParts() {
-        ShoresBetween.LOGGER.debug("posing sub-parts for a mosasaurus");
+//        ShoresBetween.LOGGER.debug("posing sub-parts for a mosasaurus");
 
         float angle = this.getYRot();
         Vec3[] part_positions;
@@ -99,9 +99,9 @@ public class Mosasaurus extends AbstractBeachedCorpse {
             Vec3 offset = part_positions[i].yRot(angle);
             AbstractBeachedCorpsePart part = this.getPartsList()[i];
             Vec3 newPos = this.getPosition(0).add(offset);
-            ShoresBetween.LOGGER.debug("Attempting to place part %s at position (%s, %s, %s)".formatted(part.name, newPos.x, newPos.y, newPos.z));
+//            ShoresBetween.LOGGER.debug("Attempting to place part %s at position (%s, %s, %s)".formatted(part.name, newPos.x, newPos.y, newPos.z));
             part.moveTo(newPos);
-            ShoresBetween.LOGGER.debug("Placed part %s at position (%s, %s, %s)".formatted(part.name, part.getX(), part.getY(), part.getZ()));
+//            ShoresBetween.LOGGER.debug("Placed part %s at position (%s, %s, %s)".formatted(part.name, part.getX(), part.getY(), part.getZ()));
         }
 
         for (int l = 0; l < this.getPartsList().length; l++) {

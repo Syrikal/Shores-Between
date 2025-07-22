@@ -72,7 +72,7 @@ public class AbstractBeachedCorpse extends Animal {
 
     public AbstractBeachedCorpse(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
-        ShoresBetween.LOGGER.debug("Creating an AbstractBeachedCorpse");
+//        ShoresBetween.LOGGER.debug("Creating an AbstractBeachedCorpse");
         this.parts = this.getPartsList();
         this.noCulling = true;
         this.setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1); // Forge: Fix MC-158205: Make sure part ids are successors of parent mob id
