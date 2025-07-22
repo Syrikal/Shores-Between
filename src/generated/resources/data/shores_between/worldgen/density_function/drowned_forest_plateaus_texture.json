@@ -1,16 +1,13 @@
 {
-  "type": "minecraft:cache_2d",
+  "type": "minecraft:flat_cache",
   "argument": {
     "type": "minecraft:spline",
     "spline": {
       "coordinate": {
-        "type": "minecraft:cache_2d",
-        "argument": {
-          "type": "minecraft:noise",
-          "noise": "shores_between:drowned_forest_plateaus",
-          "xz_scale": 1.0,
-          "y_scale": 1.0
-        }
+        "type": "minecraft:noise",
+        "noise": "shores_between:drowned_forest_plateaus",
+        "xz_scale": 1.0,
+        "y_scale": 1.0
       },
       "points": [
         {

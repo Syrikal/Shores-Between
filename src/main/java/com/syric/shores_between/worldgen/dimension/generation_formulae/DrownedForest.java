@@ -51,7 +51,7 @@ public class DrownedForest {
     private static DensityFunction DrownedForestPlateauTexture(BootstrapContext<DensityFunction> context) {
 
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
-        Holder<DensityFunction> plateaus_noise = Holder.direct(DensityFunctions.cache2d(DensityFunctions.noise(noises.getOrThrow(DROWNED_FOREST_PLATEAUS_NOISE))));
+        Holder<DensityFunction> plateaus_noise = Holder.direct(DensityFunctions.noise(noises.getOrThrow(DROWNED_FOREST_PLATEAUS_NOISE)));
 
         //Drowned Forest Plateau Texture simply produces plateaus.
         DensityFunction texture = DensityFunctions.spline(
@@ -61,7 +61,7 @@ public class DrownedForest {
                         .addPoint(1, 1, 0.7F)
                         .build()
         );
-        return DensityFunctions.cache2d(texture);
+        return DensityFunctions.flatCache(texture);
     }
 
     private static DensityFunction DrownedForestPresence(BootstrapContext<DensityFunction> context, List<DensityFunction> biomeDensityFunctions) {
@@ -104,7 +104,7 @@ public class DrownedForest {
 
                         ).clamp(-10, 0);
 
-        return DensityFunctions.cache2d(presence);
+        return DensityFunctions.flatCache(presence);
     }
 
     private static DensityFunction DrownedForestPlateausFinal(BootstrapContext<DensityFunction> context, Holder<DensityFunction> drownedForestPresence, Holder<DensityFunction> drownedForestPlateausTexture) {
@@ -181,6 +181,6 @@ public class DrownedForest {
         //Multiply by presence multiplier and ensure it's negative
         sink = DensityFunctions.mul(presenceMultiplier, sink).clamp(-100, 0);
 
-        return DensityFunctions.cache2d(sink);
+        return DensityFunctions.flatCache(sink);
     }
 }
