@@ -12,31 +12,29 @@
   "disable_mob_generation": true,
   "legacy_random_source": false,
   "noise": {
-    "height": 384,
-    "min_y": -64,
+    "height": 448,
+    "min_y": -128,
     "size_horizontal": 1,
     "size_vertical": 1
   },
   "noise_router": {
-    "barrier": 0.0,
+    "barrier": -1.0,
     "continents": "shores_between:breach_continentalness",
     "depth": "minecraft:overworld/depth",
     "erosion": "shores_between:mistwood_islands",
     "final_density": {
       "type": "minecraft:interpolated",
-      "argument": {
-        "type": "minecraft:max",
-        "argument1": "shores_between:strands_final",
-        "argument2": {
-          "type": "minecraft:max",
-          "argument1": "shores_between:rock_fields_final",
-          "argument2": "shores_between:mistwood_final"
-        }
-      }
+      "argument": "shores_between:deeps_final"
     },
-    "fluid_level_floodedness": 0.0,
-    "fluid_level_spread": 0.0,
-    "initial_density_without_jaggedness": 0.0,
+    "fluid_level_floodedness": -1.0,
+    "fluid_level_spread": -1.0,
+    "initial_density_without_jaggedness": {
+      "type": "minecraft:y_clamped_gradient",
+      "from_value": 0.0,
+      "from_y": 100,
+      "to_value": 1.0,
+      "to_y": 120
+    },
     "lava": 0.0,
     "ridges": "minecraft:overworld/ridges",
     "temperature": "shores_between:splined_rockiness",

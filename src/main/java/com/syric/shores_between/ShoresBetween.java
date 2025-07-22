@@ -52,6 +52,7 @@ public class ShoresBetween
         SBBlockEntities.register(modEventBus);
         SBBiomeSources.register(modEventBus);
         SBFeatures.register(modEventBus);
+        SBDensityFunctions.register(modEventBus);
         BoulderDecoratorType.register(modEventBus);
         SBPlacementModifierTypes.register(modEventBus);
         SBEntities.register(modEventBus);

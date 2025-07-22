@@ -1,0 +1,81 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:add",
+    "argument1": "shores_between:deeps_base",
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": "shores_between:deeps_caves",
+      "argument2": {
+        "type": "minecraft:range_choice",
+        "input": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_value": -128.0,
+          "from_y": -128,
+          "to_value": 256.0,
+          "to_y": 256
+        },
+        "max_exclusive": -85.0,
+        "min_inclusive": -200.0,
+        "when_in_range": {
+          "type": "minecraft:mul",
+          "argument1": 0.06,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 85.0,
+              "argument2": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_value": -128.0,
+                "from_y": -128,
+                "to_value": 256.0,
+                "to_y": 256
+              }
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": 85.0,
+              "argument2": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_value": -128.0,
+                "from_y": -128,
+                "to_value": 256.0,
+                "to_y": 256
+              }
+            }
+          }
+        },
+        "when_out_of_range": {
+          "type": "minecraft:mul",
+          "argument1": 1.67E-4,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 85.0,
+              "argument2": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_value": -128.0,
+                "from_y": -128,
+                "to_value": 256.0,
+                "to_y": 256
+              }
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": 85.0,
+              "argument2": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_value": -128.0,
+                "from_y": -128,
+                "to_value": 256.0,
+                "to_y": 256
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

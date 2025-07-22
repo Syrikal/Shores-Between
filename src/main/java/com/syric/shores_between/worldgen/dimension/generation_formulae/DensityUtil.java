@@ -1,9 +1,15 @@
 package com.syric.shores_between.worldgen.dimension.generation_formulae;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.KeyDispatchDataCodec;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
 
 import java.util.Arrays;
+import java.util.function.Function;
 
 public class DensityUtil {
 

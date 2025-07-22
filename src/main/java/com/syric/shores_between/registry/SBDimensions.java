@@ -57,9 +57,9 @@ public class SBDimensions {
                         16.0, //coordinate scale
                         false, //bed works
                         false, //respawn anchor works
-                        -64, //min Y
-                        256, //height
-                        256, //logical height
+                        -128, //min Y
+                        448, //height
+                        448, //logical height
                         SBTags.Blocks.INFINIBURN_BREACH, //Infiniburn blocks
                         SBDimensionEffects.BREACH_EFFECTS, //effects (mostly sky stuff)
                         0.03F, //Ambient light
@@ -97,8 +97,8 @@ public class SBDimensions {
 
         context.register(BREACH_NOISE, new NoiseGeneratorSettings(
                 NoiseSettings.create( //Noise Settings
-                        -64, //min_y
-                        384, //height
+                        -128, //min_y
+                        448, //height
                         1, //size_horizontal
                         1), //size_vertical
 
@@ -108,9 +108,9 @@ public class SBDimensions {
 
                 //Noise router
                 new NoiseRouter(
-                        DensityFunctions.zero(), //barrier noise
-                        DensityFunctions.zero(), //fluid level floodedness noise
-                        DensityFunctions.zero(), //fluid level spread noise
+                        DensityFunctions.constant(-1), //barrier noise
+                        DensityFunctions.constant(-1), //fluid level floodedness noise
+                        DensityFunctions.constant(-1), //fluid level spread noise
                         DensityFunctions.zero(), //lava noise
                         new DensityFunctions.HolderHolder(functions.getOrThrow(SPLINED_ROCKINESS)), //Temperature (Rockiness)
 //                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.TEMPERATURE)),
@@ -124,12 +124,28 @@ public class SBDimensions {
                         NoiseRouterData.getFunction(functions, NoiseRouterData.DEPTH), //Depth
                         NoiseRouterData.getFunction(functions, NoiseRouterData.RIDGES), //Ridges
 //                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)), //initial density without jaggedness
-                        DensityFunctions.zero(), //initial density without jaggedness
-                        DensityFunctions.interpolated(DensityUtil.applyAll(DensityFunctions::max,
-                                new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL)),
-                                new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)),
-                                new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_FINAL))
-                        )), //Final density
+                        DensityFunctions.yClampedGradient(100, 120, 0, 1), //initial density without jaggedness
+                        //Final density
+//                        DensityFunctions.interpolated(
+//                                DensityFunctions.min(
+//                                    DensityUtil.applyAll(DensityFunctions::max,
+//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL)),
+//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)),
+//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_FINAL))
+//                                    ),
+//                                    new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL))
+//                                )
+//                        ),
+//                        DensityFunctions.interpolated(
+//                                DensityFunctions.min(
+//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL)),
+//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL))
+//                                )
+//
+//                        ),
+                        DensityFunctions.interpolated(
+                                new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL))
+                        ),
                         DensityFunctions.zero(), //vein toggle
                         DensityFunctions.zero(), //vein ridged
                         DensityFunctions.zero() //vein gap

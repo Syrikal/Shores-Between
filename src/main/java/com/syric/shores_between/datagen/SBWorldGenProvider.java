@@ -46,6 +46,7 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
         DrownedForest.bootstrapDrownedForestNoise(context);
         Strands.bootstrapStrandNoise(context);
         Mistwood.bootstrapMistwoodNoise(context);
+        Deeps.bootstrapDeepsNoise(context);
         SBNoises.bootstrapNoises(context);
     }
 
@@ -55,6 +56,7 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
         DrownedForest.bootstrapDrownedForestDensity(context, biomeDensityFunctions);
         Mistwood.bootstrapMistwoodDensity(context, biomeDensityFunctions);
         Strands.bootstrapStrandDensity(context);
+        Deeps.bootstrapDeepsDensity(context);
     }
 
 }

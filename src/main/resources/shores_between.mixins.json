@@ -1,12 +1,14 @@
 {
   "required": true,
-  "minVersion": "0.8.3",
   "package": "com.syric.shores_between.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "MixinNoiseBasedChunkGenerator"
   ],
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "shores_between.mixin-refmap.json"
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }
