@@ -5,8 +5,467 @@
     {
       "weight": 1,
       "element": {
-        "location": "shores_between:leviathan_bones/ribcage_1_v1",
-        "processors": "minecraft:empty",
+        "location": "shores_between:leviathan_bones/spine_1",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_2",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_3",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_4",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_1",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_2",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_3",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_4",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_5",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_6",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_7",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_8",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_9",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_1_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_2_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_3_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_4_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_1_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_2_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_3_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_4_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_5_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_6_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_7_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_8_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_9_light",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_1_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_2_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_3_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_4_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_1_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_2_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_3_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_4_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_5_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_6_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_7_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_8_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_9_heavy",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_1_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_2_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_3_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/spine_4_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_1_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_2_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_3_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_4_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_5_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_6_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_7_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_8_weird",
+        "processors": "shores_between:leviathan_bone_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "shores_between:leviathan_bones/ribcage_9_weird",
+        "processors": "shores_between:leviathan_bone_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

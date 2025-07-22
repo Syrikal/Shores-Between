@@ -19,6 +19,6 @@ public class SBStructures {
         DEFERRED_REGISTRY_STRUCTURE.register(bus);
     }
 
-//    public static final DeferredHolder<StructureType<?>, StructureType<LeviathanBonesStructure>> LEVIATHAN_BONES = DEFERRED_REGISTRY_STRUCTURE.register("leviathan_bones", () -> explicitStructureTypeTyping(LeviathanBonesStructure.CODEC));
+    public static final DeferredHolder<StructureType<?>, StructureType<LeviathanBonesStructure>> LEVIATHAN_BONES = DEFERRED_REGISTRY_STRUCTURE.register("leviathan_bones", () -> () -> LeviathanBonesStructure.CODEC);
 
 }

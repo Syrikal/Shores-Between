@@ -1,0 +1,31 @@
+[
+  {
+    "processor_type": "minecraft:rule",
+    "rules": [
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true",
+          "block": "minecraft:polished_diorite"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:polished_diorite"
+        },
+        "output_state": {
+          "Name": "shores_between:leviathan_bone"
+        }
+      }
+    ]
+  },
+  {
+    "processor_type": "minecraft:block_ignore",
+    "blocks": [
+      {
+        "Name": "minecraft:obsidian"
+      },
+      {
+        "Name": "minecraft:air"
+      }
+    ]
+  }
+]
