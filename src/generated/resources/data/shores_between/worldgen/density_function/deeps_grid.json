@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:mul",
+  "argument1": {
+    "type": "shores_between:sine_function",
+    "input": {
+      "type": "shores_between:get_x_function"
+    },
+    "period": 1500.0
+  },
+  "argument2": {
+    "type": "shores_between:sine_function",
+    "input": {
+      "type": "shores_between:get_z_function"
+    },
+    "period": 1500.0
+  }
+}

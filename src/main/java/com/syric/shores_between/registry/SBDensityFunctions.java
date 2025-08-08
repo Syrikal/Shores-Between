@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
+import net.minecraft.world.level.levelgen.NoiseChunk;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -30,9 +31,12 @@ public class SBDensityFunctions {
     public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> SINE = DENSITY_FUNCTION_TYPES.register("sine_function", () -> Sine.DATA_CODEC);
     public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> COSINE = DENSITY_FUNCTION_TYPES.register("cosine_function", () -> Cosine.DATA_CODEC);
     public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> GET_X = DENSITY_FUNCTION_TYPES.register("get_x_function", () -> GetX.DATA_CODEC);
+    public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> GET_Y = DENSITY_FUNCTION_TYPES.register("get_y_function", () -> GetY.DATA_CODEC);
     public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> GET_Z = DENSITY_FUNCTION_TYPES.register("get_z_function", () -> GetZ.DATA_CODEC);
     public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> DIAGONAL_STRETCH = DENSITY_FUNCTION_TYPES.register("diagonal_stretch", () -> DiagonalStretch.DATA_CODEC);
     public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> SHIFTED_NOISE = DENSITY_FUNCTION_TYPES.register("sb_shifted_noise", () -> ShiftedNoise.DATA_CODEC);
+    public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> SAMPLE_AT_Y = DENSITY_FUNCTION_TYPES.register("sample_at_y", () -> SampleAtGivenY.DATA_CODEC);
+    public static final DeferredHolder<MapCodec<? extends DensityFunction>, MapCodec<? extends DensityFunction>> DIVIDE = DENSITY_FUNCTION_TYPES.register("divide", () -> Divide.DATA_CODEC);
 
     public static ResourceKey<MapCodec<? extends DensityFunction>> registerKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION_TYPE, new ResourceLocation(ShoresBetween.MODID, name));
@@ -61,7 +65,7 @@ public class SBDensityFunctions {
 
         @Override
         public DensityFunction mapAll(Visitor visitor) {
-            return visitor.apply(new Sine(this.input, this.period));
+            return visitor.apply(new Sine(this.input.mapAll(visitor), this.period));
         }
 
         @Override
@@ -103,7 +107,7 @@ public class SBDensityFunctions {
 
         @Override
         public DensityFunction mapAll(Visitor visitor) {
-            return visitor.apply(new Cosine(this.input, this.period));
+            return visitor.apply(new Cosine(this.input.mapAll(visitor), this.period));
         }
 
         @Override
@@ -140,6 +144,42 @@ public class SBDensityFunctions {
         @Override
         public DensityFunction mapAll(Visitor visitor) {
             return visitor.apply(new GetX());
+        }
+
+        @Override
+        public double minValue() {
+            return -30000000;
+        }
+
+        @Override
+        public double maxValue() {
+            return 30000000;
+        }
+
+        @Override
+        public KeyDispatchDataCodec<? extends DensityFunction> codec() {
+            return CODEC;
+        }
+    }
+
+    public record GetY() implements DensityFunction {
+
+        private static final MapCodec<GetY> DATA_CODEC = MapCodec.unit(new GetY());
+        public static final KeyDispatchDataCodec<GetY> CODEC = KeyDispatchDataCodec.of(DATA_CODEC);
+
+        @Override
+        public double compute(DensityFunction.FunctionContext context) {
+            return context.blockY();
+        }
+
+        @Override
+        public void fillArray(double[] array, ContextProvider contextProvider) {
+            contextProvider.fillAllDirectly(array, this);
+        }
+
+        @Override
+        public DensityFunction mapAll(Visitor visitor) {
+            return visitor.apply(new GetY());
         }
 
         @Override
@@ -223,7 +263,7 @@ public class SBDensityFunctions {
 
         @Override
         public DensityFunction mapAll(Visitor visitor) {
-            return visitor.apply(new DiagonalStretch(this.input, this.axis_x, this.axis_z, this.ratio));
+            return visitor.apply(new DiagonalStretch(this.input.mapAll(visitor), this.axis_x, this.axis_z, this.ratio));
         }
 
         @Override
@@ -293,6 +333,96 @@ public class SBDensityFunctions {
         @Override
         public double maxValue() {
             return this.noise.maxValue();
+        }
+
+        @Override
+        public KeyDispatchDataCodec<? extends DensityFunction> codec() {
+            return CODEC;
+        }
+    }
+
+    public record SampleAtGivenY(DensityFunction input, DensityFunction y) implements DensityFunction {
+
+        private static final MapCodec<SampleAtGivenY> DATA_CODEC = RecordCodecBuilder.mapCodec(
+                instance -> instance.group(
+                                DensityFunction.HOLDER_HELPER_CODEC.fieldOf("input").forGetter(x -> x.input),
+                                DensityFunction.HOLDER_HELPER_CODEC.fieldOf("y").forGetter(x -> x.y)
+                        )
+                        .apply(instance, SampleAtGivenY::new)
+        );
+        public static final KeyDispatchDataCodec<SampleAtGivenY> CODEC = makeCodec(DATA_CODEC);
+
+        @Override
+        public double compute(DensityFunction.FunctionContext context) {
+            DensityFunction.FunctionContext new_context = new SinglePointContext(context.blockX(), (int) y.compute(context), context.blockZ());
+            return input.compute(new_context);
+        }
+
+        @Override
+        public void fillArray(double[] array, ContextProvider contextProvider) {
+            contextProvider.fillAllDirectly(array, this);
+        }
+
+        @Override
+        public DensityFunction mapAll(Visitor visitor) {
+            return visitor.apply(new SampleAtGivenY(this.input.mapAll(visitor), this.y.mapAll(visitor)));
+        }
+
+        @Override
+        public double minValue() {
+            return -1;
+        }
+
+        @Override
+        public double maxValue() {
+            return 1;
+        }
+
+        @Override
+        public KeyDispatchDataCodec<? extends DensityFunction> codec() {
+            return CODEC;
+        }
+    }
+
+    public record Divide(DensityFunction numerator, DensityFunction denominator) implements DensityFunction {
+
+        private static final MapCodec<Divide> DATA_CODEC = RecordCodecBuilder.mapCodec(
+                instance -> instance.group(
+                                DensityFunction.HOLDER_HELPER_CODEC.fieldOf("numerator").forGetter(x -> x.numerator),
+                                DensityFunction.HOLDER_HELPER_CODEC.fieldOf("denominator").forGetter(x -> x.denominator)
+                        )
+                        .apply(instance, Divide::new)
+        );
+        public static final KeyDispatchDataCodec<Divide> CODEC = makeCodec(DATA_CODEC);
+
+        @Override
+        public double compute(DensityFunction.FunctionContext context) {
+            double d = denominator.compute(context);
+            if (d == 0) {
+                return numerator.compute(context) > 0 ? 100000 : -100000;
+            } else {
+                return Math.clamp(numerator.compute(context) / denominator.compute(context), -100000, 100000);
+            }
+        }
+
+        @Override
+        public void fillArray(double[] array, ContextProvider contextProvider) {
+            contextProvider.fillAllDirectly(array, this);
+        }
+
+        @Override
+        public DensityFunction mapAll(Visitor visitor) {
+            return visitor.apply(new Divide(this.numerator.mapAll(visitor), this.denominator.mapAll(visitor)));
+        }
+
+        @Override
+        public double minValue() {
+            return -100000;
+        }
+
+        @Override
+        public double maxValue() {
+            return 100000;
         }
 
         @Override

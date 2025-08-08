@@ -29,7 +29,9 @@ public class BreachBiomeSource extends BiomeSource {
                             RegistryOps.retrieveElement(SBBiomes.MISTWOOD_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.MISTWOOD_EDGE_BIOME),
                             RegistryOps.retrieveElement(SBBiomes.FORSAKEN_OCEAN_BIOME),
-                            RegistryOps.retrieveElement(SBBiomes.SEAMOUNTS_BIOME)
+                            RegistryOps.retrieveElement(SBBiomes.SEAMOUNTS_BIOME),
+                            RegistryOps.retrieveElement(SBBiomes.DEEPS_BIOME),
+                            RegistryOps.retrieveElement(SBBiomes.SHINING_POOLS_BIOME)
                     )
                     .apply(builder, builder.stable(BreachBiomeSource::new))
     );
@@ -46,6 +48,8 @@ public class BreachBiomeSource extends BiomeSource {
     private final Holder<Biome> mistwood_edge;
     private final Holder<Biome> forsaken_ocean;
     private final Holder<Biome> seamounts;
+    private final Holder<Biome> deeps;
+    private final Holder<Biome> shining_pools;
 
     public static BreachBiomeSource create(HolderGetter<Biome> pBiomeGetter) {
         return new BreachBiomeSource(
@@ -60,11 +64,13 @@ public class BreachBiomeSource extends BiomeSource {
                 pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME),
                 pBiomeGetter.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME),
-                pBiomeGetter.getOrThrow(SBBiomes.SEAMOUNTS_BIOME)
+                pBiomeGetter.getOrThrow(SBBiomes.SEAMOUNTS_BIOME),
+                pBiomeGetter.getOrThrow(SBBiomes.DEEPS_BIOME),
+                pBiomeGetter.getOrThrow(SBBiomes.SHINING_POOLS_BIOME)
         );
     }
 
-    private BreachBiomeSource(Holder<Biome> desolateStrand, Holder<Biome> drownedForest, Holder<Biome> barrenStrand, Holder<Biome> rockyStrand, Holder<Biome> rockFields, Holder<Biome> crags, Holder<Biome> grassyStrand, Holder<Biome> driftwoodBeach, Holder<Biome> mistwood, Holder<Biome> mistwoodCoast, Holder<Biome> forsakenOcean, Holder<Biome> seamounts) {
+    private BreachBiomeSource(Holder<Biome> desolateStrand, Holder<Biome> drownedForest, Holder<Biome> barrenStrand, Holder<Biome> rockyStrand, Holder<Biome> rockFields, Holder<Biome> crags, Holder<Biome> grassyStrand, Holder<Biome> driftwoodBeach, Holder<Biome> mistwood, Holder<Biome> mistwoodCoast, Holder<Biome> forsakenOcean, Holder<Biome> seamounts, Holder<Biome> deeps, Holder<Biome> shining_pools) {
         desolate_strand = desolateStrand;
         drowned_forest = drownedForest;
         barren_strand = barrenStrand;
@@ -77,11 +83,13 @@ public class BreachBiomeSource extends BiomeSource {
         mistwood_edge = mistwoodCoast;
         forsaken_ocean = forsakenOcean;
         this.seamounts = seamounts;
+        this.deeps = deeps;
+        this.shining_pools = shining_pools;
     }
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(this.desolate_strand, this.drowned_forest, this.barren_strand, this.rocky_strand, this.rock_fields, this.crags, this.grassy_strand, this.driftwood_beach, this.mistwood, this.mistwood_edge, this.forsaken_ocean, this.seamounts);
+        return Stream.of(this.desolate_strand, this.drowned_forest, this.barren_strand, this.rocky_strand, this.rock_fields, this.crags, this.grassy_strand, this.driftwood_beach, this.mistwood, this.mistwood_edge, this.forsaken_ocean, this.seamounts, this.deeps, this.shining_pools);
     }
 
     @Override
@@ -113,11 +121,20 @@ public class BreachBiomeSource extends BiomeSource {
         double vitality = sampler.humidity().compute(new DensityFunction.SinglePointContext(i1, j, k1));
         double rockiness = sampler.temperature().compute(new DensityFunction.SinglePointContext(i1, j, k1));
         double mistwood = sampler.erosion().compute(new DensityFunction.SinglePointContext(i, j, k));
+        double depth = sampler.depth().compute(new DensityFunction.SinglePointContext(i1, j, k1));
 
-        return getBiome(continentalness, vitality, rockiness, mistwood);
+        return getBiome(continentalness, vitality, rockiness, mistwood, depth);
     }
 
-    private Holder<Biome> getBiome(double continentalness, double vitality, double rockiness, double mistwood) {
+    private Holder<Biome> getBiome(double continentalness, double vitality, double rockiness, double mistwood, double depth) {
+
+        if (depth < 20) {
+            if (depth < -70 && vitality > 0.12) {
+                return shining_pools;
+            } else {
+                return deeps;
+            }
+        }
 
         if (continentalness >= 0.9 && mistwood > 0.15) {
             return mistwood > 0.3 ? this.mistwood : this.mistwood_edge;

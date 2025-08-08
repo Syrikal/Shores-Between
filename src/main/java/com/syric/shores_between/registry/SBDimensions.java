@@ -113,38 +113,29 @@ public class SBDimensions {
                         DensityFunctions.constant(-1), //fluid level spread noise
                         DensityFunctions.zero(), //lava noise
                         new DensityFunctions.HolderHolder(functions.getOrThrow(SPLINED_ROCKINESS)), //Temperature (Rockiness)
-//                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.TEMPERATURE)),
                         new DensityFunctions.HolderHolder(functions.getOrThrow(SPLINED_VITALITY)), //Vegetation (Vitality)
-//                        DensityFunctions.shiftedNoise2d(shift_x, shift_z, 0.25, noises.getOrThrow(Noises.VEGETATION)),
                         new DensityFunctions.HolderHolder(functions.getOrThrow(CONTINENTALNESS)), //Continents
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.CONTINENTS),
                         new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_ISLANDS)), //Erosion (Mistwood Islands)
-//                        NoiseRouterData.getFunction(functions, NoiseRouterData.EROSION),
-
-                        NoiseRouterData.getFunction(functions, NoiseRouterData.DEPTH), //Depth
+                        new SBDensityFunctions.GetY(), //Depth
                         NoiseRouterData.getFunction(functions, NoiseRouterData.RIDGES), //Ridges
-//                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)), //initial density without jaggedness
-                        DensityFunctions.yClampedGradient(100, 120, 0, 1), //initial density without jaggedness
+                        DensityFunctions.yClampedGradient(10, 20, 1, 0), //initial density without jaggedness
                         //Final density
-//                        DensityFunctions.interpolated(
-//                                DensityFunctions.min(
-//                                    DensityUtil.applyAll(DensityFunctions::max,
-//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL)),
-//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)),
-//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_FINAL))
-//                                    ),
-//                                    new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL))
-//                                )
-//                        ),
-//                        DensityFunctions.interpolated(
-//                                DensityFunctions.min(
-//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL)),
-//                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL))
-//                                )
-//
-//                        ),
                         DensityFunctions.interpolated(
-                                new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL))
+                                DensityUtil.applyAll(DensityFunctions::min,
+                                    DensityUtil.applyAll(DensityFunctions::max,
+                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Strands.STRANDS_FINAL)),
+                                        new DensityFunctions.HolderHolder(functions.getOrThrow(RockFields.ROCK_FIELDS_FINAL)),
+                                        new DensityFunctions.HolderHolder(functions.getOrThrow(Mistwood.MISTWOOD_FINAL))
+                                    ),
+                                    DensityUtil.applyAll(DensityFunctions::max,
+                                            DensityFunctions.min(
+                                                    new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_FINAL)),
+                                                    new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_LAVA_PITS))
+                                            ),
+                                            new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_STALACTITES)),
+                                            new DensityFunctions.HolderHolder(functions.getOrThrow(Deeps.DEEPS_PILLARS))
+                                    )
+                                )
                         ),
                         DensityFunctions.zero(), //vein toggle
                         DensityFunctions.zero(), //vein ridged

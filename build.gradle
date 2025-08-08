@@ -107,6 +107,10 @@ dependencies {
     implementation("curse.maven:jei-238222:5466528")
     implementation("curse.maven:journeymap-32274:5457883")
 
+    implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:0.5.0")) {
+        jarJar.ranged(it, "[0.5.0,)")
+    }
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

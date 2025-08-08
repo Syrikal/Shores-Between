@@ -20,20 +20,46 @@
   "noise_router": {
     "barrier": -1.0,
     "continents": "shores_between:breach_continentalness",
-    "depth": "minecraft:overworld/depth",
+    "depth": {
+      "type": "shores_between:get_y_function"
+    },
     "erosion": "shores_between:mistwood_islands",
     "final_density": {
       "type": "minecraft:interpolated",
-      "argument": "shores_between:deeps_final"
+      "argument": {
+        "type": "minecraft:min",
+        "argument1": {
+          "type": "minecraft:max",
+          "argument1": "shores_between:strands_final",
+          "argument2": {
+            "type": "minecraft:max",
+            "argument1": "shores_between:rock_fields_final",
+            "argument2": "shores_between:mistwood_final"
+          }
+        },
+        "argument2": {
+          "type": "minecraft:max",
+          "argument1": {
+            "type": "minecraft:min",
+            "argument1": "shores_between:deeps_final",
+            "argument2": "shores_between:deeps_lava_pits"
+          },
+          "argument2": {
+            "type": "minecraft:max",
+            "argument1": "shores_between:deeps_stalactites",
+            "argument2": "shores_between:deeps_pillars"
+          }
+        }
+      }
     },
     "fluid_level_floodedness": -1.0,
     "fluid_level_spread": -1.0,
     "initial_density_without_jaggedness": {
       "type": "minecraft:y_clamped_gradient",
-      "from_value": 0.0,
-      "from_y": 100,
-      "to_value": 1.0,
-      "to_y": 120
+      "from_value": 1.0,
+      "from_y": 10,
+      "to_value": 0.0,
+      "to_y": 20
     },
     "lava": 0.0,
     "ridges": "minecraft:overworld/ridges",

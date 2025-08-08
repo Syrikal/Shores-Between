@@ -1,0 +1,259 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": 8.0,
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "minecraft:mul",
+                "argument1": {
+                  "type": "shores_between:diagonal_stretch",
+                  "axis_x": 1.0,
+                  "axis_z": 1.0,
+                  "input": {
+                    "type": "minecraft:noise",
+                    "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                    "xz_scale": 1.0,
+                    "y_scale": 1.0
+                  },
+                  "ratio": 3.0
+                },
+                "argument2": {
+                  "type": "shores_between:diagonal_stretch",
+                  "axis_x": 1.0,
+                  "axis_z": 1.0,
+                  "input": {
+                    "type": "minecraft:noise",
+                    "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                    "xz_scale": 1.0,
+                    "y_scale": 1.0
+                  },
+                  "ratio": 3.0
+                }
+              },
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": -0.04,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": {
+                    "type": "shores_between:diagonal_stretch",
+                    "axis_x": 1.0,
+                    "axis_z": 1.0,
+                    "input": {
+                      "type": "shores_between:sb_shifted_noise",
+                      "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                      "shift_x": 5000.0,
+                      "shift_y": -5000.0,
+                      "shift_z": 5000.0,
+                      "xz_scale": -1.0,
+                      "y_scale": 1.0
+                    },
+                    "ratio": 3.0
+                  },
+                  "argument2": {
+                    "type": "shores_between:diagonal_stretch",
+                    "axis_x": 1.0,
+                    "axis_z": 1.0,
+                    "input": {
+                      "type": "shores_between:sb_shifted_noise",
+                      "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                      "shift_x": 5000.0,
+                      "shift_y": -5000.0,
+                      "shift_z": 5000.0,
+                      "xz_scale": -1.0,
+                      "y_scale": 1.0
+                    },
+                    "ratio": 3.0
+                  }
+                }
+              }
+            }
+          },
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": 0.8,
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": -1.0,
+              "argument2": {
+                "type": "shores_between:cosine_function",
+                "input": {
+                  "type": "minecraft:add",
+                  "argument1": {
+                    "type": "shores_between:get_x_function"
+                  },
+                  "argument2": {
+                    "type": "shores_between:get_z_function"
+                  }
+                },
+                "period": 1500.0
+              }
+            }
+          }
+        },
+        "max": 0.0,
+        "min": -100.0
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:mul",
+              "argument1": 8.0,
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "minecraft:mul",
+                  "argument1": {
+                    "type": "shores_between:diagonal_stretch",
+                    "axis_x": 1.0,
+                    "axis_z": -1.0,
+                    "input": {
+                      "type": "minecraft:noise",
+                      "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                      "xz_scale": 1.0,
+                      "y_scale": 1.0
+                    },
+                    "ratio": 3.0
+                  },
+                  "argument2": {
+                    "type": "shores_between:diagonal_stretch",
+                    "axis_x": 1.0,
+                    "axis_z": -1.0,
+                    "input": {
+                      "type": "minecraft:noise",
+                      "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                      "xz_scale": 1.0,
+                      "y_scale": 1.0
+                    },
+                    "ratio": 3.0
+                  }
+                },
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": -0.04,
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": {
+                      "type": "shores_between:diagonal_stretch",
+                      "axis_x": 1.0,
+                      "axis_z": -1.0,
+                      "input": {
+                        "type": "shores_between:sb_shifted_noise",
+                        "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                        "shift_x": 5000.0,
+                        "shift_y": -5000.0,
+                        "shift_z": 5000.0,
+                        "xz_scale": -1.0,
+                        "y_scale": 1.0
+                      },
+                      "ratio": 3.0
+                    },
+                    "argument2": {
+                      "type": "shores_between:diagonal_stretch",
+                      "axis_x": 1.0,
+                      "axis_z": -1.0,
+                      "input": {
+                        "type": "shores_between:sb_shifted_noise",
+                        "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                        "shift_x": 5000.0,
+                        "shift_y": -5000.0,
+                        "shift_z": 5000.0,
+                        "xz_scale": -1.0,
+                        "y_scale": 1.0
+                      },
+                      "ratio": 3.0
+                    }
+                  }
+                }
+              }
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": 0.8,
+              "argument2": {
+                "type": "shores_between:cosine_function",
+                "input": {
+                  "type": "minecraft:add",
+                  "argument1": {
+                    "type": "shores_between:get_x_function"
+                  },
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": -1.0,
+                    "argument2": {
+                      "type": "shores_between:get_z_function"
+                    }
+                  }
+                },
+                "period": 1500.0
+              }
+            }
+          },
+          "max": 0.0,
+          "min": -100.0
+        },
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": -0.1,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": 5.0E-6,
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:mul",
+                "argument1": {
+                  "type": "minecraft:add",
+                  "argument1": 75.0,
+                  "argument2": {
+                    "type": "shores_between:get_y_function"
+                  }
+                },
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": 75.0,
+                  "argument2": {
+                    "type": "shores_between:get_y_function"
+                  }
+                }
+              },
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": {
+                  "type": "minecraft:add",
+                  "argument1": 75.0,
+                  "argument2": {
+                    "type": "shores_between:get_y_function"
+                  }
+                },
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": 75.0,
+                  "argument2": {
+                    "type": "shores_between:get_y_function"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "max": 0.0,
+    "min": -100.0
+  }
+}

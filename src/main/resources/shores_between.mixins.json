@@ -3,7 +3,8 @@
   "package": "com.syric.shores_between.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MixinNoiseBasedChunkGenerator"
+    "MixinNoiseBasedChunkGenerator",
+    "MixinNoiseBasedAquifer"
   ],
   "injectors": {
     "defaultRequire": 1

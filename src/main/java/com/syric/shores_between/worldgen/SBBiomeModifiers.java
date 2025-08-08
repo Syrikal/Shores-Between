@@ -246,8 +246,8 @@ public class SBBiomeModifiers {
         context.register(ADD_BARREN_STRAND_MISC, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME)),
                 HolderSet.direct(
-                        placedFeatures.getOrThrow(SBPlacedFeatures.DEAD_FISH_PATCH_PLACED_KEY),
-                        placedFeatures.getOrThrow(SBPlacedFeatures.BEACHED_CORPSE_PLACED_KEY)
+                        placedFeatures.getOrThrow(SBPlacedFeatures.DEAD_FISH_PATCH_PLACED_KEY)
+//                        placedFeatures.getOrThrow(SBPlacedFeatures.BEACHED_CORPSE_PLACED_KEY)
                 ),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));

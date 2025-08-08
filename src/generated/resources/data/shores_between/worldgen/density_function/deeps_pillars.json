@@ -1,0 +1,255 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:range_choice",
+    "input": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": -400.0,
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": 0.7,
+            "argument2": "shores_between:deeps_grid"
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 0.7,
+              "argument2": "shores_between:deeps_grid"
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:add",
+                "argument1": 0.7,
+                "argument2": "shores_between:deeps_grid"
+              },
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": 0.7,
+                "argument2": "shores_between:deeps_grid"
+              }
+            }
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:clamp",
+          "input": 0.0,
+          "max": 0.0,
+          "min": -10.0
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:mul",
+              "argument1": 2.0,
+              "argument2": {
+                "type": "minecraft:noise",
+                "noise": "minecraft:pillar",
+                "xz_scale": 20.0,
+                "y_scale": 0.0
+              }
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": -1.5,
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": 2.0,
+                "argument2": {
+                  "type": "minecraft:noise",
+                  "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                  "xz_scale": 1.0,
+                  "y_scale": 0.0
+                }
+              }
+            }
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 0.55,
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": 0.55,
+                "argument2": {
+                  "type": "minecraft:noise",
+                  "noise": "minecraft:pillar_thickness",
+                  "xz_scale": 1.0,
+                  "y_scale": 1.0
+                }
+              }
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:add",
+                "argument1": 0.55,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": 0.55,
+                  "argument2": {
+                    "type": "minecraft:noise",
+                    "noise": "minecraft:pillar_thickness",
+                    "xz_scale": 1.0,
+                    "y_scale": 1.0
+                  }
+                }
+              },
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": 0.55,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": 0.55,
+                  "argument2": {
+                    "type": "minecraft:noise",
+                    "noise": "minecraft:pillar_thickness",
+                    "xz_scale": 1.0,
+                    "y_scale": 1.0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "max_exclusive": 0.03,
+    "min_inclusive": -100000.0,
+    "when_in_range": -100000.0,
+    "when_out_of_range": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": -400.0,
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": 0.7,
+            "argument2": "shores_between:deeps_grid"
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 0.7,
+              "argument2": "shores_between:deeps_grid"
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:add",
+                "argument1": 0.7,
+                "argument2": "shores_between:deeps_grid"
+              },
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": 0.7,
+                "argument2": "shores_between:deeps_grid"
+              }
+            }
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:clamp",
+          "input": 0.0,
+          "max": 0.0,
+          "min": -10.0
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:mul",
+              "argument1": 2.0,
+              "argument2": {
+                "type": "minecraft:noise",
+                "noise": "minecraft:pillar",
+                "xz_scale": 20.0,
+                "y_scale": 0.0
+              }
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": -1.5,
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": 2.0,
+                "argument2": {
+                  "type": "minecraft:noise",
+                  "noise": "shores_between:deeps_diagonal_tunnels_noise",
+                  "xz_scale": 1.0,
+                  "y_scale": 0.0
+                }
+              }
+            }
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 0.55,
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": 0.55,
+                "argument2": {
+                  "type": "minecraft:noise",
+                  "noise": "minecraft:pillar_thickness",
+                  "xz_scale": 1.0,
+                  "y_scale": 1.0
+                }
+              }
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:add",
+                "argument1": 0.55,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": 0.55,
+                  "argument2": {
+                    "type": "minecraft:noise",
+                    "noise": "minecraft:pillar_thickness",
+                    "xz_scale": 1.0,
+                    "y_scale": 1.0
+                  }
+                }
+              },
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": 0.55,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": 0.55,
+                  "argument2": {
+                    "type": "minecraft:noise",
+                    "noise": "minecraft:pillar_thickness",
+                    "xz_scale": 1.0,
+                    "y_scale": 1.0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

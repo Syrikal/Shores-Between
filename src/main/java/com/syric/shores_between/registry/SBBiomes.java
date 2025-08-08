@@ -23,8 +23,12 @@ public class SBBiomes {
     public static final ResourceKey<Biome> DRIFTWOOD_BEACH_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "driftwood_beach"));
     public static final ResourceKey<Biome> MISTWOOD_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "mistwood"));
     public static final ResourceKey<Biome> MISTWOOD_EDGE_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "mistwood_edge"));
+
     public static final ResourceKey<Biome> FORSAKEN_OCEAN_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "forsaken_ocean"));
     public static final ResourceKey<Biome> SEAMOUNTS_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "seamounts"));
+
+    public static final ResourceKey<Biome> DEEPS_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "deeps"));
+    public static final ResourceKey<Biome> SHINING_POOLS_BIOME = ResourceKey.create(Registries.BIOME, new ResourceLocation(MODID, "shining_pools"));
 
 
     public static void bootstrapBiomes(BootstrapContext<Biome> context) {
@@ -40,6 +44,8 @@ public class SBBiomes {
         context.register(MISTWOOD_EDGE_BIOME, MistwoodEdgeBiome(context));
         context.register(FORSAKEN_OCEAN_BIOME, ForsakenOceanBiome(context));
         context.register(SEAMOUNTS_BIOME, SeamountsBiome(context));
+        context.register(DEEPS_BIOME, DeepsBiome(context));
+        context.register(SHINING_POOLS_BIOME, ShiningPoolsBiome(context));
     }
 
     public static Biome DesolateStrandBiome(BootstrapContext<Biome> context) {
@@ -349,6 +355,60 @@ public class SBBiomes {
                 .waterFogColor(0x405359)
                 .foliageColorOverride(0x566b61)
                 .grassColorOverride(0x727d74)
+                .build();
+
+        MobSpawnSettings mobSpawnSettings = new MobSpawnSettings.Builder()
+                .build();
+
+        BiomeGenerationSettings biomeGenerationSettings = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER))
+                .build();
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(0.7f)
+                .mobSpawnSettings(mobSpawnSettings)
+                .generationSettings(biomeGenerationSettings)
+                .specialEffects(specialEffects)
+                .build();
+    }
+
+    public static Biome DeepsBiome(BootstrapContext<Biome> context) {
+
+        BiomeSpecialEffects specialEffects = new BiomeSpecialEffects.Builder()
+                .fogColor(0xbfc9d6)
+                .skyColor(0x86abe3)
+                .waterColor(0x638099)
+                .waterFogColor(0x4c5e6e)
+                .foliageColorOverride(0x607d5a)
+                .grassColorOverride(0xa7ad7d)
+                .build();
+
+        MobSpawnSettings mobSpawnSettings = new MobSpawnSettings.Builder()
+                .build();
+
+        BiomeGenerationSettings biomeGenerationSettings = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER))
+                .build();
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(0.7f)
+                .mobSpawnSettings(mobSpawnSettings)
+                .generationSettings(biomeGenerationSettings)
+                .specialEffects(specialEffects)
+                .build();
+    }
+
+    public static Biome ShiningPoolsBiome(BootstrapContext<Biome> context) {
+
+        BiomeSpecialEffects specialEffects = new BiomeSpecialEffects.Builder()
+                .fogColor(0xbac9d1)
+                .skyColor(0xafbdc4)
+                .waterColor(0x566c6e)
+                .waterFogColor(0x4a6163)
+                .foliageColorOverride(0x4e5c55)
+                .grassColorOverride(0x606661)
                 .build();
 
         MobSpawnSettings mobSpawnSettings = new MobSpawnSettings.Builder()
