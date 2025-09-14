@@ -155,6 +155,10 @@ public class SBBlockTagProvider extends BlockTagsProvider {
                 .add(SBBlocks.PEBBLES.get(),
                         SBBlocks.PALE_PEBBLES.get(),
                         SBBlocks.DARK_PEBBLES.get());
+        this.tag(SBTags.Blocks.MUMMIFIED_CORPSE_REPLACEABLE)
+                .add(SBBlocks.SHINGLE.get(),
+                        SBBlocks.SALTSTONE.get(),
+                        SBBlocks.SHALE.get());
 
         //Neoforge block tags
         this.tag(Tags.Blocks.BARRELS_WOODEN)

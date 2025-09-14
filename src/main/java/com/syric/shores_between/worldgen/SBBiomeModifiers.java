@@ -83,6 +83,9 @@ public class SBBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_FORSAKEN_OCEAN_PLANTS = registerKey("add_forsaken_ocean_plants");
     public static final ResourceKey<BiomeModifier> ADD_FORSAKEN_OCEAN_MISC = registerKey("add_forsaken_ocean_misc");
 
+    //Corpses
+    public static final ResourceKey<BiomeModifier> ADD_MUMMIFIED_CORPSES = registerKey("add_mummified_corpses");
+
 
 
 //    //Logs
@@ -127,6 +130,22 @@ public class SBBiomeModifiers {
         driftwoodBeach(context, placedFeatures, biomes);
         mistwood(context, placedFeatures, biomes);
         ocean(context, placedFeatures, biomes);
+
+        mummifiedCorpses(context, placedFeatures, biomes);
+
+    }
+
+    private static void mummifiedCorpses(BootstrapContext<BiomeModifier> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<Biome> biomes) {
+        context.register(ADD_MUMMIFIED_CORPSES, new BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(SBTags.Biomes.NOT_OCEAN_OR_MISTWOOD),
+                HolderSet.direct(
+                        placedFeatures.getOrThrow(SBPlacedFeatures.MUMMIFIED_CORPSE_PLACED_KEY),
+                        placedFeatures.getOrThrow(SBPlacedFeatures.SHALLOW_MUMMIFIED_CORPSE_PLACED_KEY),
+                        placedFeatures.getOrThrow(SBPlacedFeatures.DEEP_MUMMIFIED_CORPSE_PLACED_KEY)
+                ),
+                GenerationStep.Decoration.UNDERGROUND_DECORATION
+        ));
+
 
     }
 

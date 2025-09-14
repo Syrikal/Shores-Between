@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#shores_between:not_ocean_or_mistwood",
+  "features": "shores_between:mummified_corpse_placed",
+  "step": "underground_decoration"
+}

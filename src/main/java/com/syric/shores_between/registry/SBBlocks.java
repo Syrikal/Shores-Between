@@ -298,7 +298,8 @@ public class SBBlocks {
                     .requiresCorrectToolForDrops()
                     .strength(2.5F, 30)));
     public static final DeferredBlock<Block> JELLIED_ICHOR = registerWithItem("jellied_ichor",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new HalfTransparentBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .sound(SoundType.HONEY_BLOCK)
                     .requiresCorrectToolForDrops()

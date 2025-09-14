@@ -76,6 +76,9 @@ public class SBPlacedFeatures {
 
 
     public static ResourceKey<PlacedFeature> BEACHED_CORPSE_PLACED_KEY = registerKey("beached_corpse_placed");
+    public static ResourceKey<PlacedFeature> MUMMIFIED_CORPSE_PLACED_KEY = registerKey("mummified_corpse_placed");
+    public static ResourceKey<PlacedFeature> SHALLOW_MUMMIFIED_CORPSE_PLACED_KEY = registerKey("shallow_mummified_corpse_placed");
+    public static ResourceKey<PlacedFeature> DEEP_MUMMIFIED_CORPSE_PLACED_KEY = registerKey("deep_mummified_corpse_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -484,6 +487,37 @@ public class SBPlacedFeatures {
                         HeightFilter.of(63, 64),
                         BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), SBTags.Blocks.BREACH_GROUND))
+                ));
+
+        register(context, MUMMIFIED_CORPSE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.MUMMIFIED_CORPSE),
+                List.of(RarityFilter.onAverageOnceEvery(8),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(45), VerticalAnchor.absolute(55)),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO, List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.below(4), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.above(4), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get())))
+                ));
+
+        register(context, SHALLOW_MUMMIFIED_CORPSE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.SHALLOW_MUMMIFIED_CORPSE),
+                List.of(RarityFilter.onAverageOnceEvery(60),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(55), VerticalAnchor.absolute(60)),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO, List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.below(4), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.above(3), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get())))
+                ));
+
+
+        register(context, DEEP_MUMMIFIED_CORPSE_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.DEEP_MUMMIFIED_CORPSE),
+                List.of(RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(35), VerticalAnchor.absolute(45)),
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO, List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.below(4), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.above(3), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get())))
                 ));
 
     }

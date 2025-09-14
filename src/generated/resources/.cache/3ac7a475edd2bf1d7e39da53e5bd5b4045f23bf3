@@ -1,4 +1,4 @@
-// 1.20.6	2025-07-04T16:47:09.4993962	Tags for minecraft:worldgen/biome mod id shores_between
+// 1.20.6	2025-08-13T15:08:02.4135716	Tags for minecraft:worldgen/biome mod id shores_between
 a61ecfc21bd63234ea8c8437a83ed3a7fdcd69e4 data/shores_between/tags/worldgen/biome/has_corpse_boulders.json
 f5aaa7e2988c9357bad52961873387843e798361 data/shores_between/tags/worldgen/biome/has_dead_fish.json
 38edd24076df5e4b12131c46d59f239bfad0ec16 data/shores_between/tags/worldgen/biome/has_driftwood_logs.json
@@ -16,3 +16,5 @@ bfbac0ff591b15823aa0600be937453eb3dd0db2 data/shores_between/tags/worldgen/biome
 e497d1ab8d45bde11a65d7f01b04fcd2d44b7601 data/shores_between/tags/worldgen/biome/has_tangled_shingle.json
 20d60035aa6d905cdd27f350c605b63f04692950 data/shores_between/tags/worldgen/biome/is_breach.json
 a1d325a02f4e2dfd8d10a87de2b0fc7c387eb5c3 data/shores_between/tags/worldgen/biome/mistwood.json
+4048a64aa0cb16ea6c68f0ed9707d09cf67852cd data/shores_between/tags/worldgen/biome/not_ocean.json
+389058d59917f996806366daa3d4bd7566e56b8f data/shores_between/tags/worldgen/biome/not_ocean_or_mistwood.json

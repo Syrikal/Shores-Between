@@ -38,6 +38,28 @@ public class SBBiomeTagProvider extends BiomeTagsProvider {
                 .add(biomes.getOrThrow(SBBiomes.FORSAKEN_OCEAN_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.SEAMOUNTS_BIOME).key());
 
+        this.tag(SBTags.Biomes.NOT_OCEAN)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.MISTWOOD_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.MISTWOOD_EDGE_BIOME).key());
+
+        this.tag(SBTags.Biomes.NOT_OCEAN_OR_MISTWOOD)
+                .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DROWNED_FOREST_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.ROCK_FIELDS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.CRAGS_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.GRASSY_STRAND_BIOME).key())
+                .add(biomes.getOrThrow(SBBiomes.DRIFTWOOD_BEACH_BIOME).key());
+
         this.tag(SBTags.Biomes.HAS_TANGLED_SHINGLE)
                 .add(biomes.getOrThrow(SBBiomes.DESOLATE_STRAND_BIOME).key())
                 .add(biomes.getOrThrow(SBBiomes.ROCKY_STRAND_BIOME).key())

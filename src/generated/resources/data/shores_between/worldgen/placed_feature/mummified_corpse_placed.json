@@ -1,0 +1,70 @@
+{
+  "feature": "shores_between:mummified_corpse",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 6
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 55
+        },
+        "min_inclusive": {
+          "absolute": 45
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "shores_between:shale",
+          "shores_between:shingle",
+          "shores_between:saltstone"
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "shores_between:shale",
+          "shores_between:shingle",
+          "shores_between:saltstone"
+        ],
+        "offset": [
+          0,
+          -4,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "shores_between:shale",
+          "shores_between:shingle",
+          "shores_between:saltstone"
+        ],
+        "offset": [
+          0,
+          4,
+          0
+        ]
+      }
+    }
+  ]
+}

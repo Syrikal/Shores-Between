@@ -7,6 +7,8 @@ import com.syric.shores_between.worldgen.feature.bush.BushConfiguration;
 import com.syric.shores_between.worldgen.feature.bush.BushFeature;
 import com.syric.shores_between.worldgen.feature.log.FallenLogConfiguration;
 import com.syric.shores_between.worldgen.feature.log.FallenLogFeature;
+import com.syric.shores_between.worldgen.feature.mummified_corpse.MummifiedCorpseConfiguration;
+import com.syric.shores_between.worldgen.feature.mummified_corpse.MummifiedCorpseFeature;
 import com.syric.shores_between.worldgen.feature.patch.PatchConfiguration;
 import com.syric.shores_between.worldgen.feature.patch.PatchFeature;
 import com.syric.shores_between.worldgen.feature.rocks.BoulderConfiguration;
@@ -29,6 +31,7 @@ public class SBFeatures {
     public static final DeferredHolder<Feature<?>, Feature<FallenLogConfiguration>> FALLEN_LOG = FEATURES.register("fallen_log", () -> new FallenLogFeature(FallenLogConfiguration.CODEC.stable()));
     public static final DeferredHolder<Feature<?>, Feature<BushConfiguration>> BUSH = FEATURES.register("bush", () -> new BushFeature(BushConfiguration.CODEC.stable()));
     public static final DeferredHolder<Feature<?>, Feature<BeachedCorpseConfiguration>> BEACHED_CORPSE = FEATURES.register("beached_corpse", () -> new BeachedCorpseFeature(BeachedCorpseConfiguration.CODEC.stable()));
+    public static final DeferredHolder<Feature<?>, Feature<MummifiedCorpseConfiguration>> MUMMIFIED_CORPSE = FEATURES.register("mummified_corpse", () -> new MummifiedCorpseFeature(MummifiedCorpseConfiguration.CODEC.stable()));
 
 
     public static void register(IEventBus bus) {

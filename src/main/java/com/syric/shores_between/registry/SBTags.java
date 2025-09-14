@@ -23,6 +23,7 @@ public class SBTags {
         public static final TagKey<Block> BREACH_GROUND = tag("breach_ground");
         public static final TagKey<Block> SHINGLE = tag("shingle");
         public static final TagKey<Block> PEBBLES = tag("pebbles");
+        public static final TagKey<Block> MUMMIFIED_CORPSE_REPLACEABLE = tag("mummified_corpse_replaceable");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(ShoresBetween.MODID, name));
@@ -43,6 +44,8 @@ public class SBTags {
     public static class Biomes {
         public static final TagKey<Biome> IS_BREACH = tag("is_breach");
         public static final TagKey<Biome> MISTWOOD = tag("mistwood");
+        public static final TagKey<Biome> NOT_OCEAN = tag("not_ocean");
+        public static final TagKey<Biome> NOT_OCEAN_OR_MISTWOOD = tag("not_ocean_or_mistwood");
 
         //Features
         public static final TagKey<Biome> HAS_TANGLED_SHINGLE = tag("has_tangled_shingle");
@@ -64,6 +67,7 @@ public class SBTags {
         public static final TagKey<Biome> HAS_RARE_MOSSY_OUTCROPS = tag("has_rare_mossy_outcrops");
         public static final TagKey<Biome> HAS_EERIE_BOULDERS = tag("has_eerie_boulders");
         public static final TagKey<Biome> HAS_CORPSE_BOULDERS = tag("has_corpse_boulders");
+
 
         //Structures
         public static final TagKey<Biome> HAS_LEVIATHAN_BONES = tag("has_structure/has_leviathan_bones");

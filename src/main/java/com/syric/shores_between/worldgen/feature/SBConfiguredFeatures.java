@@ -6,6 +6,7 @@ import com.syric.shores_between.registry.SBTags;
 import com.syric.shores_between.worldgen.feature.beached_corpse.BeachedCorpseConfiguration;
 import com.syric.shores_between.worldgen.feature.bush.BushConfiguration;
 import com.syric.shores_between.worldgen.feature.log.FallenLogConfiguration;
+import com.syric.shores_between.worldgen.feature.mummified_corpse.MummifiedCorpseConfiguration;
 import com.syric.shores_between.worldgen.feature.patch.PatchConfiguration;
 import com.syric.shores_between.worldgen.feature.rocks.BoulderConfiguration;
 import com.syric.shores_between.worldgen.feature.rocks.boulder_decoration.*;
@@ -30,7 +31,6 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockStateMatchTest;
@@ -93,6 +93,9 @@ public class SBConfiguredFeatures {
 
 
     public static ResourceKey<ConfiguredFeature<?, ?>> BEACHED_CORPSE = registerKey("beached_corpse");
+    public static ResourceKey<ConfiguredFeature<?, ?>> SHALLOW_MUMMIFIED_CORPSE = registerKey("shallow_mummified_corpse");
+    public static ResourceKey<ConfiguredFeature<?, ?>> MUMMIFIED_CORPSE = registerKey("mummified_corpse");
+    public static ResourceKey<ConfiguredFeature<?, ?>> DEEP_MUMMIFIED_CORPSE = registerKey("deep_mummified_corpse");
 
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -592,6 +595,111 @@ public class SBConfiguredFeatures {
 
     private static void corpses(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         register(context, BEACHED_CORPSE, SBFeatures.BEACHED_CORPSE.get(), new BeachedCorpseConfiguration(true));
+
+        register(context, SHALLOW_MUMMIFIED_CORPSE, SBFeatures.MUMMIFIED_CORPSE.get(), new MummifiedCorpseConfiguration(
+                List.of(
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/anglerfish"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/armored_whale"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/crab_turtle"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/digger"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/double_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/dunkleosteus"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/dunkleosteus_squid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/eurypterid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/false_hermit"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/giant_squid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/gulper_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/horseshoe_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/isopod"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/labyrinth_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/lobster_centipede"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/lobster_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/nautilus"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/plesiosaur"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sabertooth_catfish"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sea_serpent"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sea_slug"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/spider_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/squid_whale"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/swordspine"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/twin_shark")
+                ),
+                0.1F,
+                ClampedNormalFloat.of(0.95F, 0.05F, 0, 1),
+                ClampedNormalFloat.of(1, 0.1F, 0, 1),
+                ClampedNormalFloat.of(0.8F, 0.2F, 0, 1)
+        ));
+
+        register(context, MUMMIFIED_CORPSE, SBFeatures.MUMMIFIED_CORPSE.get(), new MummifiedCorpseConfiguration(
+                List.of(
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/anglerfish"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/armored_whale"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/crab_turtle"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/digger"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/double_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/dunkleosteus"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/dunkleosteus_squid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/eurypterid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/false_hermit"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/giant_squid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/gulper_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/horseshoe_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/isopod"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/labyrinth_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/lobster_centipede"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/lobster_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/nautilus"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/plesiosaur"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sabertooth_catfish"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sea_serpent"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sea_slug"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/spider_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/squid_whale"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/swordspine"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/twin_shark")
+                ),
+                0.5F,
+                ClampedNormalFloat.of(0.95F, 0.05F, 0, 1),
+                ClampedNormalFloat.of(1, 0.1F, 0, 1),
+                ClampedNormalFloat.of(0.7F, 0.2F, 0, 1)
+        ));
+
+        register(context, DEEP_MUMMIFIED_CORPSE, SBFeatures.MUMMIFIED_CORPSE.get(), new MummifiedCorpseConfiguration(
+                List.of(
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/anglerfish"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/armored_whale"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/crab_turtle"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/digger"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/double_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/dunkleosteus"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/dunkleosteus_squid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/eurypterid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/false_hermit"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/giant_squid"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/gulper_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/horseshoe_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/isopod"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/labyrinth_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/lobster_centipede"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/lobster_eel"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/nautilus"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/plesiosaur"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sabertooth_catfish"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sea_serpent"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/sea_slug"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/spider_crab"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/squid_whale"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/swordspine"),
+                        new ResourceLocation(ShoresBetween.MODID, "features/mummified_corpses/twin_shark")
+                ),
+                0.8F,
+                ClampedNormalFloat.of(0.95F, 0.05F, 0, 1),
+                ClampedNormalFloat.of(0.7F, 0.1F, 0, 1),
+                ClampedNormalFloat.of(0.4F, 0.2F, 0, 1)
+        ));
     }
 
 

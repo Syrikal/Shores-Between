@@ -1,4 +1,4 @@
-// 1.20.6	2025-06-15T10:04:34.2543743	Tags for minecraft:block mod id shores_between
+// 1.20.6	2025-08-12T23:51:53.7503008	Tags for minecraft:block mod id shores_between
 72c1939ac526c91d23caa0329a4f6d16e00fdbca data/c/tags/blocks/barrels/wooden.json
 26ac2722ce96332636255bb240a973d70f5f0368 data/c/tags/blocks/chests.json
 41f11e500b83e7f1a2a8db8dc2b9b8f8eb898454 data/c/tags/blocks/chests/wooden.json
@@ -54,6 +54,7 @@ e75c4761cf4578ce59ba51b1a63673be1c91c4d9 data/shores_between/tags/blocks/concret
 2214544dc6a51eca8ab8d6afd9eda006f322abd9 data/shores_between/tags/blocks/fallen_logs_replace.json
 0b7e736325d762536ca36687730767af8c3a1a33 data/shores_between/tags/blocks/mistwood_logs.json
 bc9ea5dec3e5a668a1dc274d7003e92a073a04a7 data/shores_between/tags/blocks/moss_carpet_grows.json
+9b102fdfeb4f9b377d8f2d17dda4c3ff7cb6f1ec data/shores_between/tags/blocks/mummified_corpse_replaceable.json
 f91b6cbcc62e0aa396126e6ccced7950ce84028f data/shores_between/tags/blocks/pebbles.json
 d3c7111bbd10cd152ee9a05fdc6f184148d2e7e7 data/shores_between/tags/blocks/petrified_logs.json
 9e31831080cdc477510ca5c4c1e2861a6797b97f data/shores_between/tags/blocks/shingle.json
