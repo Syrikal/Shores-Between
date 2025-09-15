@@ -155,9 +155,9 @@ public class Deeps {
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
                                         DensityFunctions.noise(noises.getOrThrow(DEEPS_CAVES_NOISE), 1, 1.3)
                                 )))
-                                .addPoint(-0.6F, -0.4F, 1)
+                                .addPoint(-0.6F, -0.4F, 1.5F)
                                 .addPoint(0, 0.2F, 0)
-                                .addPoint(0.6F, -0.4F, -1)
+                                .addPoint(0.6F, -0.4F, -1.5F)
                                 .build()),
                         SBDensityFunctions.shiftedNoise(
                                 10000,
@@ -190,6 +190,14 @@ public class Deeps {
                         )
                 )
         );
+
+        //TODO REPLACE caves_multiplier with:
+        caves_multiplier = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
+                        new DensityFunctions.HolderHolder(deeps_grid)
+                )))
+                .addPoint(-1, 0.4F, 1.6F)
+                .addPoint(-0.5F, 1, 0)
+                .build());
 
         //Apply the new multiplier
         multiplied = DensityFunctions.mul(multiplied, caves_multiplier);
@@ -514,6 +522,13 @@ public class Deeps {
                         )
                 ),
 
+                //TODO Replace rockiness check with:
+//                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(smooth_vitality)))
+//                        .addPoint(0.15F, 2, -100)
+//                        .addPoint(0.2F, 0.2F, -7)
+//                        .addPoint(0.25F, 0, 0)
+//                        .build()),
+
                 //Only where Deeps Final is open at y = -86, i.e. <= -0.06
                 //Old: \left\{x\ \le\ -0.03:0,x>-0.03:500\left(x+0.03\right)^{2}\right\}
                 //New: \max\left(0,\left\{x\ge-0.05:100000,x<-0.05:\frac{-0.1\left(x+0.2\right)}{x+0.05}\right\}\right)
@@ -530,6 +545,14 @@ public class Deeps {
                                 )
                         )
                 )
+
+                //TODO Replace deeps final check with:
+//                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(deeps_final_at_y_85)))
+//                        .addPoint(-0.2F, 0, 0)
+//                        .addPoint(-0.1F, 0.2F, 4)
+//                        .addPoint(-0.05F, 2, 100)
+//                        .build()),
+
         );
 
         DensityFunction y = new SBDensityFunctions.GetY();
@@ -554,6 +577,20 @@ public class Deeps {
                 )
 
         );
+
+        //TODO Replace pits_height with:
+        pits_height = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(y)))
+                .addPoint(-104, 1, -0.4F)
+                .addPoint(-102, 0.4F, -0.2F)
+                .addPoint(-100, 0.13F, -0.08F)
+                        .addPoint(-95, 0, 0)
+                        .addPoint(-92, -0.17F, -0.15F)
+                        .addPoint(-88, -0.5F, 0)
+                        .addPoint(-85, 0, 0.4F)
+                        .addPoint(-83, 1, 0.7F)
+                .build());
+
+
 
 
         return DensityFunctions.cacheOnce(
@@ -589,6 +626,8 @@ public class Deeps {
                 )
         );
 
+
+
         //Hard ceiling adds a sharper ceiling in order to make sure caves don't go too high.
         DensityFunction hard_ceiling = DensityFunctions.rangeChoice(
                 y,
@@ -613,6 +652,18 @@ public class Deeps {
                 height_factor,
                 hard_ceiling
         );
+
+        //TODO Replace final_height_factor with:
+        final_height_factor = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(y)))
+                .addPoint(-94, 1.535F, -0.4F)
+                .addPoint(-88, 0.166F, -0.08F)
+                .addPoint(-84, 0.01F, -0.01F)
+                .addPoint(-80, 0, 0)
+                .addPoint(-40, 0.13F, 0.007F)
+                .addPoint(-20, 0.294F, 0.0123F)
+                .addPoint(-5, 0.9F, 0.1F)
+                .addPoint(0, 1.6F, 0.2F)
+                .build());
 
         return DensityFunctions.cacheOnce(final_height_factor);
     }
