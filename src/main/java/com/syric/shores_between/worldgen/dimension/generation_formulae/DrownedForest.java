@@ -56,9 +56,9 @@ public class DrownedForest {
         //Drowned Forest Plateau Texture simply produces plateaus.
         DensityFunction texture = DensityFunctions.spline(
                 CubicSpline.builder(new DensityFunctions.Spline.Coordinate(plateaus_noise))
-                        .addPoint(-1, 1, -0.7F)
+                        .addPoint(-1, 1, 0)
                         .addPoint(0, -1, 0)
-                        .addPoint(1, 1, 0.7F)
+                        .addPoint(1, 1, 0)
                         .build()
         );
         return DensityFunctions.flatCache(texture);
@@ -71,7 +71,7 @@ public class DrownedForest {
 
         /* Drowned Forest Presence decides where the Drowned Forest biome is.
         * i.e., Rockiness < -0.2, Vitality < -0.6, Continentalness between -0.1 and 0.85
-        * It is 0 here and -5 elsewhere, with a smooth falloff.
+        * It is 0 here and -10 elsewhere, with a smooth falloff.
         * Take three splines, one for each of those noises;
         * take the minimum of these,
         * clamp between -10 and 0.
@@ -79,22 +79,24 @@ public class DrownedForest {
         DensityFunction presence = DensityUtil.applyAll(DensityFunctions::min,
 
                         //The rockiness one
-                        DensityFunctions.add(
-                                DensityFunctions.mul(
-                                        DensityFunctions.constant(-20),
-                                        rockiness
-                                ),
-                                DensityFunctions.constant(-4)
-                        ),
+//                        DensityFunctions.add(
+//                                DensityFunctions.mul(
+//                                        DensityFunctions.constant(-20),
+//                                        rockiness
+//                                ),
+//                                DensityFunctions.constant(-4)
+//                        ),
+                        DensityUtil.linearDF(rockiness, -20, -4),
 
                         //The vitality one
-                        DensityFunctions.add(
-                                DensityFunctions.mul(
-                                        DensityFunctions.constant(-60),
-                                        vitality
-                                ),
-                                DensityFunctions.constant(-36)
-                        ),
+//                        DensityFunctions.add(
+//                                DensityFunctions.mul(
+//                                        DensityFunctions.constant(-60),
+//                                        vitality
+//                                ),
+//                                DensityFunctions.constant(-36)
+//                        ),
+                        DensityUtil.linearDF(vitality, -60, -36),
 
                         //The continentalness one
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(CONTINENTALNESS)))
@@ -128,10 +130,10 @@ public class DrownedForest {
 //                        .build()));
                 DensityFunctions.spline(CubicSpline.builder(
                         new DensityFunctions.Spline.Coordinate(functions.getOrThrow(NoiseRouterData.Y)))
-                        .addPoint(56, 0.3F, -0.1F)
+                        .addPoint(56, 0.3F, -0.05F)
                         .addPoint(58, 0.1F, -0.2F)
                         .addPoint(60, -1F, -1)
-                        .addPoint(62, -4F, -5)
+                        .addPoint(62, -4F, -2.5F)
                         .build()));
 
         return DensityFunctions.cacheOnce(forest_plateaus_final);
@@ -143,40 +145,60 @@ public class DrownedForest {
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
         //PresenceMultiplier is 1 in Drowned Forest and 0 elsewhere, with a smooth interpolation between.
-        DensityFunction presenceMultiplier = DensityFunctions.add(
-                DensityFunctions.mul(
-                        new DensityFunctions.HolderHolder(drownedForestPresence),
-                        DensityFunctions.constant(0.2F)
-                ),
-                DensityFunctions.constant(1)
-        ).clamp(0, 1);
+//        DensityFunction presenceMultiplier = DensityFunctions.add(
+//                DensityFunctions.mul(
+//                        new DensityFunctions.HolderHolder(drownedForestPresence),
+//                        DensityFunctions.constant(0.2F)
+//                ),
+//                DensityFunctions.constant(1)
+//        ).clamp(0, 1);
+        DensityFunction presenceMultiplier = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
+                        new DensityFunctions.HolderHolder(drownedForestPresence)
+                )))
+                .addPoint(-5, 0, 0)
+                .addPoint(0, 1, 0)
+                .build());
+
 
         DensityFunction roughness = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
                         DensityFunctions.noise(noises.getOrThrow(DROWNED_FOREST_SINKING_NOISE), 1, 0))))
-                .addPoint(-2.5F, -1, 0.1F)
-                .addPoint(-1, -0.5F, 0.5F)
-                .addPoint(1, 0.5F, 0.5F)
-                .addPoint(2.5F, 1, 0.1F)
+                .addPoint(-2.5F, -1, 0)
+                .addPoint(-1, -0.5F, 1)
+                .addPoint(0, 0, 0)
+                .addPoint(1, -0.5F, -1)
+                .addPoint(2.5F, -1, 0)
                 .build());
 
-        //Scale it appropriately
-        DensityFunction sink = DensityFunctions.mul(
-                DensityFunctions.constant(0.05F),
-//                DensityFunctions.constant(3),
-                roughness
-        );
+        //Old version:
+//        DensityFunction roughness = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
+//                        DensityFunctions.noise(noises.getOrThrow(DROWNED_FOREST_SINKING_NOISE), 1, 0))))
+//                .addPoint(-2.5F, -1, 0.1F)
+//                .addPoint(-1, -0.5F, 0.5F)
+//                .addPoint(1, 0.5F, 0.5F)
+//                .addPoint(2.5F, 1, 0.1F)
+//                .build());
 
-        //Make it negative
-        sink = DensityFunctions.mul(
-                DensityFunctions.constant(-1),
-                sink.abs()
-        );
+        //Scale it appropriately
+//        DensityFunction sink = DensityFunctions.mul(
+//                DensityFunctions.constant(0.05F),
+////                DensityFunctions.constant(3),
+//                roughness
+//        );
+
+        //Make it negative (redundant; modified the spline instead)
+//        sink = DensityFunctions.mul(
+//                DensityFunctions.constant(-1),
+//                sink.abs()
+//        );
 
         //Add a small constant
-        sink = DensityFunctions.add(
-                DensityFunctions.constant(-0.05),
-                sink
-        );
+//        sink = DensityFunctions.add(
+//                DensityFunctions.constant(-0.05),
+//                sink
+//        );
+
+        //Scale it and subtract a small constant
+        DensityFunction sink = DensityUtil.linearDF(roughness, 0.05, -0.05);
 
         //Multiply by presence multiplier and ensure it's negative
         sink = DensityFunctions.mul(presenceMultiplier, sink).clamp(-100, 0);
