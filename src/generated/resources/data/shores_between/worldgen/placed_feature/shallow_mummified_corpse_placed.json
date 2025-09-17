@@ -1,9 +1,9 @@
 {
-  "feature": "shores_between:mummified_corpse",
+  "feature": "shores_between:shallow_mummified_corpse",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 8
+      "chance": 60
     },
     {
       "type": "minecraft:in_square"
@@ -13,10 +13,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 55
+          "absolute": 60
         },
         "min_inclusive": {
-          "absolute": 45
+          "absolute": 55
         }
       }
     },
@@ -61,7 +61,7 @@
         ],
         "offset": [
           0,
-          4,
+          3,
           0
         ]
       }
