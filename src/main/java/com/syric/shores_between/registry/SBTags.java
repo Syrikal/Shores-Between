@@ -24,6 +24,7 @@ public class SBTags {
         public static final TagKey<Block> SHINGLE = tag("shingle");
         public static final TagKey<Block> PEBBLES = tag("pebbles");
         public static final TagKey<Block> MUMMIFIED_CORPSE_REPLACEABLE = tag("mummified_corpse_replaceable");
+        public static final TagKey<Block> TITAN_EGG_REPLACEABLE = tag("titan_egg_replaceable");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(ShoresBetween.MODID, name));
@@ -67,6 +68,8 @@ public class SBTags {
         public static final TagKey<Biome> HAS_RARE_MOSSY_OUTCROPS = tag("has_rare_mossy_outcrops");
         public static final TagKey<Biome> HAS_EERIE_BOULDERS = tag("has_eerie_boulders");
         public static final TagKey<Biome> HAS_CORPSE_BOULDERS = tag("has_corpse_boulders");
+
+        public static final TagKey<Biome> HAS_TITAN_EGGS = tag("has_titan_eggs");
 
 
         //Structures

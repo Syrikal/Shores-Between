@@ -80,6 +80,8 @@ public class SBPlacedFeatures {
     public static ResourceKey<PlacedFeature> SHALLOW_MUMMIFIED_CORPSE_PLACED_KEY = registerKey("shallow_mummified_corpse_placed");
     public static ResourceKey<PlacedFeature> DEEP_MUMMIFIED_CORPSE_PLACED_KEY = registerKey("deep_mummified_corpse_placed");
 
+    public static ResourceKey<PlacedFeature> TITAN_EGG_PLACED_KEY = registerKey("titan_egg_placed");
+
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -98,6 +100,8 @@ public class SBPlacedFeatures {
         foliage(context, configuredFeatures);
 
         corpses(context, configuredFeatures);
+
+        misc(context, configuredFeatures);
 
     }
 
@@ -518,6 +522,17 @@ public class SBPlacedFeatures {
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO, List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.below(4), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get()))),
                         BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(BlockPos.ZERO.above(3), List.of(SBBlocks.SHALE.get(), SBBlocks.SHINGLE.get(), SBBlocks.SALTSTONE.get())))
+                ));
+
+    }
+
+    private static void misc(BootstrapContext<PlacedFeature> context, HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures) {
+
+        register(context, TITAN_EGG_PLACED_KEY, configuredFeatures.getOrThrow(SBConfiguredFeatures.TITAN_EGG),
+                List.of(RarityFilter.onAverageOnceEvery(40),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-95), VerticalAnchor.absolute(-40)),
+                        BiomeFilter.biome()
                 ));
 
     }

@@ -1,0 +1,15 @@
+{
+  "type": "shores_between:titan_egg",
+  "config": {
+    "elongation": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 2.8,
+      "min_inclusive": 2.2
+    },
+    "size": {
+      "type": "minecraft:biased_to_bottom",
+      "max_inclusive": 25,
+      "min_inclusive": 12
+    }
+  }
+}

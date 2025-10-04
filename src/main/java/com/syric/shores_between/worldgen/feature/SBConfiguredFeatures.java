@@ -10,6 +10,7 @@ import com.syric.shores_between.worldgen.feature.mummified_corpse.MummifiedCorps
 import com.syric.shores_between.worldgen.feature.patch.PatchConfiguration;
 import com.syric.shores_between.worldgen.feature.rocks.BoulderConfiguration;
 import com.syric.shores_between.worldgen.feature.rocks.boulder_decoration.*;
+import com.syric.shores_between.worldgen.feature.titan_egg.TitanEggConfiguration;
 import com.syric.shores_between.worldgen.feature.tree.NBTTreeConfiguration;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
@@ -97,6 +98,8 @@ public class SBConfiguredFeatures {
     public static ResourceKey<ConfiguredFeature<?, ?>> MUMMIFIED_CORPSE = registerKey("mummified_corpse");
     public static ResourceKey<ConfiguredFeature<?, ?>> DEEP_MUMMIFIED_CORPSE = registerKey("deep_mummified_corpse");
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> TITAN_EGG = registerKey("titan_egg");
+
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 
@@ -115,6 +118,8 @@ public class SBConfiguredFeatures {
         logs(context);
 
         corpses(context);
+
+        misc(context);
 
     }
 
@@ -700,6 +705,10 @@ public class SBConfiguredFeatures {
                 ClampedNormalFloat.of(0.7F, 0.1F, 0, 1),
                 ClampedNormalFloat.of(0.4F, 0.2F, 0, 1)
         ));
+    }
+
+    private static void misc(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        register(context, TITAN_EGG, SBFeatures.TITAN_EGG.get(), new TitanEggConfiguration(BiasedToBottomInt.of(12, 25), UniformFloat.of(2.2F, 2.8F)));
     }
 
 

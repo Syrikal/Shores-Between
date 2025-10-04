@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "shores_between:deeps",
+  "features": "shores_between:titan_egg_placed",
+  "step": "underground_decoration"
+}

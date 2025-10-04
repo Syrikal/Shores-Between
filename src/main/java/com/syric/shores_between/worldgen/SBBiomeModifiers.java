@@ -83,6 +83,9 @@ public class SBBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_FORSAKEN_OCEAN_PLANTS = registerKey("add_forsaken_ocean_plants");
     public static final ResourceKey<BiomeModifier> ADD_FORSAKEN_OCEAN_MISC = registerKey("add_forsaken_ocean_misc");
 
+    //Deeps
+    public static final ResourceKey<BiomeModifier> ADD_TITAN_EGGS = registerKey("add_titan_eggs");
+
     //Corpses
     public static final ResourceKey<BiomeModifier> ADD_MUMMIFIED_CORPSES = registerKey("add_mummified_corpses");
 
@@ -130,6 +133,7 @@ public class SBBiomeModifiers {
         driftwoodBeach(context, placedFeatures, biomes);
         mistwood(context, placedFeatures, biomes);
         ocean(context, placedFeatures, biomes);
+        deeps(context, placedFeatures, biomes);
 
         mummifiedCorpses(context, placedFeatures, biomes);
 
@@ -561,6 +565,17 @@ public class SBBiomeModifiers {
 //                ),
 //                GenerationStep.Decoration.VEGETAL_DECORATION
 //        ));
+    }
+
+
+    private static void deeps(BootstrapContext<BiomeModifier> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<Biome> biomes) {
+        context.register(ADD_TITAN_EGGS, new BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(SBTags.Biomes.HAS_TITAN_EGGS),
+                HolderSet.direct(
+                        placedFeatures.getOrThrow(SBPlacedFeatures.TITAN_EGG_PLACED_KEY)
+                ),
+                GenerationStep.Decoration.UNDERGROUND_DECORATION
+        ));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

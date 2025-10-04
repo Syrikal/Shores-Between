@@ -161,5 +161,8 @@ public class SBBiomeTagProvider extends BiomeTagsProvider {
 
         this.tag(SBTags.Biomes.HAS_LEVIATHAN_BONES)
                 .add(biomes.getOrThrow(SBBiomes.BARREN_STRAND_BIOME).key());
+
+        this.tag(SBTags.Biomes.HAS_TITAN_EGGS)
+                .add(biomes.getOrThrow(SBBiomes.DEEPS_BIOME).key());
     }
 }

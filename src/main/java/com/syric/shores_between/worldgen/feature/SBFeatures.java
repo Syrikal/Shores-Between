@@ -13,6 +13,8 @@ import com.syric.shores_between.worldgen.feature.patch.PatchConfiguration;
 import com.syric.shores_between.worldgen.feature.patch.PatchFeature;
 import com.syric.shores_between.worldgen.feature.rocks.BoulderConfiguration;
 import com.syric.shores_between.worldgen.feature.rocks.BoulderFeature;
+import com.syric.shores_between.worldgen.feature.titan_egg.TitanEggConfiguration;
+import com.syric.shores_between.worldgen.feature.titan_egg.TitanEggFeature;
 import com.syric.shores_between.worldgen.feature.tree.NBTTreeConfiguration;
 import com.syric.shores_between.worldgen.feature.tree.NBTTreeFeature;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +34,7 @@ public class SBFeatures {
     public static final DeferredHolder<Feature<?>, Feature<BushConfiguration>> BUSH = FEATURES.register("bush", () -> new BushFeature(BushConfiguration.CODEC.stable()));
     public static final DeferredHolder<Feature<?>, Feature<BeachedCorpseConfiguration>> BEACHED_CORPSE = FEATURES.register("beached_corpse", () -> new BeachedCorpseFeature(BeachedCorpseConfiguration.CODEC.stable()));
     public static final DeferredHolder<Feature<?>, Feature<MummifiedCorpseConfiguration>> MUMMIFIED_CORPSE = FEATURES.register("mummified_corpse", () -> new MummifiedCorpseFeature(MummifiedCorpseConfiguration.CODEC.stable()));
+    public static final DeferredHolder<Feature<?>, Feature<TitanEggConfiguration>> TITAN_EGG = FEATURES.register("titan_egg", () -> new TitanEggFeature(TitanEggConfiguration.CODEC.stable()));
 
 
     public static void register(IEventBus bus) {

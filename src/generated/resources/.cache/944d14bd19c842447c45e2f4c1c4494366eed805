@@ -1,4 +1,4 @@
-// 1.20.6	2025-08-12T23:51:53.7503008	Tags for minecraft:block mod id shores_between
+// 1.20.6	2025-09-16T19:06:35.0350537	Tags for minecraft:block mod id shores_between
 72c1939ac526c91d23caa0329a4f6d16e00fdbca data/c/tags/blocks/barrels/wooden.json
 26ac2722ce96332636255bb240a973d70f5f0368 data/c/tags/blocks/chests.json
 41f11e500b83e7f1a2a8db8dc2b9b8f8eb898454 data/c/tags/blocks/chests/wooden.json
@@ -58,3 +58,4 @@ bc9ea5dec3e5a668a1dc274d7003e92a073a04a7 data/shores_between/tags/blocks/moss_ca
 f91b6cbcc62e0aa396126e6ccced7950ce84028f data/shores_between/tags/blocks/pebbles.json
 d3c7111bbd10cd152ee9a05fdc6f184148d2e7e7 data/shores_between/tags/blocks/petrified_logs.json
 9e31831080cdc477510ca5c4c1e2861a6797b97f data/shores_between/tags/blocks/shingle.json
+9598fb64c910fd17e3021ac06e088f6b12c3c968 data/shores_between/tags/blocks/titan_egg_replaceable.json
