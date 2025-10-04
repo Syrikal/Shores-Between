@@ -128,6 +128,7 @@ public class Deeps {
                             new DensityFunctions.HolderHolder(deeps_grid),
 
                             //DeepsDiagonals + 0.6, to ensure caverns can form easily on the diagonals
+                            //TODO adjust this to make more caves on the diagonals
                             DensityFunctions.add(
                                     DensityFunctions.constant(0.55),
                                     new DensityFunctions.HolderHolder(deeps_diagonals)
@@ -151,13 +152,13 @@ public class Deeps {
 
         DensityFunction base = DensityFunctions.add(
                 DensityFunctions.constant(0.2),
-                DensityUtil.applyAll(DensityFunctions::min,
+                DensityFunctions.min(
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
                                         DensityFunctions.noise(noises.getOrThrow(DEEPS_CAVES_NOISE), 1, 1.3)
                                 )))
-                                .addPoint(-0.6F, -0.4F, 1)
+                                .addPoint(-0.6F, -0.4F, 1.5F)
                                 .addPoint(0, 0.2F, 0)
-                                .addPoint(0.6F, -0.4F, -1)
+                                .addPoint(0.6F, -0.4F, -1.5F)
                                 .build()),
                         SBDensityFunctions.shiftedNoise(
                                 10000,
@@ -191,6 +192,14 @@ public class Deeps {
                 )
         );
 
+        //TODO REPLACE caves_multiplier with:
+        caves_multiplier = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
+                        new DensityFunctions.HolderHolder(deeps_grid)
+                )))
+                .addPoint(-1, 0.4F, 1.6F)
+                .addPoint(-0.5F, 1, 0)
+                .build());
+
         //Apply the new multiplier
         multiplied = DensityFunctions.mul(multiplied, caves_multiplier);
 
@@ -215,14 +224,15 @@ public class Deeps {
         //Desmos: g\left(x\right)=0.000005\left(x+75\right)^{4}-0.1
         DensityFunction y = new SBDensityFunctions.GetY();
         DensityFunction y_plus_75 = DensityFunctions.add(y, DensityFunctions.constant(75));
-        DensityFunction y_plus_75_to_the_fourth = DensityFunctions.mul(DensityFunctions.mul(y_plus_75, y_plus_75), DensityFunctions.mul(y_plus_75, y_plus_75));
-        DensityFunction tunnel_height = DensityFunctions.add(
-                DensityFunctions.mul(
-                        DensityFunctions.constant(0.000005),
-                        y_plus_75_to_the_fourth
-                ),
-                DensityFunctions.constant(-0.1)
-        );
+//        DensityFunction y_plus_75_to_the_fourth = DensityFunctions.mul(DensityFunctions.mul(y_plus_75, y_plus_75), DensityFunctions.mul(y_plus_75, y_plus_75));
+//        DensityFunction tunnel_height = DensityFunctions.add(
+//                DensityFunctions.mul(
+//                        DensityFunctions.constant(0.000005),
+//                        y_plus_75_to_the_fourth
+//                ),
+//                DensityFunctions.constant(-0.1)
+//        );
+        DensityFunction tunnel_height = DensityUtil.quarticDF(y_plus_75, 0.000005, 0, 0, 0, -0.1);
 
         DensityFunction tunnels_final = DensityUtil.applyAll(DensityFunctions::add,
                 nesw_tunnels,
@@ -325,26 +335,33 @@ public class Deeps {
         //it's -400(x + 0.7)^4
         //If stalactites only, it's + 0.9 instead
         DensityFunction factor = DensityFunctions.add(new DensityFunctions.HolderHolder(deeps_grid), DensityFunctions.constant(stalactites_only ? 0.9 : 0.7));
-        DensityFunction to_the_fourth = DensityUtil.applyAll(DensityFunctions::mul, factor, factor, factor, factor);
-        DensityFunction final_deeps_grid_limiter = DensityFunctions.mul(
-                DensityFunctions.constant(-400),
-                to_the_fourth
-        );
+//        DensityFunction to_the_fourth = DensityUtil.applyAll(DensityFunctions::mul, factor, factor, factor, factor);
+//        DensityFunction final_deeps_grid_limiter = DensityFunctions.mul(
+//                DensityFunctions.constant(-400),
+//                to_the_fourth
+//        );
+
+        DensityFunction final_deeps_grid_limiter = DensityUtil.quarticDF(factor, -400, 0, 0, 0, 0);
 
         //The thickness function
-        DensityFunction thickness_multiplier = DensityFunctions.add(
-                DensityFunctions.constant(0.55),
-                DensityFunctions.mul(
-                        DensityFunctions.constant(0.55),
-                        DensityFunctions.noise(noises.getOrThrow(Noises.PILLAR_THICKNESS))
-                )
-        );
+//        DensityFunction thickness_multiplier = DensityFunctions.add(
+//                DensityFunctions.constant(0.55),
+//                DensityFunctions.mul(
+//                        DensityFunctions.constant(0.55),
+//                        DensityFunctions.noise(noises.getOrThrow(Noises.PILLAR_THICKNESS))
+//                )
+//        );
+        DensityFunction thickness_multiplier = DensityUtil.linearDF(DensityFunctions.noise(noises.getOrThrow(Noises.PILLAR_THICKNESS)), 0.55, 0.55);
+
+
         //Cube it
-        thickness_multiplier = DensityUtil.applyAll(DensityFunctions::mul,
-                thickness_multiplier,
-                thickness_multiplier,
-                thickness_multiplier
-        );
+//        thickness_multiplier = DensityUtil.applyAll(DensityFunctions::mul,
+//                thickness_multiplier,
+//                thickness_multiplier,
+//                thickness_multiplier
+//        );
+
+        thickness_multiplier = DensityUtil.cubicDF(thickness_multiplier, 1, 0, 0, 0);
 
         //A bit of gentle massaging away from the middle to produce thicker tops and bottoms
         DensityFunction pillar_height = DensityUtil.applyAll(DensityFunctions::mul,
@@ -357,13 +374,14 @@ public class Deeps {
         if (stalactites_only) {
             pillar_height = DensityFunctions.rangeChoice(new SBDensityFunctions.GetY(),
                     -10000, -59,
-                    DensityFunctions.add(
-                            DensityFunctions.mul(
-                                    new SBDensityFunctions.GetY(),
-                                    DensityFunctions.constant(0.01)
-                            ),
-                            DensityFunctions.constant(0.57)
-                    ),
+//                    DensityFunctions.add(
+//                            DensityFunctions.mul(
+//                                    new SBDensityFunctions.GetY(),
+//                                    DensityFunctions.constant(0.01)
+//                            ),
+//                            DensityFunctions.constant(0.57)
+//                    ),
+                    DensityUtil.linearDF(new SBDensityFunctions.GetY(), 0.01, 0.57),
                     pillar_height);
         }
 
@@ -372,27 +390,29 @@ public class Deeps {
         //Produces zero for stalactites above -60, and a decreasing negative the further down it goes
 
         //Stalactite_base ranges from around 30 to 60 and represents the (negative) y-level of the bottom of the stalactites.
-        DensityFunction stalactite_base = DensityFunctions.add(
-                DensityFunctions.constant(45),
-                DensityFunctions.mul(
-                        DensityFunctions.noise(noises.getOrThrow(Noises.ICE), 0.3, 0),
-                        DensityFunctions.constant(18.75)
-                )
-        );
+//        DensityFunction stalactite_base = DensityFunctions.add(
+//                DensityFunctions.constant(45),
+//                DensityFunctions.mul(
+//                        DensityFunctions.noise(noises.getOrThrow(Noises.ICE), 0.3, 0),
+//                        DensityFunctions.constant(18.75)
+//                )
+//        );
+        DensityFunction stalactite_base = DensityUtil.linearDF(DensityFunctions.noise(noises.getOrThrow(Noises.ICE), 0.3, 0), 18.75, 45);
 
         //Removes the bottom of stalactites
         //Produces zero if it's not just stalactites
         //Produces zero for stalactites above negative stalactite_base, and a decreasing negative the further down it goes
         DensityFunction stalactite_base_removal = stalactites_only ?
-                DensityUtil.applyAll(DensityFunctions::mul,
-                        DensityFunctions.constant(0.001),
-                        DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base),
-                        DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base),
-                        DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base)
-                )
+                DensityUtil.cubicDF(DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base), 0.001, 0, 0, 0).clamp(-10, 0)
+//                DensityUtil.applyAll(DensityFunctions::mul,
+//                        DensityFunctions.constant(0.001),
+//                        DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base),
+//                        DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base),
+//                        DensityFunctions.add(new SBDensityFunctions.GetY(), stalactite_base)
+//                )
                 : DensityFunctions.zero();
 
-        stalactite_base_removal = stalactite_base_removal.clamp(-10, 0);
+//        stalactite_base_removal = stalactite_base_removal.clamp(-10, 0);
 
         output = DensityUtil.applyAll(DensityFunctions::add,
                 final_deeps_grid_limiter,
@@ -497,39 +517,54 @@ public class Deeps {
 
         //Pits Presence is 0 when the pits should be there and rapidly increases elsewhere.
         DensityFunction pits_presence = DensityFunctions.max(
-                //Only where rockiness > 0.15
+                //Only where vitality > 0.15
                 //Old: \left\{x\ge0.23:0,x<0.23:1000\left(x-0.23\right)^{2}\right\}
                 //New: \max\left(0,\left\{x\ge0.15:\frac{-0.2\left(x-0.25\right)}{x-0.15},x<0.15:100000\right\}\right)
-                DensityFunctions.max(
-                        DensityFunctions.zero(),
-                        DensityFunctions.rangeChoice(smooth_vitality, -10, 0.12,
-                                DensityFunctions.constant(100000),
-                                new SBDensityFunctions.Divide(
-                                        DensityFunctions.mul(
-                                                DensityFunctions.constant(-0.2),
-                                                DensityFunctions.add(smooth_vitality, DensityFunctions.constant(-0.22))
-                                        ),
-                                        DensityFunctions.add(smooth_vitality, DensityFunctions.constant(-0.12))
-                                )
-                        )
-                ),
+//                DensityFunctions.max(
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.rangeChoice(smooth_vitality, -10, 0.12,
+//                                DensityFunctions.constant(100000),
+//                                new SBDensityFunctions.Divide(
+//                                        DensityFunctions.mul(
+//                                                DensityFunctions.constant(-0.2),
+//                                                DensityFunctions.add(smooth_vitality, DensityFunctions.constant(-0.22))
+//                                        ),
+//                                        DensityFunctions.add(smooth_vitality, DensityFunctions.constant(-0.12))
+//                                )
+//                        )
+//                ),
+
+                //TODO Replace vitality check with:
+                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(smooth_vitality)))
+                        .addPoint(0.15F, 2, -100)
+                        .addPoint(0.2F, 0.2F, -7)
+                        .addPoint(0.25F, 0, 0)
+                        .build()),
 
                 //Only where Deeps Final is open at y = -86, i.e. <= -0.06
                 //Old: \left\{x\ \le\ -0.03:0,x>-0.03:500\left(x+0.03\right)^{2}\right\}
                 //New: \max\left(0,\left\{x\ge-0.05:100000,x<-0.05:\frac{-0.1\left(x+0.2\right)}{x+0.05}\right\}\right)
-                DensityFunctions.max(
-                        DensityFunctions.zero(),
-                        DensityFunctions.rangeChoice(deeps_final_at_y_85, -0.05, 100,
-                                DensityFunctions.constant(100000),
-                                new SBDensityFunctions.Divide(
-                                        DensityFunctions.mul(
-                                                DensityFunctions.constant(-0.1),
-                                                DensityFunctions.add(deeps_final_at_y_85, DensityFunctions.constant(0.2))
-                                        ),
-                                        DensityFunctions.add(deeps_final_at_y_85, DensityFunctions.constant(0.05))
-                                )
-                        )
-                )
+//                DensityFunctions.max(
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.rangeChoice(deeps_final_at_y_85, -0.05, 100,
+//                                DensityFunctions.constant(100000),
+//                                new SBDensityFunctions.Divide(
+//                                        DensityFunctions.mul(
+//                                                DensityFunctions.constant(-0.1),
+//                                                DensityFunctions.add(deeps_final_at_y_85, DensityFunctions.constant(0.2))
+//                                        ),
+//                                        DensityFunctions.add(deeps_final_at_y_85, DensityFunctions.constant(0.05))
+//                                )
+//                        )
+//                )
+
+                //TODO Replace deeps final check with:
+                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(deeps_final_at_y_85)))
+                        .addPoint(-0.2F, 0, 0)
+                        .addPoint(-0.1F, 0.2F, 4)
+                        .addPoint(-0.05F, 2, 100)
+                        .build())
+
         );
 
         DensityFunction y = new SBDensityFunctions.GetY();
@@ -554,6 +589,20 @@ public class Deeps {
                 )
 
         );
+
+        //TODO Replace pits_height with:
+        pits_height = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(y)))
+                .addPoint(-104, 1, -0.4F)
+                .addPoint(-102, 0.4F, -0.2F)
+                .addPoint(-100, 0.13F, -0.08F)
+                        .addPoint(-95, 0, 0)
+                        .addPoint(-92, -0.17F, -0.15F)
+                        .addPoint(-88, -0.5F, 0)
+                        .addPoint(-85, 0, 0.4F)
+                        .addPoint(-83, 1, 0.7F)
+                .build());
+
+
 
 
         return DensityFunctions.cacheOnce(
@@ -589,6 +638,8 @@ public class Deeps {
                 )
         );
 
+
+
         //Hard ceiling adds a sharper ceiling in order to make sure caves don't go too high.
         DensityFunction hard_ceiling = DensityFunctions.rangeChoice(
                 y,
@@ -613,6 +664,18 @@ public class Deeps {
                 height_factor,
                 hard_ceiling
         );
+
+        //TODO Replace final_height_factor with:
+        final_height_factor = DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(y)))
+                .addPoint(-94, 1.535F, -0.4F)
+                .addPoint(-88, 0.166F, -0.08F)
+                .addPoint(-84, 0.01F, -0.01F)
+                .addPoint(-80, 0, 0)
+                .addPoint(-40, 0.13F, 0.007F)
+                .addPoint(-20, 0.294F, 0.0123F)
+                .addPoint(-5, 0.9F, 0.1F)
+                .addPoint(0, 1.6F, 0.2F)
+                .build());
 
         return DensityFunctions.cacheOnce(final_height_factor);
     }

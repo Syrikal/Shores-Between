@@ -61,6 +61,13 @@ public class Mistwood {
                         .addPoint(1.2F, 0.12F, 0)
                         .build()),
 
+                //TODO New, smoother replacement
+//                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(SBDimensions.CONTINENTALNESS)))
+//                        .addPoint(0.96F, 0, 3)
+//                        .addPoint(1, 0.1F, 0.3F)
+//                        .addPoint(1.2F, 0.12F, 0)
+//                        .build()),
+
                 //Uses the Breach Erosion density function to cut channels through mistwood areas
                 DensityFunctions.mul(
                         //Only present in mistwood areas
@@ -68,6 +75,7 @@ public class Mistwood {
                                 .addPoint(0.9F, 0, 0)
                                 .addPoint(1, 1, 0)
                                 .build()),
+
                         //The channels themselves
                         DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
                                 DensityFunctions.noise(noises.getOrThrow(MISTWOOD_ISLANDS_NOISE), 1, 0)
@@ -78,6 +86,15 @@ public class Mistwood {
                                 .addPoint(0.5F, 0, 0.5F)
                                 .addPoint(1, 0.3F, 0)
                                 .build())
+
+                        //TODO New, smoother replacement
+//                        DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(
+//                                        DensityFunctions.noise(noises.getOrThrow(MISTWOOD_ISLANDS_NOISE), 1, 0)
+//                                )))
+//                                .addPoint(-1, 0.3F, 0)
+//                                .addPoint(0, -0.3F, 0)
+//                                .addPoint(1, 0.3F, 0)
+//                                .build())
                 )
         );
         return DensityFunctions.cache2d(islands);
@@ -107,6 +124,14 @@ public class Mistwood {
                                 .addPoint(0.3F, 1, 0)
                             .build())
                 ),
+
+                //TODO Smoother Replacement
+//                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(islands))
+//                        .addPoint(-0.3F, 0, 0)
+//                        .addPoint(0, 0.2F, 2)
+//                        .addPoint(0.3F, 1, 0)
+//                        .build()),
+
                 //Only present when continentalness is over 0.99
                 DensityFunctions.max(
                         DensityFunctions.constant(0),
@@ -116,6 +141,8 @@ public class Mistwood {
                                 .addPoint(1, 1, 0)
                                 .build())
                 )
+
+                //TODO this ones fine but can scrap the max-with-0, the spline's range is already [0, 1]
         );
 
 
@@ -135,7 +162,7 @@ public class Mistwood {
 
         //Only present when islands is negative and continentalness is over 0.99
         DensityFunction multiplier = DensityFunctions.mul(
-                //Only present when islands is positive
+                //Only present when islands is negative
                 DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(mistwood_islands))
                         .addPoint(-0.2F, 1, 0)
                         .addPoint(-0.02F, 0, 0)
@@ -149,6 +176,8 @@ public class Mistwood {
                                 .addPoint(1, 1, 0)
                                 .build())
                 )
+
+                //TODO The max with 0 is unnecessary; the spline is already between 0 and 1
         );
 
         return DensityFunctions.cache2d(DensityFunctions.mul(roughness, multiplier));
@@ -164,7 +193,7 @@ public class Mistwood {
         ));
     }
 
-        //Final mistwood density adds the islands to the terrain, then splines by Y to get actual terrain height
+    //Final mistwood density adds the islands to the terrain, then splines by Y to get actual terrain height
     private static DensityFunction MistwoodFinal(BootstrapContext<DensityFunction> context, Holder<DensityFunction> mistwood_intermediate) {
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
 
@@ -190,6 +219,16 @@ public class Mistwood {
 
                         .build())
         );
+
+        //TODO this is a mess; it could probably be massively simplified.
+//        DensityFunction mistwood_final = DensityFunctions.add(
+//                new DensityFunctions.HolderHolder(mistwood_intermediate),
+//                DensityFunctions.spline(CubicSpline.builder(new DensityFunctions.Spline.Coordinate(functions.getOrThrow(NoiseRouterData.Y)))
+//                        .addPoint(63, 0, -0.035F)
+//                        .addPoint(76, -1, -0.1F)
+//                        .addPoint(80, -2, -0.4F)
+//                        .build())
+//        );
 
         return DensityFunctions.cacheOnce(mistwood_final);
     }

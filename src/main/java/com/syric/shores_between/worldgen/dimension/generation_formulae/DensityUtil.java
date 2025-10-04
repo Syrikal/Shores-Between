@@ -63,4 +63,38 @@ public class DensityUtil {
 //        return two_d ? DensityFunctions.cache2d(a) : DensityFunctions.cacheOnce(a);
     }
 
+    public static DensityFunction linearDF(DensityFunction x, double a, double b) {
+        return DensityFunctions.add(
+                DensityFunctions.mul(x, DensityFunctions.constant(a)),
+                DensityFunctions.constant(b)
+        );
+    }
+
+    public static DensityFunction quadraticDF(DensityFunction x, double a, double b, double c) {
+        return applyAll(DensityFunctions::add,
+                applyAll(DensityFunctions::mul, DensityFunctions.constant(a), x, x),
+                DensityFunctions.mul(DensityFunctions.constant(b), x),
+                DensityFunctions.constant(c)
+                );
+    }
+
+    public static DensityFunction cubicDF(DensityFunction x, double a, double b, double c, double d) {
+        return applyAll(DensityFunctions::add,
+                applyAll(DensityFunctions::mul, DensityFunctions.constant(a), x, x, x),
+                applyAll(DensityFunctions::mul, DensityFunctions.constant(b), x, x),
+                DensityFunctions.mul(DensityFunctions.constant(c), x),
+                DensityFunctions.constant(d)
+        );
+    }
+
+    public static DensityFunction quarticDF(DensityFunction x, double a, double b, double c, double d, double e) {
+        return applyAll(DensityFunctions::add,
+                applyAll(DensityFunctions::mul, DensityFunctions.constant(a), x, x, x, x),
+                applyAll(DensityFunctions::mul, DensityFunctions.constant(b), x, x, x),
+                applyAll(DensityFunctions::mul, DensityFunctions.constant(c), x, x),
+                DensityFunctions.mul(DensityFunctions.constant(d), x),
+                DensityFunctions.constant(e)
+        );
+    }
+
 }
